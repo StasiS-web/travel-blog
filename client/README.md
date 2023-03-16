@@ -1,7 +1,7 @@
 # Travel Blog
 
 ## :art: Project Introduction
-This project is a travel blog that is an React App for traveler. Destination are separated by continents, also you can find some travel tips and travel gear. The travel gears are product recommendations for travelers.
+This project is a travel blog that is an React App for traveler. Destination are separated by continents.
 
 ## Functionality
 ### Navigation
@@ -10,9 +10,12 @@ User are able to navigate through various links like:
 * About, 
 * Destination with underlying navigation
     * divides the destination into categories using the continents
-* Travel Tips
-* About
 * Contacts
+
+### Functionality
+* create new articles
+* edit existing articles
+* delete existing articles
 
 ### Social Links
 Redirect the user to WhatsApp, Facebook, Twitter and Instagram.

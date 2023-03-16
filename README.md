@@ -1,7 +1,8 @@
 # Travel Blog
 
 ## :art: Project Introduction
-This project is a travel blog that is an React App for traveler. Destination are separated by continents, also you can find some travel tips and travel gear. The travel gears are product recommendations for travelers.
+Travel Blog is a project created for the project defense of the React Softuni Course (Feb - Mar 2023) as part of the Front-End Module.
+This project is an React App for people who love to travel. Destination are separated by continents. 
 
 ## Database
 Using the Softuni Practice server to store data and display the data on the pages.
