@@ -7,7 +7,7 @@ This project is an React App for people who love to travel. Destination are sepa
 ## Database
 Using the Softuni Practice server to store data and display the data on the pages.
 
-### Navigation
+## Navigation
 User are able to navigate through various links like:
 * Home, 
 * About, 
@@ -15,16 +15,13 @@ User are able to navigate through various links like:
     * divides the destination into categories using the continents
 * Contacts
 
-### Functionality
+## Functionality
 * create new articles
 * edit existing articles
 * delete existing articles
 
-### Social Links
+## Social Links
 Redirect the user to WhatsApp, Facebook, Twitter and Instagram.
-
-### Archive 
-Collection of articles for each month by years.
 
 ## :hammer: Used technologies
 * HTML
@@ -55,7 +52,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-## server Available Script
+## Server Available Script
 
 ### `cd server` 
 Redirects you to the server directory.
@@ -65,6 +62,9 @@ Runs starts the server.
 
 </details>
 
+## Disclaimer
+The content and image used in this project does not have a commercial license and it is not used for commercial purpose. The image on the error 404 page were purchased with License for personal use only. All the content in this project is used only for educational purpose.
+
 ## Resources
 * Use local image files
 * Person images are from [Pexels](https://www.pexels.com/)
@@ -73,4 +73,5 @@ Runs starts the server.
 * The design template used for this projects comes from [Free HTML5](http://freehtml5.co/)
 * [React Beta Documentation](https://beta.reactjs.org/)
 
-## Disclaimer
+## License
+This project is licensed with the MIT license. This [image](https://res.cloudinary.com/dnvg6uuxl/image/upload/v1678298265/travel-blog/error_404_wnxcl7_gzg5il.jpg) has a license for personal use only.
