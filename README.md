@@ -74,4 +74,4 @@ The content and image used in this project does not have a commercial license an
 * [React Beta Documentation](https://beta.reactjs.org/)
 
 ## License
-This project is licensed with the MIT license. This [image](https://res.cloudinary.com/dnvg6uuxl/image/upload/v1678298265/travel-blog/error_404_wnxcl7_gzg5il.jpg) has a license for personal use only.
+This project is licensed with the [MIT license](LICENSE). This [image](https://res.cloudinary.com/dnvg6uuxl/image/upload/v1678298265/travel-blog/error_404_wnxcl7_gzg5il.jpg) has a license for personal use only.
