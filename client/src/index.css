@@ -1,0 +1,163 @@
+:root {
+  --font-primary: 'Josefin Slab', Arial, serif;
+  --font-secondary: 'Sacramento', cursive;
+
+  --primary-crl: #1d2f3b;
+  --secondary-crl: #fbf2eb;
+  --third-crl: #e9eef4;
+  --body-crl: #828282;
+
+  --white-crl: #ffffff;
+  --black-crl: #000000;
+}
+
+body {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--body-crl);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#home,
+#about,
+#travel-tips,
+#destination,
+#profile
+#not-found {
+  position: relative;
+  overflow-x: hidden;
+  width: 100%;
+  height: 100%;
+  -webkit-transition: 0.5s;
+  -o-transition: 0.5s;
+  transition: 0.5s;
+}
+
+a {
+  color: var(--primary-crl);
+  -webkit-transition: 0.5s;
+  -o-transition: 0.5s;
+  transition: 0.5s;
+}
+
+a:hover,
+a:active,
+a:focus {
+  color: var(--primary-crl);
+  outline: none;
+  text-decoration: none;
+}
+
+p {
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{
+  color: var(--black-crl);
+  font-family: var(--font-primary);
+  font-weight: 400;
+  margin: 0 0 20px 0;
+}
+
+::-webkit-selection {
+  color: var(--white-crl);
+  background-color: var(--primary-crl);
+}
+
+::-moz-selection {
+  color: var(--white-crl);
+  background-color: var(--primary-crl);
+}
+
+::selection {
+  color: var(--white-crl);
+  background-color: var(--primary-crl);
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-justify {
+  text-align: justify;
+}
+
+.text-info {
+  color: #31708f;
+}
+
+.text-success {
+  color: #3c763d;
+}
+
+.text-danger {
+  color: #a94442;
+}
+
+.heading {
+  margin-top: 5em;
+  margin-bottom: 5em;
+  position: relative;
+}
+
+.heading:after {
+  position: absolute;
+  top: 28px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 1px;
+  content: '';
+  background-color: black;
+  z-index: -1;
+}
+
+.heading h2 {
+  font-size: 40px;
+  margin-bottom: 20px;
+  line-height: 1.5;
+  color: #000;
+  font-family: "Sacramento", cursive;
+}
+
+.heading h2 span {
+  padding: 20px 30px;
+  border: 1px solid #000;
+  z-index: 8;
+  position: relative;
+}
+
+.heading h2 span:after {
+  position: absolute;
+  top: -10px;
+  bottom: 10px;
+  left: -10px;
+  right: 10px;
+  content: '';
+  background-color: #fbf2eb;
+  z-index: -1;
+}
+
+.heading p {
+  font-size: 18px;
+  line-height: 1.5;
+  color: #828282;
+}

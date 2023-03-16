@@ -1,0 +1,24 @@
+#sidebar .side {
+    margin-bottom: 6em;
+    width: 100%;
+    float: left;
+}
+
+.heading.heading-sidebar {
+    margin-bottom: 2em;
+}
+
+.heading.heading-sidebar:before {
+    top: 20px;
+}
+
+.heading.heading-sidebar h2 {
+    font-size: 30px;
+}
+
+.heading.heading-sidebar h2 span {
+    padding: 10px 20px;
+    border: 1px solid #000;
+    z-index: 8;
+    position: relative;
+}

@@ -1,0 +1,166 @@
+.js .animate-box {
+    opacity: 0;
+}
+
+@keyframes fadeInUp {
+    from {
+      opacity: 0;
+      visibility: hidden;
+      /*-webkit-transform: translate3d(0, 100%, 0);
+      transform: translate3d(0, 100%, 0);*/
+      -webkit-transform: translate3d(0, 40px, 0);
+      transform: translate3d(0, 40px, 0);
+    }
+  
+    to {
+      visibility: visible;
+      opacity: 1;
+      -webkit-transform: none;
+      transform: none;
+    }
+  }
+  
+  .fadeInUp {
+    -webkit-animation-name: fadeInUp;
+    animation-name: fadeInUp;
+  }
+
+/* Hero */
+#hero {
+    min-height: 600px;
+    background: #fff url(../../../public/img/loader.gif) no-repeat center center;
+}
+
+.ml-0{
+    margin-left: 0!important;
+}
+
+.mr-0{
+    margin-right: 0!important;
+}
+
+.pr-0 {
+    padding-right: 0!important;
+}
+
+.pl-0{
+    padding-left: 0!important;
+}
+
+.col-3 {
+    text-align: center;
+    padding: 5px 2.5px !important;
+}
+
+.col-3.first {
+    padding-left: 15px !important;
+}
+
+.col-3.last {
+    padding-right: 15px !important;
+}
+
+.card-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1.25rem;
+}
+
+.card .heading h2,
+.card .heading p{
+    color: #ffffff;
+}
+
+.card .heading a{
+    text-decoration: none;
+}
+
+.card .heading h5{
+    margin-top: 25px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.card {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    color: #ffffff;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0.25rem;
+    border: none;
+    border-radius: 0;
+}
+
+.card img {
+    vertical-align: middle;
+    border-style: none;
+    border-radius: 0;
+}
+
+.card-img {
+    width: 100%;
+    border-radius: calc(0.25rem - 1px);
+}
+
+#hero .btn {
+    font-size: 24px;
+}
+
+#hero .btn.btn-primary {
+    padding: 14px 30px !important;
+}
+
+/* Popular Posts */
+#blog-popular {
+    padding: 7em 0;
+    clear: both;
+}
+
+#blog-popular {
+    padding-bottom: 0 !important;
+}
+
+#blog-popular .blog {
+    margin-bottom: 0;
+}
+
+.blog a {
+    text-decoration: none;
+}
+  
+.blog-popular .blog {
+    margin-bottom: 0;
+}
+
+/* Instagram */
+.insta {
+    height: 350px;
+}
+
+.nopadding {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/*  Media Queries  */
+@media screen and (max-width: 768px) {
+    #blog-popular {
+        padding: 3em 0;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #hero {
+        min-height: 400px;
+    }
+}

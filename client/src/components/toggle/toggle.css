@@ -1,0 +1,199 @@
+.nav-toggle {
+    position: absolute;
+    right: 0px;
+    top: 65px;
+    z-index: 21;
+    padding: 6px 0 0 0;
+    display: block;
+    margin: 0 auto;
+    display: none;
+    height: 44px;
+    width: 44px;
+    z-index: 2001;
+    border-bottom: none !important;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    text-decoration: none;
+    top: 8px !important;
+}
+
+.nav-toggle.active i::before,
+.nav-toggle.active i::after {
+    background-color: #444;
+}
+
+.nav-toggle:hover,
+.nav-toggle:focus,
+.nav-toggle:active {
+    outline: none;
+    border-bottom: none !important;
+}
+
+.nav-toggle i {
+    position: relative;
+    display: inline-block;
+    width: 25px;
+    height: 2px;
+    color: #252525;
+    font: bold 14px/.4 Helvetica;
+    text-transform: uppercase;
+    text-indent: -55px;
+    background-color: #252525;
+    transition: all .2s ease-out;
+}
+
+.nav-toggle i::before,
+.nav-toggle i::after {
+    content: '';
+    width: 25px;
+    height: 2px;
+    background-color: #252525;
+    position: absolute;
+    left: 0;
+    transition: all .2s ease-out;
+}
+
+.nav-toggle.nav-white>i {
+    color: #ffffff;
+    background-color: #000000;
+}
+
+.nav-toggle.nav-white>i::before,
+.nav-toggle.nav-white>i::after {
+    background-color: #000000;
+}
+
+.nav-toggle i::before {
+    top: -7px;
+}
+
+.nav-toggle i::after {
+    bottom: -7px;
+}
+
+.nav-toggle:hover i::before {
+    top: -10px;
+}
+
+.nav-toggle:hover i::after {
+    bottom: -10px;
+}
+
+.nav-toggle.active i {
+    background-color: transparent;
+}
+
+.nav-toggle.active i::before {
+    top: 0;
+    -webkit-transform: rotateZ(45deg);
+    -moz-transform: rotateZ(45deg);
+    -ms-transform: rotateZ(45deg);
+    -o-transform: rotateZ(45deg);
+    transform: rotateZ(45deg);
+    background-color: #ffffff;
+}
+
+.nav-toggle.active i::after {
+    bottom: 0;
+    -webkit-transform: rotateZ(-45deg);
+    -moz-transform: rotateZ(-45deg);
+    -ms-transform: rotateZ(-45deg);
+    -o-transform: rotateZ(-45deg);
+    transform: rotateZ(-45deg);
+    background-color: #ffffff;
+}
+
+.nav-toggle.active i::before,
+.nav-toggle.active i::after {
+    background-color: #444;
+}
+
+.nav-toggle:hover,
+.nav-toggle:focus,
+.nav-toggle:active {
+    outline: none;
+    border-bottom: none !important;
+}
+
+.nav-toggle i {
+    position: relative;
+    display: inline-block;
+    width: 25px;
+    height: 2px;
+    color: #252525;
+    font: bold 14px/.4 Helvetica;
+    text-transform: uppercase;
+    text-indent: -55px;
+    background-color: #252525;
+    transition: all .2s ease-out;
+}
+
+.nav-toggle i::before,
+.nav-toggle i::after {
+    content: '';
+    width: 25px;
+    height: 2px;
+    background-color: #252525;
+    position: absolute;
+    left: 0;
+    transition: all .2s ease-out;
+}
+
+.nav-toggle.fh5co-nav-white>i {
+    color: #ffffff;
+    background-color: #000000;
+}
+
+.nav-toggle.fh5co-nav-white>i::before,
+.nav-toggle.fh5co-nav-white>i::after {
+    background-color: #000000;
+}
+
+.nav-toggle i::before {
+    top: -7px;
+}
+
+.nav-toggle i::after {
+    bottom: -7px;
+}
+
+.nav-toggle:hover i::before {
+    top: -10px;
+}
+
+.nav-toggle:hover i::after {
+    bottom: -10px;
+}
+
+.nav-toggle.active i {
+    background-color: transparent;
+}
+
+.nav-toggle.active i::before {
+    top: 0;
+    -webkit-transform: rotateZ(45deg);
+    -moz-transform: rotateZ(45deg);
+    -ms-transform: rotateZ(45deg);
+    -o-transform: rotateZ(45deg);
+    transform: rotateZ(45deg);
+    background-color: #ffffff;
+}
+
+.nav-toggle.active i::after {
+    bottom: 0;
+    -webkit-transform: rotateZ(-45deg);
+    -moz-transform: rotateZ(-45deg);
+    -ms-transform: rotateZ(-45deg);
+    -o-transform: rotateZ(-45deg);
+    transform: rotateZ(-45deg);
+    background-color: #ffffff;
+}
+
+
+/*  Media Queries  */
+@media screen and (max-width: 768px) {
+    .nav-toggle {
+        display: block;
+    }
+}

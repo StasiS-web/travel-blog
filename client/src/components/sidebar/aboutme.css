@@ -1,0 +1,55 @@
+.staff {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.staff img {
+    width: 140px;
+    height: 140px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    border-radius: 50%;
+}
+
+.staff h3 {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.staff p {
+    margin-bottom: 30px;
+}
+
+.staff .role {
+    color: gray;
+    margin-bottom: 30px;
+    font-weight: normal;
+    display: block;
+}
+
+.admin-btn{
+    margin-top: 15px;
+    padding: 15px;
+    background-color: #fbf2eb;
+ }
+
+.btn-success {
+    background: #5cb85c;
+    color: #fff;
+    border-radius: 5px;
+    text-decoration: none;
+    border: 2px solid #5cb85c;
+    padding: 5px;
+}
+
+.btn-success:hover,
+.btn-success:focus,
+.btn-success:active {
+    color: #5cb85c;
+    background: #fbf2eb!important;
+    border-color: #5cb85c !important;
+}
+

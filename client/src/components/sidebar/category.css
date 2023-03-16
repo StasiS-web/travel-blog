@@ -1,0 +1,33 @@
+#sidebar .category {
+    margin: 0;
+    padding: 0;
+}
+
+#sidebar .category li {
+    list-style: none;
+    padding: 7px 0;
+}
+
+#sidebar .category li a {
+    color: #000;
+    position: relative;
+    padding-left: 20px;
+    text-decoration: none;
+}
+
+#sidebar .category li a i {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.heading.heading-sidebar h2 {
+    font-size: 30px;
+}
+
+.heading.heading-sidebar h2 span {
+    padding: 10px 20px;
+    border: 1px solid #000;
+    z-index: 8;
+    position: relative;
+}

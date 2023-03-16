@@ -1,0 +1,36 @@
+#sidebar .blog-entry {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    width: 100%;
+    float: left;
+    padding: 20px 0;
+}
+
+#sidebar .blog-entry>a {
+    width: 100%;
+    float: left;
+    position: relative;
+    text-decoration: none;
+}
+
+#sidebar .blog-entry>a img {
+    float: left;
+    width: 90px;
+    height: 90px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    border-radius: 50%;
+}
+
+#sidebar .blog-entry>a .desc {
+    padding-top: 10px;
+    padding-left: 110px;
+}
+
+#sidebar .blog-entry>a .desc .date {
+    color: rgba(0, 0, 0, 0.4);
+}
+
+#sidebar .blog-entry>a .desc h3 {
+    font-size: 20px;
+}
