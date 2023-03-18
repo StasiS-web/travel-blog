@@ -1,43 +1,53 @@
-const request = async (method, url, data) => {
-    try{
-        const user = localStorage.getItem('auth');
-        const auth = JSON.parse(user || '{}');
-
-        let headers = {};
-
-        if(auth.accessToken){
-            headers['X-Authorization'] = auth.accessToken;
-        }
-
-        let buildRequest;
-
-        if(method === 'GET'){
-            buildRequest = fetch(url, {headers});
-        }
-        else {
-            buildRequest = fetch(url, {
-                method,
-                headers: {
-                    ...headers,
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify(data)
-        });
+const request = async (method, url, data, options = {}) => {
+    const { headers: customHeaders = {}, ...customOptions } = options;
+    const token = localStorage.getItem('auth');
+    const auth = token ? JSON.parse(token) : {};
+  
+    const headers = {
+      ...customHeaders,
+      'content-type': 'application/json',
+    };
+  
+    if (auth.accessToken) {
+      headers['Authorization'] = `Bearer ${auth.accessToken}`;
     }
-        const response = await buildRequest;
-        console.log(response);
-
-        const result = await response.json();
-
-        return result;
+  
+    const requestOptions = {
+      method,
+      headers,
+      ...customOptions,
+    };
+  
+    if (data) {
+      requestOptions.body = JSON.stringify(data);
     }
-    catch(error){
-        console.log(error);
-    }
-}
+  
+    try {
+      const response = await fetch(url, requestOptions);
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'An error occurred');
+      }
+  
+      const result = await response.text();
 
-export const get = request.bind({}, 'GET');
-export const post = request.bind({}, 'POST');
-export const patch = request.bind({}, 'PATCH');
-export const put = request.bind({}, 'PUT');
-export const del = request.bind({}, 'DELETE');
+      if(result && result.trim() !== '') {
+        const jsonData = JSON.parse(result);
+        return jsonData;
+      }
+      else{
+        throw new Error("Error or null response");
+      }
+    } catch (error) {
+      console.log(error);
+      console.log(error);
+      throw new Error("Error parsing JSON" + error.message);
+    }
+  };
+  
+  export const get = (url, options) => request('GET', url, null, options);
+  export const post = (url, data, options) => request('POST', url, data, options);
+  export const patch = (url, data, options) => request('PATCH', url, data, options);
+  export const put = (url, data, options) => request('PUT', url, data, options);
+  export const del = (url, options) => request('DELETE', url, null, options);
+  

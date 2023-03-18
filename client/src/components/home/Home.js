@@ -1,6 +1,6 @@
 import "../home/home.css";
 import React from "react";
-import { paths } from "../../constants/constants";
+import { paths } from "../../constants/Constants";
 import { Link } from "react-router-dom";
 
 const  Home = () => {

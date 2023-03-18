@@ -1,41 +1,29 @@
-import { createContext, useContext } from "react";
-import { useLocalStorage } from "../hooks/useLocalStorage"
+import { createContext } from "react";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 export const AuthContext = createContext();
 
-const initialState = {
-    _id: "",
-    email: "",
-    accessToken: "",
-    photo: "",
-    displayName: "",
-    bio: "",
-};
+export const AuthProvider = ({ children }) => {
+  const [auth, setAuth] = useLocalStorage('auth', {});
 
-export const AuthProvider = ({ children }) =>{
-    const [ user, setUser ] = useLocalStorage('user', initialState);
+  const userLogin = (authData) => {
+    setAuth(authData);
+  };
 
-    const userLogin = (authData) => {
-        setUser(authData);
-    };
+  const userLogout = () => {
+    setAuth({});
+  };
 
-    const updateProfileData = (profileData) => {
-        setUser({ ...user, ...profileData });
-    };
+  const isAuthenticated = Object.keys(auth).length > 0;
 
-    function userLogout() {
-        setUser(initialState);
-    };
-
-    return (
-        <AuthContext.Provider value={{ user, userLogin, userLogout, updateProfileData, isAuthenticated: Boolean(user.email) }}>
-            {children}
-        </AuthContext.Provider>
-    );
-};
-
-export const useAuth = () => {
-    const authState = useContext(AuthContext);
-    return authState;
-};
-
+  return (
+    <AuthContext.Provider value={{
+        user: auth,
+        userLogin,
+        userLogout,
+        isAuthenticated,
+    }}>
+        {children}
+    </AuthContext.Provider>
+  )
+}

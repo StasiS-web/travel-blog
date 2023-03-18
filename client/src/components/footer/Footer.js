@@ -1,6 +1,6 @@
 import "./footer.css";
 import { Link } from "react-router-dom"
-import { paths } from '../../constants/constants';
+import { paths } from "../../constants/Constants";
 
 const Footer = () => {
   return (
@@ -61,8 +61,8 @@ const Footer = () => {
             <h4><strong>Contact Information</strong></h4>
             <ul className="footer-links">
               <li>
-                <i className="ri-map-pin-line"></i> 198 West 21th Street, <br />{" "}
-                Suite 721 New York NY 10016
+                <i className="ri-map-pin-line"></i> 19 Bulgaria Blvd., <br />{" "}
+                1610, Sofia, Bulgaria
               </li>
               <li>
                 <i className="ri-phone-line"></i>

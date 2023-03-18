@@ -22,7 +22,7 @@ const Contacts = () => {
             <form action="#">
               <div className="form-group row">
                 <div className="col-6 field">
-                  <label for="firstname">First Name</label>
+                  <label htmlFor="firstname">First Name</label>
                   <input
                     type="text"
                     name="firstName"
@@ -30,7 +30,7 @@ const Contacts = () => {
                     className="form-control"/>
                 </div>
                 <div className="col-6 field">
-                  <label for="lastname">Last Name</label>
+                  <label htmlFor="lastname">Last Name</label>
                   <input
                     type="lastName"
                     name="lastName"
@@ -41,7 +41,7 @@ const Contacts = () => {
               </div>
               <div className="form-group row">
                 <div className="col-6 field">
-                  <label for="email">Email</label>
+                  <label htmlFor="email">Email</label>
                   <input
                     type="email"
                     name="email"
@@ -50,7 +50,7 @@ const Contacts = () => {
                   />
                 </div>
                 <div className="col-6 field">
-                  <label for="phone">Phone</label>
+                  <label htmlFor="phone">Phone</label>
                   <input
                     type="text"
                     name="phone"
@@ -61,7 +61,7 @@ const Contacts = () => {
               </div>
               <div className="form-group row">
                 <div className="col-12 field">
-                  <label for="message">Message</label>
+                  <label htmlFor="message">Message</label>
                   <textarea
                     name="message"
                     id="message"

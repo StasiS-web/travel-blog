@@ -1,5 +1,5 @@
 import "./destination.css";
-import { paths } from "../../constants/constants";
+import { paths } from "../../constants/Constants";
 import { Link } from "react-router-dom";
 import Sidebar from "../sidebar/Sidebar";
 

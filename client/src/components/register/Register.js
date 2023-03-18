@@ -1,47 +1,41 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../../contexts/AuthContext";
-import * as authService from "../../services/authService";
-import { paths, notifications, notificationMessages } from '../../constants/constants';
-
+import authServices from "../../services/authService";
+import { AuthContext } from "../../contexts/AuthContext"; 
+import { paths, notifications } from "../../constants/Constants";
+import { types, NotificationContext} from "../../contexts/NotificationContext";
 
 const Register = () => {
-  const [errors, setError] = useState({
-    nameTxt: null,
-    emailTxt: null,
-    passwordTxt: null,
-    confirmPasswordTxt: null
-  });
-  const [ email, setEmail ] = useState('');
-  const { userLogin } = useContext(useAuth);
   const navigate = useNavigate();
+  const { userLogin } = useContext(AuthContext);
+  const { showNotification } = useContext(NotificationContext);
 
-
-  const onRegister = (event) => {
+  const onRegister = async (event) => {
     event.preventDefault();
 
     const formData = new FormData(event.target);
-
     const name = formData.get('name');
     const email = formData.get("email");
     const password = formData.get("password");
     const confirmPassword = formData.get("confirm-password");
 
-    if (password !== confirmPassword) {
-      setError((state) => ({
-        ...state,
-        confirmPasswordTxt: notifications.passwordShouldMatch,
-      }));
-      return;
+    if(email === '' || password === ''){
+      return showNotification(notifications.fieldsWarningMsg, types.warning);
     }
 
-    authService.register(name, email, password).then((authData) => {
-      if(authData === "400") {
-        throw authData;
-      } else {
+    if (password !== confirmPassword) {
+      return showNotification(notifications.passwordWarningMsg, types.warning);
+    }
+
+    await authServices.register(name, email, password)
+    .then(authData => {
         userLogin(authData);
-        navigate(paths.homePath);
-      }
+        showNotification(notifications.registerSuccessMsg, types.success);
+        event.target.reset();
+        navigate("/");
+    })
+    .catch((error) => {
+      return showNotification(error.message, types.error);
     });
   };
 
@@ -57,7 +51,7 @@ const Register = () => {
         </div>
         <div className="row">
           <div className="col-6 col-offset3">
-            <form onSubmit={onRegister} method="POST">
+            <form id="register" onSubmit={onRegister} method="POST">
               <div className="form-group">
               <div className="col-12 field">
                   <label htmlFor="name">Full Name</label>
@@ -68,9 +62,6 @@ const Register = () => {
                     placeholder="Full Name ..."
                     className="form-control"
                   />
-                  <p className={errors.nameTxt ? "error" : "hidden"}>
-                    {errors.nameTxt}
-                  </p>
                 </div>
 
 
@@ -83,9 +74,6 @@ const Register = () => {
                     placeholder="Email ..."
                     className="form-control"
                   />
-                  <p className={errors.emailTxt ? "error" : "hidden"}>
-                    {errors.emailTxt}
-                  </p>
                 </div>
               </div>
 
@@ -99,9 +87,6 @@ const Register = () => {
                     placeholder="Password ..."
                     className="form-control"
                   />
-                  <p className={errors.emailTxt ? "error" : "hidden"}>
-                    {errors.emailTxt}
-                  </p>
                 </div>
                 <div className="col-12 field">
                   <label htmlFor="con-password">Confirm Password</label>
@@ -112,14 +97,11 @@ const Register = () => {
                     placeholder="Confirm Password ..."
                     className="form-control"
                   />
-                  <p className={errors.emailTxt ? "error" : "hidden"}>
-                    {errors.emailTxt}
-                  </p>
                 </div>
               </div>
               <div className="form-group row">
                 <div className="col-12 field">
-                  <button type="submit" className="btn btn-primary">
+                  <button type="submit" className="btn btn-primary" defaultValue="Register">
                     Sign Up
                   </button>
                   <p className="text-center">

@@ -1,28 +1,50 @@
-import { useState  } from "react";
+import { useState, useEffect } from "react";
 
-export const useLocalStorage = (key, initialValue) => {
-    const [ state, setState ] = useState(() => {
-        try{
-            let item = localStorage.getItem(key);
+export const useLocalStorage = (key, defaultValue) => {
+  if (!key || typeof key !== "string") {
+    throw new Error("Invalid key for useLocalStorage hook");
+  }
 
-            return item ? JSON.parse(item) : initialValue;
-        }
-        catch(error){
-            console.log(error);
-            return initialValue;
-        }
-    });
+  const [value, setValue] = useState(() => {
+    try {
+      const storedValue = localStorage.getItem(key);
+      return storedValue ? JSON.parse(storedValue) : defaultValue;
+    } catch (error) {
+      console.error(`Error reading value for key ${key}: ${error.message}`);
+      return defaultValue;
+    }
+  });
 
-    const setItem = (value) => {
+  useEffect(() => {
+    const handleStorageChange = (event) => {
+      if (event.key === key) {
         try {
-            localStorage.setItem(key, JSON.stringify(value))
-            
-            setState(value);
+          const newValue = JSON.parse(event.newValue);
+          setValue(newValue);
+        } catch (error) {
+          console.error(`Error parsing new value for key ${key}: ${error.message}`);
         }
-        catch(error){
-            console.log(error);
-        }
+      }
     };
 
-    return [ state, setItem ];
-}
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, [key]);
+
+  const setLocalStorageValue = (newValue) => {
+    if (!newValue) {
+      throw new Error("Invalid value for useLocalStorage hook");
+    }
+    try {
+      localStorage.setItem(key, JSON.stringify(newValue));
+      setValue(newValue);
+    } catch (error) {
+      console.error(`Error setting value for key ${key}: ${error.message}`);
+    }
+  };
+
+  return [value, setLocalStorageValue];
+};

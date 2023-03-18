@@ -1,13 +1,27 @@
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import formatDate from "../../utils/dateUtils";
+import * as destinationService from "../../services/destinationService";
 
-const ArticleDetails = () => {
+export const ArticleDetails = () => {
+    const {articleId} = useParams();
+    const [ currentArticle, setCurrentArticle ] = useState({});
+
+    useEffect(() => {
+        destinationService.getDestinationById(articleId)
+          .then(result =>{
+            setCurrentArticle(result);
+          });
+    })
+
     return(
-        <div id="article-details">
+      <div id="article-details">
       <div className="content no-pd-top">
         <div className="container">
-          <div className="row animate-box">
+        <div className="row animate-box">
             <div className="col-12 col-offset0 text-center heading">
               <h2>
-                <span>Destination</span>
+                <span>Article Details</span>
               </h2>
             </div>
           </div>
@@ -18,21 +32,19 @@ const ArticleDetails = () => {
                 <div className="blog animate-box">
                     <div className="title text-center">
                       <h3>
-                        Modeling &amp; Stylist in USA
+                        {currentArticle.title}
                       </h3>
-                      <span className="posted-on">Nov. 15th 2016</span>
-                      <span className="category">Asia</span>
+                      <span className="posted-on">{formatDate(currentArticle.createdOn)}</span>
+                      <span className="category">{currentArticle.category}</span>
                     </div>
                     <img
                         className="img-responsive"
-                        src="img/blog-2.jpg"
+                        src={currentArticle.imageUrl}
                         alt=""
                       />
                     <div className="blog-text">
                       <p>
-                        Far far away, behind the word mountains, far from the
-                        countries Vokalia and Consonantia, there live the blind
-                        texts.
+                        {currentArticle.content}
                       </p>
                     </div>
                   </div>

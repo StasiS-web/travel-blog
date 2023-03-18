@@ -1,27 +1,36 @@
 import "./login.css";
-import React from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import authServices from "../../services/authService";
+import { paths } from "../../constants/Constants";
 import { AuthContext } from "../../contexts/AuthContext";
-import * as authService from "../../services/authService";
-import { paths } from '../../constants/constants';
 
  const Login = () => {
-  const { userLogin } = useContext(AuthContext)
+  const [ email, setEmail ] = useState('');
+  const [ password, setPassword ] = useState('');
+  const { userLogin } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const onSubmit = (event) => {
+  const onChangeEmail = (event) => {
+    setEmail(event.target.value);
+  }
+
+  const onChangePassword = (event) => {
+    setPassword(event.target.value);
+  }
+
+  const onSubmit = async (event) => {
     event.preventDefault();
 
     const { email, password } = Object.fromEntries(new FormData(event.target));
     
-    authService.login(email, password)
+      await authServices.login(email, password)
         .then(authData => {
-          userLogin(authData);
-          navigate(paths.homePath);
+          userLogin(authData)
+          navigate("/");
         })
         .catch(() => {
-          navigate(paths.error404Path);
+          navigate("/404");
         })
   
   };
@@ -48,6 +57,8 @@ import { paths } from '../../constants/constants';
                     name="email"
                     placeholder="Email ..."
                     className="form-control"
+                    value={email}
+                    onChange={onChangeEmail}
                   />
                 </div>
               </div>
@@ -61,6 +72,8 @@ import { paths } from '../../constants/constants';
                     name="password"
                     placeholder="Password ..."
                     className="form-control"
+                    value={password}
+                    onChange={onChangePassword}
                   />
                 </div>
               </div>

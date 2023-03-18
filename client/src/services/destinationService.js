@@ -1,5 +1,5 @@
 import * as request from "./requester";
-import { destinationUrl } from '../../constants/constants';
+import { destinationUrl } from "../constants/Constants";
 
 export const getAllDestinations = () => request.get(destinationUrl);
 

@@ -1,7 +1,8 @@
 import "./aboutme.css";
 import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
-import {  AuthContext } from "../../contexts/AuthContext";
+import { paths } from "../../constants/Constants";
+import { AuthContext } from "../../contexts/AuthContext";
 
  const AboutMe = () => {
   const { user } = useContext(AuthContext);
@@ -47,7 +48,7 @@ import {  AuthContext } from "../../contexts/AuthContext";
           </li>
         </Link>
         {user.email ? <div className="admin-btn">
-         <NavLink to="/create" className="btn btn-success">Create</NavLink> 
+         <NavLink to={paths.createArticle} className="btn btn-success"><i className="ri-add-circle-fill"></i>Create</NavLink> 
         </div> : null}
       </div>
     </div>

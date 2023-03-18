@@ -2,7 +2,7 @@ import "./navigation.css";
 import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
-import { paths } from '../../constants/constants';
+import {paths} from "../../constants/Constants";
 
 
 const Navigation = () => {

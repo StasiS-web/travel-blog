@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import {paths} from "../../constants/Constants";
 
  const NotFound = () => {
   return (
@@ -10,7 +11,7 @@ import { Link } from "react-router-dom";
           <p className="text-danger text-center">
             The page you are looking for is temporarily unavailable. Please go to Home page.
           </p>
-          <Link to="/" className="btn btn-primary">Go Home</Link>
+          <Link to={paths.homePath} className="btn btn-primary">Go Home</Link>
         </div>
       </div>
     </div>

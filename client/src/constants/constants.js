@@ -16,26 +16,22 @@ const paths = {
     error404Path: "/404",
 
     destinationsPath: "/destination",
-    detailsDestinationPath: "/destination/:id",
 
-    createPath: "/create-article",
-    updatePath: "/destination/:id/edit-article"
+    createArticle: "destination/create-article",
+    updateArticleById: "/destination/edit-article",
+    deleteArticleById: "/destination/delete-article"
 }
 
 const notifications ={
     name: "Please provide your name.",
-    emailRequired: "Please provide your email.",
-    passwordRequired: "Please provide a password.",
-    passwordShouldMatch: "Password and Confirm password should match.",
     userExists: "User already exists.",
-    articleTitleRequired: "Please provide article title.",
-    articleAuthorRequired: "Please provide article author.",
-    articleCategoryRequired: "Please provide article category.",
-    articleImageRequired: "Please provide article image URL.",
-    articleContentRequired: "Please provide article content.",
-}
+    userDataNotFound: "User data not found",
 
-const notificationMessages = {
+    passwordWarningMsg: "Password and Confirm password should match.",
+    fieldsWarningMsg: "Please fill all required fields.",
+
+    registerSuccessMsg: "You have successfully register.",
+    loginSuccessMsg: "You have successfully login.",
     logoutSuccessMsg: "You have successfully logged out.",
 
     articleCreateMsg: "Article created.",
@@ -50,6 +46,5 @@ export {
     destinationUrl,
     tipUrl,
     paths,
-    notifications,
-    notificationMessages
+    notifications
 }

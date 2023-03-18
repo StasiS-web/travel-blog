@@ -1,10 +1,20 @@
 import * as request from "./requester";
-import { userUrl } from '../constants/constants';
+import { userUrl, notifications } from '../constants/Constants';
 
-export const login = (email, password) => 
+const getUserData = () => {
+    let user = localStorage.getItem('user');
+
+    if(!user) {
+        throw new Error(notifications.userDataNotFound);
+    }
+
+    return JSON.parse(user);
+}
+
+const login = (email, password) => 
     request.post(`${userUrl}/login`, {email, password});
 
-export const logout = async (accessToken) => {
+const logout = async (accessToken) => {
     try{
         const response = await fetch(`${userUrl}/logout`, {
             headers: {
@@ -19,5 +29,25 @@ export const logout = async (accessToken) => {
     }
 }
 
-export const register = (email, password) =>
+const register = (email, password) =>
     request.post(`${userUrl}/register`, {email, password});
+
+function saveUserData(data){
+    let {user: {email, uid} } = data;
+    localStorage.setItem('user', JSON.stringify({email, uid}));
+}
+
+function clearUserData(){
+    localStorage.removeItem('user');
+}
+
+const authServices = {
+    getUserData,
+    login,
+    logout,
+    register,
+    saveUserData,
+    clearUserData
+}
+
+export default authServices;
