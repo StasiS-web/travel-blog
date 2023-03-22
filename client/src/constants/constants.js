@@ -16,19 +16,21 @@ const paths = {
     error404Path: "/404",
 
     destinationsPath: "/destination",
+    detailsPath: "/detail/:postId",
 
     createArticle: "destination/create-article",
-    updateArticleById: "/destination/edit-article",
-    deleteArticleById: "/destination/delete-article"
+    updateArticleById: "/destination/:postId/edit-article"
 }
 
 const notifications ={
     name: "Please provide your name.",
     userExists: "User already exists.",
+    emailExists: "This email already exists.",
     userDataNotFound: "User data not found",
 
+    emailWarningMsg: "Email must be at least 6 characters long.",
     passwordWarningMsg: "Password and Confirm password should match.",
-    fieldsWarningMsg: "Please fill all required fields.",
+    fieldsErrorMsg: "Please fill all required fields.",
 
     registerSuccessMsg: "You have successfully register.",
     loginSuccessMsg: "You have successfully login.",
@@ -39,6 +41,7 @@ const notifications ={
     articleDeleteMsg: "Article deleted.",
 
     invalidInput: "Invalid input!",
+    notReceivedData: "Authentication data not received."
 }
 
 export {

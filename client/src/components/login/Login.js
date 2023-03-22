@@ -1,7 +1,7 @@
 import "./login.css";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import authServices from "../../services/authService";
+import * as authService from "../../services/authService";
 import { paths } from "../../constants/Constants";
 import { AuthContext } from "../../contexts/AuthContext";
 
@@ -10,6 +10,7 @@ import { AuthContext } from "../../contexts/AuthContext";
   const [ password, setPassword ] = useState('');
   const { userLogin } = useContext(AuthContext);
   const navigate = useNavigate();
+  useEffect(() => {document.getElementById("login-page").classList.add("active")}, []);
 
   const onChangeEmail = (event) => {
     setEmail(event.target.value);
@@ -24,14 +25,14 @@ import { AuthContext } from "../../contexts/AuthContext";
 
     const { email, password } = Object.fromEntries(new FormData(event.target));
     
-      await authServices.login(email, password)
+      await authService.login(email, password)
         .then(authData => {
           userLogin(authData)
           navigate("/");
         })
         .catch(() => {
           navigate("/404");
-        })
+        });
   
   };
 

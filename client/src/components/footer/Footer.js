@@ -43,16 +43,16 @@ const Footer = () => {
             <h4><strong>Links</strong></h4>
             <ul className="footer-links">
               <li>
-              <a href={paths.homePath}>Home</a>
+              <a href="/">Home</a>
               </li>
               <li>
-              <a href={paths.aboutPath}>About</a>
+              <a href="/about">About</a>
               </li>
               <li>
-              <a href={paths.destinationsPath}>Destination</a>
+              <a href="/destination">Destination</a>
               </li>
               <li>
-              <a href={paths.contactPath}>Contact</a>
+              <a href="/contacts">Contact</a>
               </li>
             </ul>
           </div>

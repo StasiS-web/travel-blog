@@ -3,7 +3,7 @@ import React from "react";
 import { paths } from "../../constants/Constants";
 import { Link } from "react-router-dom";
 
-const  Home = () => {
+const  Home = ({_id}) => {
   return (
     <div id="home">
       <div id="hero" className="row ml-0 mr-0">
@@ -13,7 +13,7 @@ const  Home = () => {
             <div className="card-overlay text-center heading">
               <p>Travel Tips</p>
               <h2>How to Start a Blog &amp; Makes Money</h2>
-              <Link to={paths.detailsDestinationPath} className="btn btn-primary">
+              <Link to={paths.destinationsPath/`${_id}`} className="btn btn-primary">
                 READ MORE
               </Link>
             </div>
@@ -25,7 +25,7 @@ const  Home = () => {
             <div className="card-overlay text-center heading">
               <p>Travel Tips</p>
               <h2>15 Steps for Planning a Trip</h2>
-              <Link to={paths.detailsDestinationPath} className="btn btn-primary">
+              <Link to={paths.destinationsPath/`${_id}`} className="btn btn-primary">
                 READ MORE
               </Link>
             </div>
@@ -134,7 +134,7 @@ const  Home = () => {
       <div id="instagram">
         <div className="container">
           <div className="row animate-box">
-            <div className="col-12md colmd-offset0 text-center heading">
+            <div className="col-12md col-md-offset0 text-center heading">
               <h2>
                 <span>Instagram Posts</span>
               </h2>

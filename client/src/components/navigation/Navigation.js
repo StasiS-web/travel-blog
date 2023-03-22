@@ -2,7 +2,6 @@ import "./navigation.css";
 import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
-import {paths} from "../../constants/Constants";
 
 
 const Navigation = () => {
@@ -15,36 +14,37 @@ const Navigation = () => {
           <div className="top-menu">
             <div className="container">
               <div className="row">
-                <div className="colsm-7 text-left menu-1">
+                <div className="col-sm-7 text-left menu-1">
                   <ul>
                     <li>
-                      <NavLink to={paths.homePath} className={({isActive}) => isActive ? "active" : ""}>Home</NavLink>
+                      <NavLink to="/" className={({isActive}) => isActive ? "active" : ""}>Home</NavLink>
                     </li>
                     <li>
-                      <NavLink to={paths.aboutPath} className={({isActive}) => isActive ? "active" : ""}>About</NavLink>
+                      <NavLink to="/about" className={({isActive}) => isActive ? "active" : ""}>About</NavLink>
                     </li>
                     <li>
-                      <NavLink to={paths.destinationsPath} className={({isActive}) => isActive ? "active" : ""}>Destination</NavLink>
+                      <NavLink to="/destination" className={({isActive}) => isActive ? "active" : ""}>Destination</NavLink>
                     </li>
                     <li >
-                      <NavLink to={paths.contactPath} className={({isActive}) => isActive ? "active" : "" }>Contact</NavLink>
+                      <NavLink to="/contacts" className={({isActive}) => isActive ? "active" : "" }>Contact</NavLink>
                     </li>
                   </ul>
                 </div>
-                <div className="colsm-5 user-links text-justify">
+                <div className="col-sm-5 user-links text-justify">
                   {user.email ?  
                     <>
-                      <Link to={paths.profilePath}>Profile</Link>
-                      <NavLink to={paths.logoutPath} className="btn btn-primary">Logout</NavLink>
+                    <span>Hello, {user.name}</span>
+                      <Link to="/profile/:profileName">Profile</Link>
+                      <NavLink to="/logout" className="btn btn-primary">Logout</NavLink>
                     </>
                     :
                     <>
-                      <Link to={paths.loginPath}>Login</Link> 
-                      <Link to={paths.registerPath}>Register</Link>
+                      <Link to="/login">Login</Link> 
+                      <Link to="/register">Register</Link>
                     </>
                   }
                 </div>
-                <div className="colsm-5 text-right icons">
+                <div className="col-sm-5 text-right icons">
                   <Link to="#">
                     <li className="social-icons">
                       <i className="ri-whatsapp-fill"></i>
@@ -73,9 +73,9 @@ const Navigation = () => {
           </div>
         </div>
         <div className="row">
-          <div className="colxs-12 text-center menu-2">
+          <div className="col-xs-12 text-center menu-2">
             <div className="logo">
-              <Link to={paths.homePath}>
+              <Link to="/">
                 <h1 className="logo-slogan">
                   Awesome <span>.</span>
                   <small>Traveler</small>

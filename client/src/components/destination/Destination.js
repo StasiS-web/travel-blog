@@ -1,11 +1,12 @@
 import "./destination.css";
-import { paths } from "../../constants/Constants";
-import { Link } from "react-router-dom";
 import Sidebar from "../sidebar/Sidebar";
+import DestinationItem from "../destination/destinationItem/DestinationItem";
 
-const Destination = () => {
+const Destination = ({
+  articles,
+}) => {
   return (
-    <div id="destination">
+    <div id="destination-page">
       <div className="content no-pd-top">
         <div className="container">
           <div className="row animate-box">
@@ -36,156 +37,17 @@ const Destination = () => {
                     </div>
                   </div>
                 </div>
-                <div className="col-6">
-                  <div className="blog animate-box">
-                    <div className="title text-center">
-                      <span className="posted-on">Nov. 15th 2016</span>
-                      <h3>
-                        <Link to="{paths.detailsDestinationPath}">Modeling &amp; Stylist in USA</Link>
-                      </h3>
-                      <span className="category">Asia</span>
-                    </div>
-                    <a href="#">
-                      <img
-                        className="img-responsive"
-                        src="img/blog-2.jpg"
-                        alt=""
-                      />
-                    </a>
-                    <div className="blog-text text-center">
-                      <p>
-                        Far far away, behind the word mountains, far from the
-                        countries Vokalia and Consonantia, there live the blind
-                        texts.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-6">
-                  <div className="blog animate-box">
-                    <div className="title text-center">
-                      <span className="posted-on">Nov. 15th 2016</span>
-                      <h3>
-                      <Link to={paths.detailsDestinationPath}>Modeling &amp; Stylist in USA</Link>
-                      </h3>
-                      <span className="category">Europe</span>
-                    </div>
-                    <a href="#">
-                      <img
-                        className="img-responsive"
-                        src="img/blog-1.jpg"
-                        alt=""
-                      />
-                    </a>
-                    <div className="blog-text text-center">
-                      <p>
-                        Far far away, behind the word mountains, far from the
-                        countries Vokalia and Consonantia, there live the blind
-                        texts.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-6">
-                  <div className="blog animate-box">
-                    <div className="title text-center">
-                      <span className="posted-on">Nov. 15th 2016</span>
-                      <h3>
-                      <Link to={paths.detailsDestinationPath}>Modeling &amp; Stylist in USA</Link>
-                      </h3>
-                      <span className="category">Australia</span>
-                    </div>
-                    <a href="#">
-                      <img
-                        className="img-responsive"
-                        src="img/blog-2.jpg"
-                        alt=""
-                      />
-                    </a>
-                    <div className="blog-text text-center">
-                      <p>
-                        Far far away, behind the word mountains, far from the
-                        countries Vokalia and Consonantia, there live the blind
-                        texts.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-6">
-                  <div className="blog animate-box">
-                    <div className="title text-center">
-                      <span className="posted-on">Nov. 15th 2016</span>
-                      <h3>
-                      <Link to={paths.detailsDestinationPath}>Modeling &amp; Stylist in USA</Link>
-                      </h3>
-                      <span className="category">North America</span>
-                    </div>
-                    <a href="#">
-                      <img
-                        className="img-responsive"
-                        src="img/blog-1.jpg"
-                        alt=""
-                      />
-                    </a>
-                    <div className="blog-text text-center">
-                      <p>
-                        Far far away, behind the word mountains, far from the
-                        countries Vokalia and Consonantia, there live the blind
-                        texts.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-6">
-                  <div className="blog animate-box">
-                    <div className="title text-center">
-                      <span className="posted-on">Nov. 15th 2016</span>
-                      <h3>
-                      <Link to={paths.detailsDestinationPath}>Modeling &amp; Stylist in USA</Link>
-                      </h3>
-                      <span className="category">Australia</span>
-                    </div>
-                    <a href="#">
-                      <img
-                        className="img-responsive"
-                        src="img/blog-2.jpg"
-                        alt=""
-                      />
-                    </a>
-                    <div className="blog-text text-center">
-                      <p>
-                        Far far away, behind the word mountains, far from the
-                        countries Vokalia and Consonantia, there live the blind
-                        texts.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-6">
-                  <div className="blog animate-box">
-                    <div className="title text-center">
-                      <span className="posted-on">Nov. 15th 2016</span>
-                      <h3>
-                      <Link to={paths.detailsDestinationPath}>Modeling &amp; Stylist in USA</Link>
-                      </h3>
-                      <span className="category">North America</span>
-                    </div>
-                    <a href="#">
-                      <img
-                        className="img-responsive"
-                        src="img/blog-1.jpg"
-                        alt=""
-                      />
-                    </a>
-                    <div className="blog-text text-center">
-                      <p>
-                        Far far away, behind the word mountains, far from the
-                        countries Vokalia and Consonantia, there live the blind
-                        texts.
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                {articles.map(x => 
+                  <DestinationItem key={x._id} {...x} />
+                )}
+
+                {articles.length === 0 && (
+                   <div className="title text-center">
+                   <h3>
+                     No articles yet.
+                   </h3>
+                 </div>
+                )}
               </div>
             </div>
           </div>

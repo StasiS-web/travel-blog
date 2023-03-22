@@ -1,43 +1,67 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import authServices from "../../services/authService";
-import { AuthContext } from "../../contexts/AuthContext"; 
+import { useAuthContext, withAuth } from "../../contexts/AuthContext";
 import { paths, notifications } from "../../constants/Constants";
-import { types, NotificationContext} from "../../contexts/NotificationContext";
+import { types, NotificationContext } from "../../contexts/NotificationContext";
+import * as authService from "../../services/authService";
 
-const Register = () => {
+const Register = ({ auth }) => {
   const navigate = useNavigate();
-  const { userLogin } = useContext(AuthContext);
-  const { showNotification } = useContext(NotificationContext);
+  const login = useAuthContext();
+  useEffect(() => {
+    document.getElementById("register-page").classList.add("active");
+  }, []);
+  const { showNotifications } = useContext(NotificationContext);
 
   const onRegister = async (event) => {
     event.preventDefault();
 
     const formData = new FormData(event.target);
-    const name = formData.get('name');
+    const name = formData.get("name");
     const email = formData.get("email");
     const password = formData.get("password");
     const confirmPassword = formData.get("confirm-password");
 
-    if(email === '' || password === ''){
-      return showNotification(notifications.fieldsWarningMsg, types.warning);
+    const data = { name, email, password };
+
+    if (
+      name === "" ||
+      email === "" ||
+      password === "" ||
+      confirmPassword === ""
+    ) {
+      showNotifications({
+        message: notifications.fieldsErrorMsg,
+        type: types.error,
+      });
+      return;
+    }
+
+    if (email.length < 6) {
+      showNotifications({
+        message: notifications.emailWarningMsg,
+        type: types.warning,
+      });
+      return;
     }
 
     if (password !== confirmPassword) {
-      return showNotification(notifications.passwordWarningMsg, types.warning);
+      showNotifications({
+        message: notifications.passwordWarningMsg,
+        type: types.warning,
+      });
+      return;
     }
 
-    await authServices.register(name, email, password)
-    .then(authData => {
-        userLogin(authData);
-        showNotification(notifications.registerSuccessMsg, types.success);
-        event.target.reset();
-        navigate("/");
-    })
-    .catch((error) => {
-      return showNotification(error.message, types.error);
+    authService.register(data).then((data) => {
+      auth.userLogin(data);
+      showNotifications({
+        message: notifications.registerSuccessMsg,
+        type: types.success,
+      });
+      navigate("/");
     });
-  };
+  }
 
   return (
     <div id="register-page">
@@ -53,7 +77,7 @@ const Register = () => {
           <div className="col-6 col-offset3">
             <form id="register" onSubmit={onRegister} method="POST">
               <div className="form-group">
-              <div className="col-12 field">
+                <div className="col-12 field">
                   <label htmlFor="name">Full Name</label>
                   <input
                     type="name"
@@ -63,7 +87,6 @@ const Register = () => {
                     className="form-control"
                   />
                 </div>
-
 
                 <div className="col-12 field">
                   <label htmlFor="email">Email</label>
@@ -101,11 +124,16 @@ const Register = () => {
               </div>
               <div className="form-group row">
                 <div className="col-12 field">
-                  <button type="submit" className="btn btn-primary" defaultValue="Register">
+                  <button
+                    type="submit"
+                    className="btn btn-primary"
+                    defaultValue="Register"
+                  >
                     Sign Up
                   </button>
                   <p className="text-center">
-                    Already have an account? <Link to={paths.loginPath}>Login</Link>
+                    Already have an account?{" "}
+                    <Link to={paths.loginPath}>Login</Link>
                   </p>
                 </div>
               </div>
@@ -117,4 +145,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export const RegisterWithAuth = withAuth(Register);

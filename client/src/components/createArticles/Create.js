@@ -1,12 +1,15 @@
+import { useEffect } from "react";
 import "./create.css";
 import { useForm } from "../../hooks/useForm";
 
 
 const Create = ({show, onArticleCreateSubmit, onArticleCreateClose}) => {
-  const { formValues, onChangeHandler, onSubmit } = useForm({ text: ''}, onArticleCreateSubmit);
+  const { formValues, changeHandler, onSubmit } = useForm({ text: ''}, onArticleCreateSubmit);
+  useEffect(() => {document.getElementById("create-page").classList.add("active")}, []);
+  
 
   return ( 
-    <div id="create" show={show} onBlur={onArticleCreateClose}>
+    <div id="create-page" show={show} onBlur={onArticleCreateClose}>
       <div className="container">
         <div className="row" closeButton onHide={onArticleCreateClose}>
           <div className="col-12 col-offset0 text-center heading">
@@ -16,7 +19,7 @@ const Create = ({show, onArticleCreateSubmit, onArticleCreateClose}) => {
           </div>
         </div>
         <div className="col-9 row">
-          <form className="create" onSubmit={onSubmit}>
+          <form id="create" method="post" onSubmit={onSubmit}>
             <div className="form-group">
               <div className="col-12 field">
                 <label htmlFor="title">Title*</label>
@@ -27,7 +30,7 @@ const Create = ({show, onArticleCreateSubmit, onArticleCreateClose}) => {
                   placeholder="Title ..."
                   className="form-control"
                   value={formValues.title}
-                  onChange={onChangeHandler}
+                  onChange={changeHandler}
                 />
               </div>
               <div className="col-12 field">
@@ -38,8 +41,8 @@ const Create = ({show, onArticleCreateSubmit, onArticleCreateClose}) => {
                   name="imageUrl"
                   placeholder="ImageUrl ..."
                   className="form-control"
-                  value={formValues.imageUrl}
-                  onChange={onChangeHandler}
+                  value={formValues.title}
+                  onChange={changeHandler}
                 />
               </div>
             </div>
@@ -52,8 +55,8 @@ const Create = ({show, onArticleCreateSubmit, onArticleCreateClose}) => {
                   name="category"
                   placeholder="Category ..."
                   className="form-control"
-                  value={formValues.category}
-                  onChange={onChangeHandler}
+                  value={formValues.title}
+                  onChange={changeHandler}
                 />
               </div>
               <div className="col-6 field">
@@ -64,8 +67,8 @@ const Create = ({show, onArticleCreateSubmit, onArticleCreateClose}) => {
                   name="date"
                   placeholder="Created on ..."
                   className="form-control"
-                  value={formValues.createdOn}
-                  onChange={onChangeHandler}
+                  value={formValues.title}
+                  onChange={changeHandler}
                 />
               </div>
             </div>
@@ -80,8 +83,8 @@ const Create = ({show, onArticleCreateSubmit, onArticleCreateClose}) => {
                   rows="10"
                   placeholder="Content ..."
                   className="form-control"
-                  value={formValues.content}
-                  onChange={onChangeHandler}
+                  value={formValues.title}
+                  onChange={changeHandler}
                 ></textarea>
               </div>
             </div>

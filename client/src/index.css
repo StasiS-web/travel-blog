@@ -24,9 +24,11 @@ body {
 #home,
 #about,
 #travel-tips,
-#destination,
-#profile
-#not-found {
+#destination-page,
+#article-details,
+#profile,
+#not-found,
+#edit-page {
   position: relative;
   overflow-x: hidden;
   width: 100%;

@@ -1,20 +1,10 @@
 import * as request from "./requester";
 import { userUrl, notifications } from '../constants/Constants';
 
-const getUserData = () => {
-    let user = localStorage.getItem('user');
-
-    if(!user) {
-        throw new Error(notifications.userDataNotFound);
-    }
-
-    return JSON.parse(user);
-}
-
-const login = (email, password) => 
+export const login = (email, password) => 
     request.post(`${userUrl}/login`, {email, password});
 
-const logout = async (accessToken) => {
+export const logout = async (accessToken) => {
     try{
         const response = await fetch(`${userUrl}/logout`, {
             headers: {
@@ -29,25 +19,23 @@ const logout = async (accessToken) => {
     }
 }
 
-const register = (email, password) =>
+export const register = (email, password) =>
     request.post(`${userUrl}/register`, {email, password});
 
-function saveUserData(data){
-    let {user: {email, uid} } = data;
-    localStorage.setItem('user', JSON.stringify({email, uid}));
+export const getUserData = () => {
+    let user = localStorage.getItem('user');
+
+    if(!user) {
+        throw new Error(notifications.userDataNotFound);
+    }
+
+    return JSON.parse(user);
 }
 
-function clearUserData(){
+export function clearUserData(){
     localStorage.removeItem('user');
 }
 
-const authServices = {
-    getUserData,
-    login,
-    logout,
-    register,
-    saveUserData,
-    clearUserData
-}
-
-export default authServices;
+export const isAuth = () => {
+    return Boolean(getUserData());
+};
