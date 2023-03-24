@@ -1,39 +1,51 @@
-import "./login.css";
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import * as authService from "../../services/authService";
-import { paths } from "../../constants/Constants";
+import { notifications, paths } from "../../constants/Constants";
 import { AuthContext } from "../../contexts/AuthContext";
+import { types } from "../../contexts/NotificationContext";
+import { validateUser } from "../../utils/validationHandler";
 
- const Login = () => {
-  const [ email, setEmail ] = useState('');
-  const [ password, setPassword ] = useState('');
+const Login = () => {
+  const [error, setError] = useState({ message: "", type: "" });
   const { userLogin } = useContext(AuthContext);
   const navigate = useNavigate();
-  useEffect(() => {document.getElementById("login-page").classList.add("active")}, []);
 
-  const onChangeEmail = (event) => {
-    setEmail(event.target.value);
-  }
+  useEffect(() => {
+    document.getElementById("login-page").classList.add("active");
+  }, []);
 
-  const onChangePassword = (event) => {
-    setPassword(event.target.value);
-  }
-
-  const onSubmit = async (event) => {
+  const onLoginSubmit = async (event, data) => {
     event.preventDefault();
 
-    const { email, password } = Object.fromEntries(new FormData(event.target));
-    
-      await authService.login(email, password)
-        .then(authData => {
-          userLogin(authData)
-          navigate("/");
-        })
-        .catch(() => {
-          navigate("/404");
-        });
-  
+    let formData = new FormData(event.currentTarget);
+    let { email, password } = Object.fromEntries(formData);
+
+    if (email === "" || password === "") {
+      setError({
+        message: notifications.fieldsErrorMsg,
+        type: types.error,
+      });
+      return;
+    }
+
+    await authService
+      .login(email, password)
+      .then((authData) => {
+        if (!authData._id) {
+          return;
+        }
+        userLogin(authData);
+        navigate("/");
+      })
+      .catch(() => {
+        navigate("/404");
+      });
+  };
+
+  const validationHandler = (event) => {
+    let [message, type] = validateUser(event.target);
+    setError({ type, message });
   };
 
   return (
@@ -48,7 +60,7 @@ import { AuthContext } from "../../contexts/AuthContext";
         </div>
         <div className="row">
           <div className="col-6 col-offset3 login">
-            <form onSubmit={onSubmit}>
+            <form id="login-form" onSubmit={onLoginSubmit}>
               <div className="form-group">
                 <div className="col-12 field">
                   <label htmlFor="email">Email</label>
@@ -58,9 +70,13 @@ import { AuthContext } from "../../contexts/AuthContext";
                     name="email"
                     placeholder="Email ..."
                     className="form-control"
-                    value={email}
-                    onChange={onChangeEmail}
+                    onBlur={validationHandler}
                   />
+                  {error.name === "email" ? (
+                    <span className="text-warning">{error.message}</span>
+                  ) : (
+                    ""
+                  )}
                 </div>
               </div>
 
@@ -73,9 +89,13 @@ import { AuthContext } from "../../contexts/AuthContext";
                     name="password"
                     placeholder="Password ..."
                     className="form-control"
-                    value={password}
-                    onChange={onChangePassword}
+                    onBlur={validationHandler}
                   />
+                  {error.name === "password" ? (
+                    <span className="text-warning">{error.message}</span>
+                  ) : (
+                    ""
+                  )}
                 </div>
               </div>
 
@@ -96,6 +116,6 @@ import { AuthContext } from "../../contexts/AuthContext";
       </div>
     </div>
   );
-}
+};
 
 export default Login;

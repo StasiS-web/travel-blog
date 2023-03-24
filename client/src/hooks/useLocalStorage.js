@@ -11,7 +11,7 @@ export const useLocalStorage = (key, defaultValue) => {
 
   const [value, setValue] = useState(() => {
     try {
-      const storedValue = localStorage.getItem(key);
+      const storedValue = localStorage.getItem("key");
 
       if (storedValue !== undefined && storedValue !== null) {
         return JSON.parse(storedValue);

@@ -1,46 +1,42 @@
 const request = async (method, url, data) => {
-    try{
-      const token = localStorage.getItem('auth');
-      const auth = token ? JSON.parse(token) : {};
-    
-      const headers = {};
-    
-      if (auth.accessToken) {
-        headers['X-Authorization'] = auth.accessToken;
-      }
-    
-      let buildRequest;
+  try {
+    const auth = JSON.parse(localStorage.getItem('auth') || '{}');
+    const headers = {};
 
-      if(method === "GET"){
-        buildRequest = fetch(url, {headers});
-      }
-      else {
-        buildRequest = fetch(url, {
-          method,
-          headers: {
-            ...headers,
-            'content-type': "application/json"
-          },
-          body: JSON.stringify(data)
-        });
-      }
-    
-      const response = await buildRequest;
-
-      console.log(response);
-
-      const result = await response.json();
-
-      return result;
+    if (auth.accessToken) {
+      headers['Authorization'] = `Bearer ${auth.accessToken}`;
     }
-    catch(error){
-      console.log(error);
+
+    let options = { method, headers };
+
+    if (data) {
+      options.headers['Content-Type'] = 'application/json';
+      options.body = JSON.stringify(data);
     }
-  };
-  
-  export const get = request.bind({}, 'GET');
-  export const post = request.bind({}, 'POST');
-  export const patch = request.bind({}, 'PATCH');
-  export const put = request.bind({}, 'PUT');
-  export const del = request.bind({}, 'DELETE');
+
+    const response = await fetch(url, options);
+
+    if (response.status === 204) {
+      return {};
+    }
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw result;
+    }
+
+    return result;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+export const get = request.bind(null, 'GET');
+export const post = request.bind(null, 'POST');
+export const patch = request.bind(null, 'PATCH');
+export const put = request.bind(null, 'PUT');
+export const del = request.bind(null, 'DELETE');
+
   

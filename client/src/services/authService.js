@@ -1,12 +1,14 @@
 import * as request from "./requester";
-import { userUrl, notifications } from '../constants/Constants';
+import { notifications } from '../constants/Constants';
+
+const baseUrl = "http://localhost:3030/users";
 
 export const login = (email, password) => 
-    request.post(`${userUrl}/login`, {email, password});
+    request.post(`${baseUrl}/login`, {email, password});
 
 export const logout = async (accessToken) => {
     try{
-        const response = await fetch(`${userUrl}/logout`, {
+        const response = await fetch(`${baseUrl}/logout`, {
             headers: {
                 'X-Authorization':  accessToken
             }
@@ -20,7 +22,7 @@ export const logout = async (accessToken) => {
 }
 
 export const register = (email, password) =>
-    request.post(`${userUrl}/register`, {email, password});
+    request.post(`${baseUrl}/register`, {email, password});
 
 export const getUserData = () => {
     let user = localStorage.getItem('user');
@@ -31,6 +33,8 @@ export const getUserData = () => {
 
     return JSON.parse(user);
 }
+
+export const getProfile = () => request.get(`${baseUrl}/profile`);
 
 export function clearUserData(){
     localStorage.removeItem('user');

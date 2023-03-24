@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import formatDate from "../../utils/dateUtils";
 import { paths } from "../../constants/Constants";
 import { AuthContext } from "../../contexts/AuthContext";
-import * as destinationService from "../../services/destinationService";
+import { getOneById } from "../../services/destinationService";
 
 export const ArticleDetails = () => {
   const { articleId } = useParams();
@@ -11,7 +11,7 @@ export const ArticleDetails = () => {
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    destinationService.getDestinationById(articleId).then((result) => {
+    getOneById(articleId).then((result) => {
       setCurrentArticle(result);
     });
   });

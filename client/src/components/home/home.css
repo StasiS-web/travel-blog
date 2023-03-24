@@ -28,7 +28,6 @@
 /* Hero */
 #hero {
     min-height: 600px;
-    background: #fff url(../../../public/img/loader.gif) no-repeat center center;
 }
 
 .ml-0{

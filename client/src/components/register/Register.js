@@ -1,36 +1,31 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuthContext, withAuth } from "../../contexts/AuthContext";
+import { validateUser } from "../../utils/validationHandler";
 import { paths, notifications } from "../../constants/Constants";
-import { types, NotificationContext } from "../../contexts/NotificationContext";
+import {  NotificationContext, types } from "../../contexts/NotificationContext";
 import * as authService from "../../services/authService";
 
-const Register = ({ auth }) => {
+const Register = ({auth}) => {
   const navigate = useNavigate();
-  const login = useAuthContext();
+  const { addNotifications } = useContext(NotificationContext);
+  const [error, setError] = useState({message: '', type: ''});
   useEffect(() => {
     document.getElementById("register-page").classList.add("active");
   }, []);
-  const { showNotifications } = useContext(NotificationContext);
 
-  const onRegister = async (event) => {
+  const onRegisterSubmit = (data, event) =>{
     event.preventDefault();
-
-    const formData = new FormData(event.target);
-    const name = formData.get("name");
-    const email = formData.get("email");
-    const password = formData.get("password");
-    const confirmPassword = formData.get("confirm-password");
-
-    const data = { name, email, password };
-
+    
+    let formData = new FormData(event.currentTarget);
+    let { name, email, password, confirmPassword} = Object.fromEntries(formData);
+     
     if (
       name === "" ||
       email === "" ||
       password === "" ||
       confirmPassword === ""
     ) {
-      showNotifications({
+      setError({
         message: notifications.fieldsErrorMsg,
         type: types.error,
       });
@@ -38,7 +33,7 @@ const Register = ({ auth }) => {
     }
 
     if (email.length < 6) {
-      showNotifications({
+      setError({
         message: notifications.emailWarningMsg,
         type: types.warning,
       });
@@ -46,23 +41,33 @@ const Register = ({ auth }) => {
     }
 
     if (password !== confirmPassword) {
-      showNotifications({
+      setError({
         message: notifications.passwordWarningMsg,
         type: types.warning,
       });
       return;
     }
+  
+    authService.register(name, email, password, confirmPassword)
+      .then(authData => {
+        if(!authData.ok){
+          return;
+        }
+        auth.userLogin(authData);
+        navigate("/");
+      })
+       .catch((error) =>
+        addNotifications({type: types.warning, message: notifications.emailExists}),
+        setError
 
-    authService.register(data).then((data) => {
-      auth.userLogin(data);
-      showNotifications({
-        message: notifications.registerSuccessMsg,
-        type: types.success,
-      });
-      navigate("/");
-    });
+    )
   }
 
+  const validationHandler = (event) => {
+    let [message, type] = validateUser(event.target);
+    setError({type, message});
+  }
+  
   return (
     <div id="register-page">
       <div className="container">
@@ -75,7 +80,7 @@ const Register = ({ auth }) => {
         </div>
         <div className="row">
           <div className="col-6 col-offset3">
-            <form id="register" onSubmit={onRegister} method="POST">
+            <form id="register" method="POST" onSubmit={onRegisterSubmit}>
               <div className="form-group">
                 <div className="col-12 field">
                   <label htmlFor="name">Full Name</label>
@@ -85,7 +90,9 @@ const Register = ({ auth }) => {
                     name="name"
                     placeholder="Full Name ..."
                     className="form-control"
+                    onBlur={validationHandler}
                   />
+                  {error.name === "name" ? <span className="text-warning">{error.message}</span> : "" }
                 </div>
 
                 <div className="col-12 field">
@@ -96,7 +103,9 @@ const Register = ({ auth }) => {
                     name="email"
                     placeholder="Email ..."
                     className="form-control"
+                    onBlur={validationHandler}
                   />
+                  {error.name === "email" ? <span className="text-warning">{error.message}</span> : "" }
                 </div>
               </div>
 
@@ -109,17 +118,21 @@ const Register = ({ auth }) => {
                     name="password"
                     placeholder="Password ..."
                     className="form-control"
+                    onBlur={validationHandler}
                   />
+                  {error.name === "password" ? <span className="text-danger">{error.message}</span> : "" }
                 </div>
                 <div className="col-12 field">
                   <label htmlFor="con-password">Confirm Password</label>
                   <input
                     type="password"
                     id="confirm-password"
-                    name="confirm-password"
+                    name="confirmPassword"
                     placeholder="Confirm Password ..."
                     className="form-control"
+                    onBlur={validationHandler}
                   />
+                  {error.name === "confirmPassword" ? <span className="text-danger">{error.message}</span> : "" }
                 </div>
               </div>
               <div className="form-group row">
@@ -145,4 +158,4 @@ const Register = ({ auth }) => {
   );
 };
 
-export const RegisterWithAuth = withAuth(Register);
+export default Register;

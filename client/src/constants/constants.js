@@ -1,7 +1,3 @@
-const baseUrl = "http://localhost:3030";
-const userUrl = `${baseUrl}/users`;
-const destinationUrl = `${baseUrl}/jsonstore/destinations`;
-const tipUrl = `${baseUrl}/jsonstore/tips`;
 
 const paths = {
     registerPath: "/register",
@@ -28,9 +24,12 @@ const notifications ={
     emailExists: "This email already exists.",
     userDataNotFound: "User data not found",
 
-    emailWarningMsg: "Email must be at least 6 characters long.",
+    emailErrorMsg: "Email must be at least 6 characters long.",
+    fieldsErrorMsg: "Filed should not be empty.",
+
     passwordWarningMsg: "Password and Confirm password should match.",
-    fieldsErrorMsg: "Please fill all required fields.",
+    emailWarningMsg: "Please insert a valid email.",
+    nameWarningMsg: "Please insert a valid name.",
 
     registerSuccessMsg: "You have successfully register.",
     loginSuccessMsg: "You have successfully login.",
@@ -45,9 +44,6 @@ const notifications ={
 }
 
 export {
-    userUrl,
-    destinationUrl,
-    tipUrl,
     paths,
     notifications
 }

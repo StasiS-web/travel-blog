@@ -1,12 +1,15 @@
 import * as request from "./requester";
-import { destinationUrl } from "../constants/Constants";
 
-export const getAllDestinations = () => request.get(destinationUrl);
+const baseUrl = "http://localhost:3030/jsonstore/destinations";
 
-export const getDestinationById = (destinationId) => request.get(`${destinationUrl}/${destinationId}`);
+export const getAll = () => request.get(baseUrl);
 
-export const createDestination = (destinationData) => request.post(destinationUrl, destinationData);
+export const getOneById = (destinationId) => request.get(`${baseUrl}/${destinationId}`);
 
-export const updateDestination = (destinationId, destinationData) => request.put(`${destinationUrl}/${destinationId}`, destinationData);
+export const getArticleByCategory = (category) => request.get(`${baseUrl}/category/${category}`);
 
-export const removeDestination = (destinationId) => request.del(`${destinationUrl}/${destinationId}`);
+export const create = (destinationData) => request.post(baseUrl, destinationData);
+
+export const update = (destinationId, destinationData) => request.put(`${baseUrl}/${destinationId}`, destinationData);
+
+export const remove = (destinationId) => request.del(`${baseUrl}/${destinationId}`);

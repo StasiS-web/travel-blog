@@ -1,11 +1,25 @@
 import "./destination.css";
 import Sidebar from "../sidebar/Sidebar";
 import DestinationItem from "../destination/destinationItem/DestinationItem";
+import { getAll } from "../../services/destinationService";
+import { useEffect, useState } from "react";
 
-const Destination = ({
-  articles,
-}) => {
-  return (
+const Destination = () => {
+  const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(Boolean);
+
+  useEffect(() => {
+    setLoading(true);
+    getAll()
+     .then(result => {
+      setLoading(false);
+      setArticles(result)
+     })
+     .catch(error => console.log(error))
+  }, [])
+
+  let loader = <div className="loader"><img src="../../img/loader.gif" alt="" /></div>;
+   return (
     <div id="destination-page">
       <div className="content no-pd-top">
         <div className="container">
@@ -37,17 +51,17 @@ const Destination = ({
                     </div>
                   </div>
                 </div>
-                {articles.map(x => 
-                  <DestinationItem key={x._id} {...x} />
-                )}
-
-                {articles.length === 0 && (
-                   <div className="title text-center">
-                   <h3>
-                     No articles yet.
-                   </h3>
-                 </div>
-                )}
+                {articles.length > 0 
+                  ? articles.map(p => <DestinationItem key={p._id} post={p} />)
+                 : loading ? loader 
+                 : <>
+                  <div className="title text-center">
+                  <h3>
+                    No articles yet.
+                  </h3>
+                  </div>
+                </>
+                }
               </div>
             </div>
           </div>

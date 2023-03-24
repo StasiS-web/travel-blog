@@ -2,7 +2,7 @@ import "../common/forms.css";
 import { useForm } from "../../hooks/useForm";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
-import { updateDestination } from "../../services/destinationService";
+import { update } from "../../services/destinationService";
 
 const Edit = ({ onArticleUpdateSubmit, onArticleCreateClose }) => {
   const { articleId } = useParams();
@@ -19,7 +19,7 @@ const Edit = ({ onArticleUpdateSubmit, onArticleCreateClose }) => {
   );
 
   useEffect(() => {
-    updateDestination.getArticleById(articleId)
+    update.getArticleById(articleId)
       .then(result => {
         changeValue(result);
       });

@@ -2,6 +2,16 @@
   padding-top: 1.5em !important;
 }
 
+.loader{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  position: static;
+  width: 50%;
+  height: 100%;
+  z-index: 9999;
+}
+
 .blog {
   margin-bottom: 3em;
   width: 100%;
