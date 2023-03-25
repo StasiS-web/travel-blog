@@ -3,9 +3,11 @@ import { useLocalStorage } from "../hooks/useLocalStorage";
 
 const initialState = {
   _id: '',
-  name: '',
   email: '',
   accessToken: '',
+  photo: '',
+  name: '',
+  bio: '',
 };
 
 export const AuthContext = createContext();
@@ -17,6 +19,10 @@ export const AuthProvider = ({ children }) => {
     setAuth(authData);
   };
 
+  const updateProfile = (profileData) => {
+    setAuth({...auth, ...profileData});
+  };
+
   const userLogout = () => {
     setAuth(initialState);
   };
@@ -26,6 +32,7 @@ export const AuthProvider = ({ children }) => {
         user: auth,
         userLogin,
         userLogout,
+        updateProfile,
         isAuth: auth.name,
     }}>
         {children}

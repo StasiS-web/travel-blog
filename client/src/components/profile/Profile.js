@@ -1,12 +1,19 @@
 import "./profile.css";
 import { useEffect } from "react";
 import { useAuthContext } from "../../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const { user } = useAuthContext();
+  const navigate = useNavigate();
   useEffect(() => {
     document.getElementById("profile-page").classList.add("active");
   }, []);
+
+  const onProfileChange = (event) => {
+    event.preventDefault();
+    navigate("/profile-edit")
+  }
 
   return (
     <div id="profile-page">
@@ -22,15 +29,16 @@ const Profile = () => {
           <div className="row">
             <div className="col-6 col-offset3">
               <div className="staff">
-                <img src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1677792081/travel-blog/user-staff_e3vz8z.jpg" alt="about me" />
-                <h3>{user.displayName}'s Profile</h3>
+                <img src={user.photo} alt="about me" />
+                <h3>{user.name}'s Profile</h3>
                 <strong className="role">CEO, Founder</strong>
-                <strong>jeanSmith@gmail.com</strong>
+                <strong>{user.email}</strong>
                 <p>
-                  Quos quia provident conse culpa facere ratione maxime commodi
-                  voluptates id repellat velit eaque aspernatur expedita.
+                  {user.bio}
                 </p>
-               
+                <button className="btn btn-outline" onClick={onProfileChange}>
+                    Update Details
+                </button>
               </div>
             </div>
           </div>

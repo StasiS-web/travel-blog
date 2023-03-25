@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 import { NotificationProvider } from "./contexts/NotificationContext";
 import PrivateRoute from "./components/common/PrivateRoute";
+import PublicRoute from "./components/common/PublicRoute";
 import Toggle from "./components/toggle/Toggle";
 import Navigation from "./components/navigation/Navigation";
 import Home from "./components/home/Home";
@@ -12,6 +13,7 @@ import GoTop from "./components/top/GoTop";
 import About from "./components/about/About";
 import Contacts from "./components/contacts/Contacts";
 import Profile from "./components/profile/Profile";
+import { ProfileEdit } from "./components/profile/ProfileEdit/ProfileEdit";
 import Login from "./components/login/Login";
 import Create from "./components/createArticles/Create";
 import  NotFound from "./components/common/NotFound";
@@ -21,7 +23,6 @@ import Register from "./components/register/Register";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "./components/common/ErrorFallback";
 import Logout from "./components/logout/Logout";
-import PublicRoute from "./components/common/PublicRoute";
 
 function App() {
   return (
@@ -47,7 +48,8 @@ function App() {
               <Route path="/register" element={<Register />} />
             </Route>
             <Route element={<PrivateRoute />}>
-              <Route path="/profile/:profileName" element={<Profile />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/profile-edit" element={<ProfileEdit />} />
               <Route path="/logout" element={<Logout />} />
               <Route path="/destination/create-article" element={<Create />} />
               <Route path="/destination/edit-article/:postId" element={<Edit />} />

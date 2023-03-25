@@ -9,6 +9,7 @@ const paths = {
     contactPath: "/contacts",
 
     profilePath: "/profile",
+    editProfile: "/profile-edit",
     error404Path: "/404",
 
     destinationsPath: "/destination",

@@ -84,7 +84,7 @@ const Register = () => {
                     className="form-control"
                     onBlur={validationHandler}
                   />
-                 </div>
+                </div>
               </div>
 
               <div className="form-group">
