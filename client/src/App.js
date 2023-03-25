@@ -1,5 +1,8 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./contexts/AuthContext";
+import { NotificationProvider } from "./contexts/NotificationContext";
+import PrivateRoute from "./components/common/PrivateRoute";
 import Toggle from "./components/toggle/Toggle";
 import Navigation from "./components/navigation/Navigation";
 import Home from "./components/home/Home";
@@ -12,14 +15,13 @@ import Profile from "./components/profile/Profile";
 import Login from "./components/login/Login";
 import Create from "./components/createArticles/Create";
 import  NotFound from "./components/common/NotFound";
-import { AuthProvider } from "./contexts/AuthContext";
-import { NotificationProvider } from "./contexts/NotificationContext";
-import { paths } from "./constants/Constants";
 import { ArticleDetails } from "./components/details/ArticleDetails";
-import Edit from "./components/editArticle/edit";
+import Edit from "./components/editArticle/Edit";
 import Register from "./components/register/Register";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "./components/common/ErrorFallback";
+import Logout from "./components/logout/Logout";
+import PublicRoute from "./components/common/PublicRoute";
 
 function App() {
   return (
@@ -34,21 +36,25 @@ function App() {
             <Route path="*" element={<NotFound />} />
             <Route element={<Toggle />} />
             <Route element={<Navigation />} />
-            <Route path={paths.homePath} element={<Home />} />
-            <Route path={paths.aboutPath} element={<About />} />
-            <Route path={paths.destinationsPath} element={<Destination />} />
-            <Route path={paths.detailsPath} element={<ArticleDetails />} />
-            <Route path={paths.contactPath} element={<Contacts />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/destination" element={<Destination />} />
+            <Route path="/details/:postId" element={<ArticleDetails />} />
+            <Route path="/contacts" element={<Contacts />} />
 
-              <Route path={paths.loginPath} element={<Login />} />
-              <Route path={paths.registerPath} element={<Register />} />
-
-              <Route path={paths.profilePath} element={<Profile />} />
-              <Route path={paths.createPath} element={<Create />} />
-              <Route path={paths.updateArticleById} element={<Edit />} />
-            </Routes>
-            <Footer />
-            <GoTop />
+            <Route element={<PublicRoute />}>
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+            </Route>
+            <Route element={<PrivateRoute />}>
+              <Route path="/profile/:profileName" element={<Profile />} />
+              <Route path="/logout" element={<Logout />} />
+              <Route path="/destination/create-article" element={<Create />} />
+              <Route path="/destination/edit-article/:postId" element={<Edit />} />
+            </Route>
+          </Routes>
+          <Footer />
+          <GoTop />
           </Router>
         </NotificationProvider>
       </AuthProvider>
