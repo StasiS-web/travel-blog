@@ -12,13 +12,15 @@ export const ProfileEdit = () => {
     let profileImg = formData.get("profileImg");
     let name = formData.get("name");
     let email = formData.get("email");
-    let profileBio = formData.get("profileBio");
+    let profileBio = formData.get("bio");
+    let position = formData.get("jobTitle");
 
     updateProfile({
       photo: profileImg,
       name: name,
       email: email,
       bio: profileBio,
+      jobTitle: position,
     });
 
     navigate(`/profile`);
@@ -66,6 +68,16 @@ export const ProfileEdit = () => {
                   name="email"
                   className="form-control"
                   defaultValue={user.email}
+                />
+              </div>
+              <div className="col-12 field">
+                <label htmlFor="jobTitle">Job Title</label>
+                <input
+                  type="text"
+                  id="jobTitle"
+                  name="jobTitle"
+                  className="form-control"
+                  defaultValue={user.jobTitle}
                 />
               </div>
               <div className="col-12 field">

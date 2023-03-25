@@ -7,6 +7,7 @@ const initialState = {
   accessToken: '',
   photo: '',
   name: '',
+  jobTitle: '',
   bio: '',
 };
 
