@@ -13,7 +13,7 @@ export const destinationServiceFactory = (accessToken) =>{
 
     const getLatestArticle = (createOn) => request.get(`${baseUrl}/records?sortBy=${createOn}%20desc%2C_createdOn`);
 
-    const create = (destinationData) => request.post(baseUrl, destinationData);
+    const create = (destinationData) => request.post(`${baseUrl}`, destinationData);
 
     const update = (destinationId, destinationData) => request.put(`${baseUrl}/${destinationId}`, destinationData);
 

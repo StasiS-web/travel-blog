@@ -1,19 +1,61 @@
 import "./create.css";
-import { useForm } from "../../hooks/useForm";
-import { useEffect } from "react";
 import formatDate from "../../utils/dateUtils";
+import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../../contexts/AuthContext";
+import { useNotificationsContext, types } from "../../contexts/NotificationContext";
+import { notifications } from "../../constants/Constants";
+import { useService } from "../../hooks/useService";
+import { destinationServiceFactory } from "../../services/destinationService";
 
-const Create = ({onCreateArticleSubmit, }) => {
-  const { values, onChangeHandler, onSubmit } = useForm({
-    title: '',
-    imageUrl: '',
-    category: '',
-    createdOn: '',
-    content: '',
-}, onCreateArticleSubmit);
-  
- useEffect(() => {document.getElementById("create-page").classList.add("active")}, []);
-  
+
+const Create = () => {
+  const { user } = useAuthContext()
+  const navigate = useNavigate();
+  const { showNotifications} = useNotificationsContext();
+  const destinationService = useService(destinationServiceFactory);
+
+  const onCreateSubmit = (event) => {
+    event.preventDefault();
+
+    let formData = new FormData(event.currentTarget);
+    let title = formData.get("title");
+    let imageUrl = formData.get("imageUrl");
+    let createOn = formData.get("createOn");
+    let category = formData.get("category");
+    let content = formData.get("content");
+
+    if(title === "" || category === "" || content === "" || 
+       imageUrl === "" || content === "") {
+          showNotifications({message: notifications.fieldsErrorMsg, type: types.error});
+          return;
+    }
+
+    let publishDate = formatDate(createOn);
+
+    const articleData = {
+      title,
+      imageUrl,
+      category,
+      createdOn: publishDate,
+      content,
+    }
+
+    destinationService.create(articleData, user.accessToken)
+      .then((result) => {
+        showNotifications({message: notifications.articleCreateMsg, type: types.success});
+        navigate("/destination")
+      })
+      .catch((error) => {
+        showNotifications({message: error.message, type: types.error});
+        console.log(error);
+      });
+  }
+
+const handleClose = (event) => {
+  event.preventDefault();
+  navigate("/destination");
+};
+ 
   return ( 
     <div id="create-page">
       <div className="container">
@@ -25,7 +67,7 @@ const Create = ({onCreateArticleSubmit, }) => {
           </div>
         </div>
         <div className="col-9 row">
-          <form id="create" method="post" onSubmit={onSubmit}>
+          <form id="create" method="post" onSubmit={onCreateSubmit}>
             <div className="form-group">
               <div className="col-12 field">
                 <label htmlFor="title">Title*</label>
@@ -34,9 +76,7 @@ const Create = ({onCreateArticleSubmit, }) => {
                   id="title"
                   name="title"
                   placeholder="Title ..."
-                  className="form-control"
-                  value={values.title}
-                  onChange={onChangeHandler}/>
+                  className="form-control"/>
               </div>
               <div className="col-12 field">
                 <label htmlFor="imageUrl">ImageUrl*</label>
@@ -45,9 +85,7 @@ const Create = ({onCreateArticleSubmit, }) => {
                   id="imageUrl"
                   name="imageUrl"
                   placeholder="ImageUrl ..."
-                  className="form-control"
-                  value={values.imageUrl}
-                  onChange={onChangeHandler}/>
+                  className="form-control"/>
               </div>
             </div>
             <div className="form-group">
@@ -58,9 +96,7 @@ const Create = ({onCreateArticleSubmit, }) => {
                   id="category"
                   name="category"
                   placeholder="Category ..."
-                  className="form-control"
-                  value={values.category}
-                  onChange={onChangeHandler}/>
+                  className="form-control"/>
               </div>
               <div className="col-6 field">
                 <label htmlFor="date">Created on*</label>
@@ -70,8 +106,6 @@ const Create = ({onCreateArticleSubmit, }) => {
                   name="date"
                   placeholder="Created on ..."
                   className="form-control"
-                  value={formatDate(values.createdOn)}
-                  onChange={onChangeHandler}
                    />
               </div>
             </div>
@@ -85,9 +119,7 @@ const Create = ({onCreateArticleSubmit, }) => {
                   maxLength="1200"
                   rows="15"
                   placeholder="Content ..."
-                  className="form-control"
-                  value={values.content}
-                  onChange={onChangeHandler}></textarea>
+                  className="form-control"></textarea>
               </div>
             </div>
             <div className="form-group">
@@ -95,7 +127,7 @@ const Create = ({onCreateArticleSubmit, }) => {
               <button type="submit" className="btn btn-success">
                 Create
               </button>
-              <button className="btn btn-outline">
+              <button className="btn btn-outline" onClick={handleClose}>
                 Cancel
               </button>
             </div>
