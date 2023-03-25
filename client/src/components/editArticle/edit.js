@@ -2,33 +2,40 @@ import "../common/forms.css";
 import { useForm } from "../../hooks/useForm";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
-import { update } from "../../services/destinationService";
+import { destinationServiceFactory } from "../../services/destinationService";
+import { useService } from "../../hooks/useService";
+import formatDate from "../../utils/dateUtils";
+import { useNotificationsContext, types } from "../../contexts/NotificationContext";
 
-const Edit = ({ onArticleUpdateSubmit, onArticleCreateClose }) => {
+const Edit = ({ onArticleUpdateSubmit }) => {
   const { articleId } = useParams();
-  const { formValues, changeHandler, onSubmit, changeValue } = useForm({
+  const { showNotifications } = useNotificationsContext();
+  const destinationService = useService(destinationServiceFactory)
+  const { values, onChangeHandler, onSubmit, changeValues } = useForm({
       _id: '',
       title: '',
+      imageUrl: '',
       category: '',
       createdOn: '',
-      author: '',
-      imageUrl: '',
       content: '',
     },
-    onArticleUpdateSubmit
-  );
+    onArticleUpdateSubmit);
 
   useEffect(() => {
-    update.getArticleById(articleId)
+    destinationService.getOneArticle(articleId)
       .then(result => {
-        changeValue(result);
+        changeValues(result);
+      })
+      .catch((error) => {
+        showNotifications({message: error.message, type: types.error})
+        console.log(error);
       });
-  }, []);
+  }, [articleId]);
 
   return (
-    <div id="edit-page" onBlur={onArticleCreateClose}>
+    <div id="edit-page">
       <div className="container">
-        <div className="row" closeButton onHide={onArticleCreateClose}>
+        <div className="row">
           <div className="col-12 col-offset0 text-center heading">
             <h2>
               <span>Edit Article</span>
@@ -46,8 +53,8 @@ const Edit = ({ onArticleUpdateSubmit, onArticleCreateClose }) => {
                   name="title"
                   placeholder="Title ..."
                   className="form-control"
-                  value={formValues.title}
-                  onChange={changeHandler}
+                  value={values.title}
+                  onChange={onChangeHandler}
                 />
               </div>
               <div className="col-12 field">
@@ -58,8 +65,8 @@ const Edit = ({ onArticleUpdateSubmit, onArticleCreateClose }) => {
                   name="imageUrl"
                   placeholder="ImageUrl ..."
                   className="form-control"
-                  value={formValues.imageUrl}
-                  onChange={changeHandler}
+                  value={values.imageUrl}
+                  onChange={onChangeHandler}
                 />
               </div>
             </div>
@@ -72,8 +79,8 @@ const Edit = ({ onArticleUpdateSubmit, onArticleCreateClose }) => {
                   name="category"
                   placeholder="Category ..."
                   className="form-control"
-                  value={formValues.category}
-                  onChange={changeHandler}
+                  value={values.category}
+                  onChange={onChangeHandler}
                 />
               </div>
               <div className="col-6 field">
@@ -84,8 +91,8 @@ const Edit = ({ onArticleUpdateSubmit, onArticleCreateClose }) => {
                   name="createdOn"
                   placeholder="Created on ..."
                   className="form-control"
-                  value={formValues.createdOn}
-                  onChange={changeHandler}
+                  value={formatDate(values.createdOn)}
+                  onChange={e => formatDate(e.target.value)}
                 />
               </div>
             </div>
@@ -100,8 +107,8 @@ const Edit = ({ onArticleUpdateSubmit, onArticleCreateClose }) => {
                   rows="10"
                   placeholder="Content ..."
                   className="form-control"
-                  value={formValues.content}
-                  onChange={changeHandler}></textarea>
+                  value={values.content}
+                  onChange={onChangeHandler}></textarea>
               </div>
             </div>
             <div className="form-group">
@@ -109,7 +116,7 @@ const Edit = ({ onArticleUpdateSubmit, onArticleCreateClose }) => {
               <button type="submit" className="btn btn-success">
                 Update
               </button>
-              <button className="btn btn-outline" onClick={onArticleCreateClose}>
+              <button className="btn btn-outline">
                 Cancel
               </button>
             </div>

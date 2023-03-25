@@ -1,20 +1,32 @@
-import { useParams, Link } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import "./articleDetails.css";
+import { useParams, Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import formatDate from "../../utils/dateUtils";
-import { paths } from "../../constants/Constants";
-import { AuthContext } from "../../contexts/AuthContext";
-import { getOneById } from "../../services/destinationService";
+import { useAuthContext } from "../../contexts/AuthContext";
+import { destinationServiceFactory } from "../../services/destinationService";
+import { useService } from "../../hooks/useService";
 
 export const ArticleDetails = () => {
   const { articleId } = useParams();
   const [currentArticle, setCurrentArticle] = useState({});
-  const { user } = useContext(AuthContext);
+  const { user } = useAuthContext();
+  const destinationService = useService(destinationServiceFactory);
+  const navigate = useNavigate();
+
+  const isOwner = currentArticle._ownerId === user._id;
 
   useEffect(() => {
-    getOneById(articleId).then((result) => {
-      setCurrentArticle(result);
-    });
-  });
+    destinationService.getOneArticle(articleId)
+      .then((result) => {
+        setCurrentArticle(result);
+    })
+  }, [articleId]);
+
+  const onDelete = async () => { 
+    await destinationService.delete(articleId);
+    navigate("/destination")
+  }
+
 
   return (
     <div id="article-details">
@@ -49,17 +61,16 @@ export const ArticleDetails = () => {
                     <div className="blog-text">
                       <p>{currentArticle.content}</p>
                     </div>
-                    {user.email ? (
+                    {isOwner && (
                       <div className="admin-btn">
-                        <Link to={paths.detailsPath / `${articleId}`}>
-                          {" "}
+                        <Link to={`/destination/edit-article/${articleId}`} className="btn btn-outline edit-btn">
                           <i className="ri-edit-box-fill"></i>
                         </Link>
-                        <Link to={paths.detailsPath / `${articleId}`}>
+                        <button className="btn btn-danger" onClick={onDelete}>
                           <i className="ri-delete-bin-2-fill"></i>
-                        </Link>
+                        </button>
                       </div>
-                    ) : null}
+                    )}
                   </div>
                 </div>
               </div>

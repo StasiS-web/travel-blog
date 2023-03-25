@@ -1,16 +1,18 @@
 import "./destination.css";
 import Sidebar from "../sidebar/Sidebar";
 import DestinationItem from "../destination/destinationItem/DestinationItem";
-import { getAll } from "../../services/destinationService";
+import { destinationServiceFactory } from "../../services/destinationService";
 import { useEffect, useState } from "react";
+import { useService } from "../../hooks/useService";
 
 const Destination = () => {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(Boolean);
+  const destinationService = useService(destinationServiceFactory);
 
   useEffect(() => {
     setLoading(true);
-    getAll()
+    destinationService.getAll()
      .then(result => {
       setLoading(false);
       setArticles(result)

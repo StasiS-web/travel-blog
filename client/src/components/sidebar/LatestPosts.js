@@ -1,6 +1,8 @@
 import "./latestPosts.css";
+import { useParams, Link } from "react-router-dom";
 
 const LatestPosts = () => {
+  const { articleId } = useParams();
   return (
     <div className="side animate-box">
       <div className="col-12 col-md-offset-0 text-center heading heading-sidebar">
@@ -9,31 +11,31 @@ const LatestPosts = () => {
         </h2>
       </div>
       <div className="blog-entry">
-        <a href="#">
-          <img src="img/blog-1.jpg" className="img-responsive" alt="" />
+        <Link to={`/details/${articleId}`}>
+          <img src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1677863148/travel-blog/destination/aruba_askniz.jpg" className="img-responsive" alt="" />
           <div className="desc">
-            <span className="date">Feb. 15, 2023</span>
-            <h3>6 of the Best Road Trips</h3>
+            <span className="date">Mar. 21, 2023</span>
+            <h3>7 Awesome Reasons to Visit Aruba</h3>
           </div>
-        </a>
+        </Link>
       </div>
       <div className="blog-entry">
-        <a href="#">
-          <img src="img/blog-2.jpg" className="img-responsive" alt="" />
+        <Link to={`/details/${articleId}`}>
+          <img src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1677797444/travel-blog/popular/hiking-canada_ubwtfl.jpg" className="img-responsive" alt="" />
           <div className="desc">
-            <span className="date">Jan. 01, 2022</span>
-            <h3>10 Awesome Reasons to Visit Aruba </h3>
+            <span className="date">Feb. 28, 2023</span>
+            <h3>The Trans Canada Trail</h3>
           </div>
-        </a>
+        </Link>
       </div>
       <div className="blog-entry">
-        <a href="#">
-          <img src="img/blog-1.jpg" className="img-responsive" alt="" />
+        <Link to={`/details/${articleId}`}>
+          <img src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1678115031/travel-blog/popular/oxford-uni_rnmvu0.jpg" className="img-responsive" alt="" />
           <div className="desc">
-            <span className="date">Dec. 22, 2021</span>
-            <h3>How to Make Money from a Travel Blog</h3>
+            <span className="date">Feb. 16, 2023</span>
+            <h3>The Oxford University College</h3>
           </div>
-        </a>
+        </Link>
       </div>
     </div>
   );

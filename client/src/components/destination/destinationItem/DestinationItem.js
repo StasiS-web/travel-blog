@@ -1,39 +1,32 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-const DestinationItem = ({
-  _id,
-  title,
-  category,
-  createdOn,
-  imageUrl,
-  content,
-},) => {
+const DestinationItem = ({article}) => {
   const [ showMore, setShowMore ] = useState(false);
 
     return(
         <div className="col-6">
         <div className="blog animate-box">
           <div className="title text-center">
-            <span className="posted-on">{createdOn}</span>
+            <span className="posted-on">{article.createdOn}</span>
             <h3>
-            <Link to={`/destination/${_id}`}>{title}</Link>
+            <Link to={`/details/${article._id}`}>{article.title}</Link>
             </h3>
-            <span className="category">{category}</span>
+            <span className="category">{article.category}</span>
           </div>
-          <Link to={`/destination/${_id}`}>
+          <Link to={`/details/${article._id}`}>
             <img
               className="img-responsive"
-              src={imageUrl}
+              src={article.imageUrl}
               alt=""
             />
           </Link>
           <div className="blog-text text-center">
             <p>
-              {showMore ? content : `${content.substring(0, 50)}`}
+              {showMore ? article.content : `${article.content.substring(0, 50)}`}
             </p>
           </div>
-          <Link to="/destination/:id" onClick={() => setShowMore(!showMore)}>Details</Link>
+          <Link to={`/details/${article._id}`} onClick={() => setShowMore(!showMore)}>Details</Link>
         </div>
       </div>
     )

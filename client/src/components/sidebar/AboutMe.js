@@ -1,11 +1,9 @@
 import "./aboutme.css";
-import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { paths } from "../../constants/Constants";
-import { AuthContext } from "../../contexts/AuthContext";
+import { useAuthContext } from "../../contexts/AuthContext";
 
  const AboutMe = () => {
-  const { user } = useContext(AuthContext);
+  const { user } = useAuthContext();
 
   return (
     <div className="side animate-box">
@@ -47,9 +45,10 @@ import { AuthContext } from "../../contexts/AuthContext";
             <i className="ri-instagram-fill"></i>
           </li>
         </Link>
-        {user.email ? <div className="admin-btn">
-         <NavLink to={paths.createArticle} className="btn btn-success"><i className="ri-add-circle-fill"></i>Create</NavLink> 
-        </div> : null}
+        {user.email ? (
+        <div className="admin-btn">
+         <NavLink to="/destination/create-article" className="btn btn-success"><i className="ri-add-circle-fill"></i>Create</NavLink> 
+        </div> ) : null}
       </div>
     </div>
   );

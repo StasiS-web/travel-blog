@@ -1,51 +1,48 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import * as authService from "../../services/authService";
-import { notifications, paths } from "../../constants/Constants";
-import { AuthContext } from "../../contexts/AuthContext";
-import { types } from "../../contexts/NotificationContext";
+import * as authServiceFactory from "../../services/authService";
+import { notifications } from "../../constants/Constants";
+import { useAuthContext } from "../../contexts/AuthContext";
+import { useNotificationsContext, types } from "../../contexts/NotificationContext";
 import { validateUser } from "../../utils/validationHandler";
 
 const Login = () => {
-  const [error, setError] = useState({ message: "", type: "" });
-  const { userLogin } = useContext(AuthContext);
+  const { showNotifications } = useNotificationsContext();
+  const { userLogin } = useAuthContext();
   const navigate = useNavigate();
 
   useEffect(() => {
     document.getElementById("login-page").classList.add("active");
   }, []);
 
-  const onLoginSubmit = async (event, data) => {
+  const onLoginSubmit = async (event) => {
     event.preventDefault();
 
     let formData = new FormData(event.currentTarget);
     let { email, password } = Object.fromEntries(formData);
 
     if (email === "" || password === "") {
-      setError({
+      showNotifications({
         message: notifications.fieldsErrorMsg,
         type: types.error,
       });
       return;
     }
 
-    await authService
-      .login(email, password)
+    await authServiceFactory.login(email, password)
       .then((authData) => {
-        if (!authData._id) {
-          return;
-        }
         userLogin(authData);
         navigate("/");
       })
-      .catch(() => {
-        navigate("/404");
+      .catch((error) => {
+        showNotifications({message: error.message, type: types.error});
+        console.log(error);
       });
   };
 
   const validationHandler = (event) => {
     let [message, type] = validateUser(event.target);
-    setError({ type, message });
+    showNotifications({ type, message });
   };
 
   return (
@@ -72,11 +69,6 @@ const Login = () => {
                     className="form-control"
                     onBlur={validationHandler}
                   />
-                  {error.name === "email" ? (
-                    <span className="text-warning">{error.message}</span>
-                  ) : (
-                    ""
-                  )}
                 </div>
               </div>
 
@@ -91,11 +83,6 @@ const Login = () => {
                     className="form-control"
                     onBlur={validationHandler}
                   />
-                  {error.name === "password" ? (
-                    <span className="text-warning">{error.message}</span>
-                  ) : (
-                    ""
-                  )}
                 </div>
               </div>
 
@@ -106,7 +93,7 @@ const Login = () => {
                   </button>
                   <p className="text-center">
                     If you don't have an account.{" "}
-                    <Link to={paths.registerPath}>Register</Link>
+                    <Link to="/register">Register</Link>
                   </p>
                 </div>
               </div>

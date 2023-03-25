@@ -1,9 +1,9 @@
 import "../home/home.css";
 import React from "react";
-import { paths } from "../../constants/Constants";
-import { Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
-const  Home = ({_id}) => {
+const  Home = () => {
+  const { articleId } = useParams();
   return (
     <div id="home">
       <div id="hero" className="row ml-0 mr-0">
@@ -12,8 +12,8 @@ const  Home = ({_id}) => {
             <img className="card-img" src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1677863934/travel-blog/destination/south-africa_sjjdnh.jpg" alt="" />
             <div className="card-overlay text-center heading">
               <p>South Africa</p>
-              <h2>7 of the Best Places to Visit in South Africa</h2>
-              <Link to={paths.destinationsPath/`${_id}`} className="btn btn-primary">
+              <h2>The Best Places to Visit in South Africa</h2>
+              <Link to={`/details/${articleId}`} className="btn btn-primary">
                 READ MORE
               </Link>
             </div>
@@ -24,8 +24,8 @@ const  Home = ({_id}) => {
             <img className="card-img" src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1677793219/travel-blog/popular/paris_xed1u2.jpg" alt="" />
             <div className="card-overlay text-center heading">
               <p>Europe</p>
-              <h2>Awesome Trip to Paris to visit the Tourist Attractions</h2>
-              <Link to={paths.destinationsPath/`${_id}`} className="btn btn-primary">
+              <h2>Trip to Paris Visiting the Tourist Attractions</h2>
+              <Link to={`/details/${articleId}`} className="btn btn-primary">
                 READ MORE
               </Link>
             </div>
@@ -81,48 +81,48 @@ const  Home = ({_id}) => {
           <div className="row">
             <div className="col-3">
               <div className="blog animate-box">
-                <a href="#">
+                <Link to={`/details/${articleId}`}>
                   <img className="img-responsive" src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1677797444/travel-blog/popular/hiking-canada_ubwtfl.jpg" alt="" />
-                </a>
+                </Link>
                 <div className="blog-text">
                   <h3>
-                    <a href="#">Hiking in Canada</a>
+                    <Link to={`/details/${articleId}`}>Hiking in Canada</Link>
                   </h3>
                 </div>
               </div>
             </div>
             <div className="col-3">
               <div className="blog animate-box">
-                <a href="#">
+                <Link to={`/details/${articleId}`}>
                   <img className="img-responsive" src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1677793405/travel-blog/popular/caribbean_efthqn.jpg" alt="" />
-                </a>
+                </Link>
                 <div className="blog-text">
                   <h3>
-                    <a href="#">20 Most Beautiful Caribbean Islands</a>
+                    <Link to={`/details/${articleId}`}>20 Most Beautiful Caribbean Islands</Link>
                   </h3>
                 </div>
               </div>
             </div>
             <div className="col-3">
               <div className="blog animate-box">
-                <a href="#">
+                <Link to={`/details/${articleId}`}>
                   <img className="img-responsive" src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1677864594/travel-blog/destination/shri-lanka_c3b69x.jpg" alt="" />
-                </a>
+                </Link>
                 <div className="blog-text">
                   <h3>
-                    <a href="#">Shri Lanka</a>
+                    <Link to={`/details/${articleId}`}>Shri Lanka</Link>
                   </h3>
                 </div>
               </div>
             </div>
             <div className="col-3">
               <div className="blog animate-box">
-                <a href="#">
+                <Link to={`/details/${articleId}`}>
                   <img className="img-responsive" src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1677864970/travel-blog/destination/sagrada-fam%C3%ADlia_lgwlml.jpg" alt="" />
-                </a>
+                </Link>
                 <div className="blog-text">
                   <h3>
-                    <a href="#">Sagrada Família by the Architect Antoni Gaudí</a>
+                  <Link to={`/details/${articleId}`}>Sagrada Família by the Architect Antoni Gaudí</Link>
                   </h3>
                 </div>
               </div>

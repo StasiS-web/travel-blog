@@ -1,28 +1,19 @@
-import * as request from "./requester";
+import {requestFactory} from "./requester";
 import { notifications } from '../constants/Constants';
 
 const baseUrl = "http://localhost:3030/users";
 
-export const login = (email, password) => 
-    request.post(`${baseUrl}/login`, {email, password});
+const request = requestFactory();
 
-export const logout = async (accessToken) => {
-    try{
-        const response = await fetch(`${baseUrl}/logout`, {
-            headers: {
-                'X-Authorization':  accessToken
-            }
-        });
+export const login = (email, password) => request.post(`${baseUrl}/login`, {email, password});
 
-        return response;
-    }
-    catch(error){
-        console.log(error);
-    }
-}
+export const register = (email, password) => request.post(`${baseUrl}/register`, {email, password});
 
-export const register = (email, password) =>
-    request.post(`${baseUrl}/register`, {email, password});
+export const logout = () => request.get(`${baseUrl}/logout`);
+
+export const getProfile = () => request.get(`${baseUrl}/profile`);
+
+export const clearUserData = () => localStorage.removeItem('user');
 
 export const getUserData = () => {
     let user = localStorage.getItem('user');
@@ -32,12 +23,6 @@ export const getUserData = () => {
     }
 
     return JSON.parse(user);
-}
-
-export const getProfile = () => request.get(`${baseUrl}/profile`);
-
-export function clearUserData(){
-    localStorage.removeItem('user');
 }
 
 export const isAuth = () => {

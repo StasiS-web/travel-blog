@@ -80,6 +80,14 @@
   top: -15px
 }
 
+.welcome-msg{
+  margin-right: 5px;
+}
+
+.logout-btn{
+  color: #fbf2eb !important;
+}
+
 /* Logo */
 .nav .logo {
   font-size: 50px;

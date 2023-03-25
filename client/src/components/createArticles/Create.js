@@ -1,17 +1,23 @@
-import { useEffect } from "react";
 import "./create.css";
 import { useForm } from "../../hooks/useForm";
+import { useEffect } from "react";
+import formatDate from "../../utils/dateUtils";
 
-
-const Create = ({show, onArticleCreateSubmit, onArticleCreateClose}) => {
-  const { formValues, changeHandler, onSubmit } = useForm({ text: ''}, onArticleCreateSubmit);
-  useEffect(() => {document.getElementById("create-page").classList.add("active")}, []);
+const Create = ({onCreateArticleSubmit, }) => {
+  const { values, onChangeHandler, onSubmit } = useForm({
+    title: '',
+    imageUrl: '',
+    category: '',
+    createdOn: '',
+    content: '',
+}, onCreateArticleSubmit);
   
-
+ useEffect(() => {document.getElementById("create-page").classList.add("active")}, []);
+  
   return ( 
-    <div id="create-page" show={show} onBlur={onArticleCreateClose}>
+    <div id="create-page">
       <div className="container">
-        <div className="row" closeButton onHide={onArticleCreateClose}>
+        <div className="row">
           <div className="col-12 col-offset0 text-center heading">
             <h2>
               <span>Create Articles</span>
@@ -29,9 +35,8 @@ const Create = ({show, onArticleCreateSubmit, onArticleCreateClose}) => {
                   name="title"
                   placeholder="Title ..."
                   className="form-control"
-                  value={formValues.title}
-                  onChange={changeHandler}
-                />
+                  value={values.title}
+                  onChange={onChangeHandler}/>
               </div>
               <div className="col-12 field">
                 <label htmlFor="imageUrl">ImageUrl*</label>
@@ -41,9 +46,8 @@ const Create = ({show, onArticleCreateSubmit, onArticleCreateClose}) => {
                   name="imageUrl"
                   placeholder="ImageUrl ..."
                   className="form-control"
-                  value={formValues.title}
-                  onChange={changeHandler}
-                />
+                  value={values.imageUrl}
+                  onChange={onChangeHandler}/>
               </div>
             </div>
             <div className="form-group">
@@ -55,9 +59,8 @@ const Create = ({show, onArticleCreateSubmit, onArticleCreateClose}) => {
                   name="category"
                   placeholder="Category ..."
                   className="form-control"
-                  value={formValues.title}
-                  onChange={changeHandler}
-                />
+                  value={values.category}
+                  onChange={onChangeHandler}/>
               </div>
               <div className="col-6 field">
                 <label htmlFor="date">Created on*</label>
@@ -67,9 +70,9 @@ const Create = ({show, onArticleCreateSubmit, onArticleCreateClose}) => {
                   name="date"
                   placeholder="Created on ..."
                   className="form-control"
-                  value={formValues.title}
-                  onChange={changeHandler}
-                />
+                  value={formatDate(values.createdOn)}
+                  onChange={onChangeHandler}
+                   />
               </div>
             </div>
             <div className="form-group">
@@ -78,14 +81,13 @@ const Create = ({show, onArticleCreateSubmit, onArticleCreateClose}) => {
                 <textarea
                   id="content"
                   name="content"
-                  minLength="50"
-                  maxLength="600"
-                  rows="10"
+                  minLength="250"
+                  maxLength="1200"
+                  rows="15"
                   placeholder="Content ..."
                   className="form-control"
-                  value={formValues.title}
-                  onChange={changeHandler}
-                ></textarea>
+                  value={values.content}
+                  onChange={onChangeHandler}></textarea>
               </div>
             </div>
             <div className="form-group">
@@ -93,7 +95,7 @@ const Create = ({show, onArticleCreateSubmit, onArticleCreateClose}) => {
               <button type="submit" className="btn btn-success">
                 Create
               </button>
-              <button className="btn btn-outline" onClick={onArticleCreateClose}>
+              <button className="btn btn-outline">
                 Cancel
               </button>
             </div>

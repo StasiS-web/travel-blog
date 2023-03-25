@@ -66,7 +66,7 @@ const Footer = () => {
               </li>
               <li>
                 <i className="ri-phone-line"></i>
-                <a href="tel://1234567920">+ 1235 2355 98</a>
+                <a href="tel://35912352355">+ 359 1235 2355</a>
               </li>
               <li>
                 <i className="ri-mail-line"></i>

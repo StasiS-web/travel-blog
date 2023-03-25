@@ -1,11 +1,10 @@
 import "./navigation.css";
-import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { AuthContext } from "../../contexts/AuthContext";
+import { useAuthContext } from "../../contexts/AuthContext";
 
 
 const Navigation = () => {
-  const { user } = useContext(AuthContext);
+  const { user } = useAuthContext();
 
   return (
     <nav className="nav">
@@ -17,33 +16,29 @@ const Navigation = () => {
                 <div className="col-sm-7 text-left menu-1">
                   <ul>
                     <li>
-                      <NavLink to="/" className={({isActive}) => isActive ? "active" : ""}>Home</NavLink>
+                      <NavLink to="/">Home</NavLink>
                     </li>
                     <li>
-                      <NavLink to="/about" className={({isActive}) => isActive ? "active" : ""}>About</NavLink>
+                      <NavLink to="/about">About</NavLink>
                     </li>
                     <li>
-                      <NavLink to="/destination" className={({isActive}) => isActive ? "active" : ""}>Destination</NavLink>
+                      <NavLink to="/destination">Destination</NavLink>
                     </li>
                     <li >
-                      <NavLink to="/contacts" className={({isActive}) => isActive ? "active" : "" }>Contact</NavLink>
+                      <NavLink to="/contacts">Contact</NavLink>
                     </li>
                   </ul>
                 </div>
-                <div className="col-sm-5 user-links text-justify">
                   {user.email ?  
-                    <>
-                    <span>Hello, {user.name}</span>
-                      <Link to="/profile/:profileName">Profile</Link>
-                      <NavLink to="/logout" className="btn btn-primary">Logout</NavLink>
-                    </>
-                    :
-                    <>
+                    <div id="user" className="col-sm-5 user-links text-justify">
+                      <span className="welcome-msg">Hello, <Link to="/profile">{user.email}</Link></span>
+                      <NavLink to="/logout" className="btn btn-primary logout-btn">Logout</NavLink>
+                    </div>
+                    : <div id="guest" className="col-sm-5 user-links text-justify">
                       <Link to="/login">Login</Link> 
                       <Link to="/register">Register</Link>
-                    </>
+                    </div>
                   }
-                </div>
                 <div className="col-sm-5 text-right icons">
                   <Link to="#">
                     <li className="social-icons">

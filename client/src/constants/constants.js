@@ -8,14 +8,14 @@ const paths = {
     aboutPath: "/about",
     contactPath: "/contacts",
 
-    profilePath: "/profile/:profileName",
+    profilePath: "/profile",
     error404Path: "/404",
 
     destinationsPath: "/destination",
-    detailsPath: "/detail/:postId",
+    detailsPath: "/destination/:postId",
 
-    createArticle: "destination/create-article",
-    updateArticleById: "/destination/:postId/edit-article"
+    createArticle: "/destination/create-article",
+    updateArticleById: "/destination/edit-article/:postId",
 }
 
 const notifications ={
