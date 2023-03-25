@@ -32,6 +32,10 @@ const notifications ={
     emailWarningMsg: "Please insert a valid email.",
     nameWarningMsg: "Please insert a valid name.",
 
+    titleWarningMsg: "The article title must be at least 15 characters long.",
+    contentWarningMsg: "The article content must be at least 150 characters long.",
+    imageErrorMsg: "The image address must contain http(s)://",
+
     registerSuccessMsg: "You have successfully register.",
     loginSuccessMsg: "You have successfully login.",
     logoutSuccessMsg: "You have successfully logged out.",

@@ -6,10 +6,11 @@ import { useNotificationsContext, types } from "../../contexts/NotificationConte
 import { notifications } from "../../constants/Constants";
 import { useService } from "../../hooks/useService";
 import { destinationServiceFactory } from "../../services/destinationService";
+import { validateArticle } from "../../utils/validationHandler";
 
 
 const Create = () => {
-  const { user } = useAuthContext()
+  const { user } = useAuthContext();
   const navigate = useNavigate();
   const { showNotifications} = useNotificationsContext();
   const destinationService = useService(destinationServiceFactory);
@@ -41,7 +42,7 @@ const Create = () => {
     }
 
     destinationService.create(articleData, user.accessToken)
-      .then((result) => {
+      .then(result => {
         showNotifications({message: notifications.articleCreateMsg, type: types.success});
         navigate("/destination")
       })
@@ -51,11 +52,16 @@ const Create = () => {
       });
   }
 
-const handleClose = (event) => {
-  event.preventDefault();
-  navigate("/destination");
-};
- 
+  const handleClose = (event) => {
+    event.preventDefault();
+    navigate("/destination");
+  };
+
+  const validateHandler = (event) => {
+    let [message, type] = validateArticle(event.target);
+    showNotifications({type, message});
+  };
+
   return ( 
     <div id="create-page">
       <div className="container">
@@ -76,7 +82,8 @@ const handleClose = (event) => {
                   id="title"
                   name="title"
                   placeholder="Title ..."
-                  className="form-control"/>
+                  className="form-control"
+                  onBlur={validateHandler}/>
               </div>
               <div className="col-12 field">
                 <label htmlFor="imageUrl">ImageUrl*</label>
@@ -85,7 +92,8 @@ const handleClose = (event) => {
                   id="imageUrl"
                   name="imageUrl"
                   placeholder="ImageUrl ..."
-                  className="form-control"/>
+                  className="form-control"
+                  onBlur={validateHandler}/>
               </div>
             </div>
             <div className="form-group">
@@ -96,7 +104,8 @@ const handleClose = (event) => {
                   id="category"
                   name="category"
                   placeholder="Category ..."
-                  className="form-control"/>
+                  className="form-control"
+                  onBlur={validateHandler}/>
               </div>
               <div className="col-6 field">
                 <label htmlFor="date">Created on*</label>
@@ -106,7 +115,7 @@ const handleClose = (event) => {
                   name="date"
                   placeholder="Created on ..."
                   className="form-control"
-                   />
+                  onBlur={validateHandler} />
               </div>
             </div>
             <div className="form-group">
@@ -119,7 +128,8 @@ const handleClose = (event) => {
                   maxLength="1200"
                   rows="15"
                   placeholder="Content ..."
-                  className="form-control"></textarea>
+                  className="form-control"
+                  onBlur={validateHandler}></textarea>
               </div>
             </div>
             <div className="form-group">
