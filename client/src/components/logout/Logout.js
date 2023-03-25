@@ -5,7 +5,7 @@ import * as authServiceFactory from "../../services/authService";
 
 const Logout = () => {
   const navigate = useNavigate();
-  const { userLogout } = useAuthContext();
+  const { user, userLogout } = useAuthContext();
 
   useEffect(() => {
       authServiceFactory.logout()
@@ -13,7 +13,7 @@ const Logout = () => {
           userLogout();
           navigate("/");
         });
-    }, [userLogout, navigate]);
+    }, [userLogout, navigate, user.accessToken, user.email]);
 
     return <Navigate to="/" />
 }
