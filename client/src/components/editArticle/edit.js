@@ -1,6 +1,6 @@
 import "../common/forms.css";
 import { useForm } from "../../hooks/useForm";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { destinationServiceFactory } from "../../services/destinationService";
 import { useService } from "../../hooks/useService";
@@ -8,6 +8,7 @@ import formatDate from "../../utils/dateUtils";
 import { useNotificationsContext, types } from "../../contexts/NotificationContext";
 
 const Edit = ({ onArticleUpdateSubmit }) => {
+  const navigate = useNavigate();
   const { articleId } = useParams();
   const { showNotifications } = useNotificationsContext();
   const destinationService = useService(destinationServiceFactory)
@@ -22,7 +23,7 @@ const Edit = ({ onArticleUpdateSubmit }) => {
     onArticleUpdateSubmit);
 
   useEffect(() => {
-    destinationService.getOneArticle(articleId)
+    destinationService.edit(articleId)
       .then(result => {
         changeValues(result);
       })
@@ -31,6 +32,11 @@ const Edit = ({ onArticleUpdateSubmit }) => {
         console.log(error);
       });
   }, [articleId]);
+
+  const handleClose = (event) => {
+    event.preventDefault();
+    navigate("/destinations");
+  };
 
   return (
     <div id="edit-page">
@@ -116,7 +122,7 @@ const Edit = ({ onArticleUpdateSubmit }) => {
               <button type="submit" className="btn btn-success">
                 Update
               </button>
-              <button className="btn btn-outline">
+              <button className="btn btn-outline" onClick={handleClose}>
                 Cancel
               </button>
             </div>
