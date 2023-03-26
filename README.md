@@ -16,12 +16,24 @@ User are able to navigate through various links like:
 * Contacts
 
 ## Functionality
-* create new articles
-* edit existing articles
-* delete existing articles
+The application contains two parts:
+Public part
+    * Guests can:
+        - visit Home page
+        - register: "/register"
+        - login: "/login"
+        - view all articles: "/destinations"
+        - view a single article's details: "/destinations:postId"
+        - view 404 page
 
-## Social Links
-Redirect the user to WhatsApp, Facebook, Twitter and Instagram.
+Private part
+    * Logger users can:
+        - create new articles: "/destinations/create-article"
+    * The author of the post can:
+        - edit existing articles: "/destinations/edit-article/:postId",
+        - delete existing article by id
+    * The owner of the account
+        - edit the details in the profile page: "/profile-edit"
 
 ## :hammer: Used technologies
 * HTML
@@ -43,12 +55,17 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-## How to start the Server
 ### `cd server` 
 Redirects you to the server directory.
 
 ###  `node server.js`
 Runs starts the server.
+
+## Authentication
+Login credentials for this application
+email: jean@admin.awesome.com
+password: 123456
+
 
 ## Disclaimer
 The content and image used in this project does not have a commercial license and it is not used for commercial purpose. The image on the error 404 page were purchased with License for personal use only. All the content in this project is used only for educational purpose.
