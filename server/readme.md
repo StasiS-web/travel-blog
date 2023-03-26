@@ -18,5 +18,7 @@ The documentation below assumes you are pre-pending the Base URL to the endpoint
 
 # Endpoints: destinations & tips
 
-- `/destinations` -- get destinations list/ create destination;
-- `/destinations/{destinationId}` -- get destination/update destination/ delete destination by provided id;
+- get destinations list -- `/destinations` 
+- create articles -- `/destinations/create-article`
+- update article by provided id `/destinations/edit-article/:postId` 
+- delete articles by provided id;

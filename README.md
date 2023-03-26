@@ -28,39 +28,27 @@ Redirect the user to WhatsApp, Facebook, Twitter and Instagram.
 * CSS
 * JavaScript 
 * ReactJS
-* SoftUni Practice Server 
-* [Cloudinary](https://console.cloudinary.com/) - store image files
+* [SoftUni practice server](https://github.com/softuni-practice-server/softuni-practice-server) as a backend solution
+* [Cloudinary](https://console.cloudinary.com/) - as a storage solution for the image files
 
-## Available Scripts
+## How to start
 In here you can find the scripts I have used for this project.
 
-<details>
-<summary> 
-    Click here for more info. 
- </summary>
-
-### `npx create-react-app travel-blog`
-This will create a React Project. You should change `my-app` with your project name.
-
-### `cd travel-blog`
-Redirects you to the project directory.
-
+### `cd client`
+Redirects you to the app directory.
 In the project directory, you can run:
 ### `npm start`
-Runs the app in the development mode.\
+Runs the app in the development mode.
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-## Server Available Script
-
+## How to start the Server
 ### `cd server` 
 Redirects you to the server directory.
 
 ###  `node server.js`
 Runs starts the server.
-
-</details>
 
 ## Disclaimer
 The content and image used in this project does not have a commercial license and it is not used for commercial purpose. The image on the error 404 page were purchased with License for personal use only. All the content in this project is used only for educational purpose.
@@ -74,6 +62,5 @@ The content and image used in this project does not have a commercial license an
 * [React Beta Documentation](https://beta.reactjs.org/)
 
 ## License
-
 This project is licensed with the MIT license. This [image](https://res.cloudinary.com/dnvg6uuxl/image/upload/v1678298265/travel-blog/error_404_wnxcl7_gzg5il.jpg) has a license for personal use only.
 
