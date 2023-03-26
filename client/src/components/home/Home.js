@@ -1,6 +1,6 @@
-import "../home/home.css";
 import React from "react";
-import { useParams, Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import "../home/home.css";
 
 const  Home = () => {
   const { articleId } = useParams();

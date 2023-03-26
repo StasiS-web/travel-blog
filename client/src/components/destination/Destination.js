@@ -1,9 +1,9 @@
-import "./destination.css";
-import Sidebar from "../sidebar/Sidebar";
-import DestinationItem from "../destination/destinationItem/DestinationItem";
-import { destinationServiceFactory } from "../../services/destinationService";
 import { useEffect, useState } from "react";
+import { destinationServiceFactory } from "../../services/destinationService";
 import { useService } from "../../hooks/useService";
+import DestinationItem from "../destination/destinationItem/DestinationItem";
+import Sidebar from "../sidebar/Sidebar";
+import "./destination.css";
 
 const Destination = () => {
   const [articles, setArticles] = useState([]);
@@ -12,16 +12,22 @@ const Destination = () => {
 
   useEffect(() => {
     setLoading(true);
-    destinationService.getAll()
-     .then(result => {
-      setLoading(false);
-      setArticles(result)
-     })
-     .catch(error => console.log(error))
-  }, [])
+    destinationService
+      .getAll()
+      .then((result) => {
+        setLoading(false);
+        setArticles(result);
+      })
+      .catch((error) => console.log(error));
+  }, []);
 
-  let loader = <div className="loader"><img src="../../img/loader.gif" alt="" /></div>;
-   return (
+  let loader = (
+    <div className="loader">
+      <img src="../../img/loader.gif" alt="" />
+    </div>
+  );
+
+  return (
     <div id="destination-page">
       <div className="content no-pd-top">
         <div className="container">
@@ -39,9 +45,7 @@ const Destination = () => {
                 <div className="col-12">
                   <div className="blog animate-box">
                     <div className="title title-pin text-center">
-                      <h3>
-                        Intro
-                      </h3>
+                      <h3>Intro</h3>
                     </div>
                     <div className="blog-text text-center">
                       <p>
@@ -53,17 +57,25 @@ const Destination = () => {
                     </div>
                   </div>
                 </div>
-                {articles.length > 0 
-                  ? articles.map(p => <DestinationItem key={p._id} post={p} />)
-                 : loading ? loader 
-                 : <>
+                {articles.length > 0 ? (
+                  articles.map(
+                    ({ _id, title, imageUrl, category, content }) => (
+                      <DestinationItem
+                        key={_id}
+                        title={title}
+                        imageUrl={imageUrl}
+                        category={category}
+                        content={content}
+                      ></DestinationItem>
+                    )
+                  )
+                ) : loading ? (
+                  loader
+                ) : (
                   <div className="title text-center">
-                  <h3>
-                    No articles yet.
-                  </h3>
+                    <h3>No articles yet.</h3>
                   </div>
-                </>
-                }
+                )}
               </div>
             </div>
           </div>

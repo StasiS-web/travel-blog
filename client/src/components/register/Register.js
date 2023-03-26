@@ -2,9 +2,10 @@ import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { validateUser } from "../../utils/validationHandler";
 import { notifications } from "../../constants/Constants";
-import {  useNotificationsContext, types } from "../../contexts/NotificationContext";
-import * as authServiceFactory from "../../services/authService";
+import { useNotificationsContext, types } from "../../contexts/NotificationContext";
 import { useAuthContext } from "../../contexts/AuthContext";
+import * as authServiceFactory from "../../services/authService";
+
 
 const Register = () => {
   const { userLogin } = useAuthContext();

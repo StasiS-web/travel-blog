@@ -1,7 +1,6 @@
-import "./navigation.css";
 import { Link, NavLink } from "react-router-dom";
 import { useAuthContext } from "../../contexts/AuthContext";
-
+import "./navigation.css";
 
 const Navigation = () => {
   const { user } = useAuthContext();

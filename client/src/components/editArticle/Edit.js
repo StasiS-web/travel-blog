@@ -1,11 +1,11 @@
-import "../common/forms.css";
-import { useForm } from "../../hooks/useForm";
-import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { destinationServiceFactory } from "../../services/destinationService";
+import { useForm } from "../../hooks/useForm";
+import { useNotificationsContext, types } from "../../contexts/NotificationContext";
 import { useService } from "../../hooks/useService";
 import formatDate from "../../utils/dateUtils";
-import { useNotificationsContext, types } from "../../contexts/NotificationContext";
+import "../common/forms.css";
 
 const Edit = ({ onArticleUpdateSubmit }) => {
   const navigate = useNavigate();

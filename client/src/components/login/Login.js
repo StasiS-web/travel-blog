@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import * as authServiceFactory from "../../services/authService";
 import { notifications } from "../../constants/Constants";
 import { useAuthContext } from "../../contexts/AuthContext";
 import { useNotificationsContext, types } from "../../contexts/NotificationContext";
 import { validateUser } from "../../utils/validationHandler";
+import * as authServiceFactory from "../../services/authService";
 
 const Login = () => {
   const { showNotifications } = useNotificationsContext();

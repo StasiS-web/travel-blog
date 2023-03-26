@@ -1,6 +1,6 @@
-import "./aboutme.css";
 import { Link, NavLink } from "react-router-dom";
 import { useAuthContext } from "../../contexts/AuthContext";
+import "./aboutme.css";
 
  const AboutMe = () => {
   const { user } = useAuthContext();

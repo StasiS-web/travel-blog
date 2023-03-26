@@ -1,5 +1,5 @@
-import "./latestPosts.css";
 import { useParams, Link } from "react-router-dom";
+import "./latestPosts.css";
 
 const LatestPosts = () => {
   const { articleId } = useParams();

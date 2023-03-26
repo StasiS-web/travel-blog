@@ -1,5 +1,5 @@
-import "../common/forms.css";
 import Category from "../sidebar/Category";
+import "../common/forms.css";
 
 const Contacts = () => {
   return (
