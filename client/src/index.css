@@ -26,8 +26,10 @@ body {
 #destination-page,
 #article-details,
 #profile-page,
+#profile-edit,
 #not-found,
-#edit-page {
+#edit-page,
+#create-page {
   position: relative;
   overflow-x: hidden;
   width: 100%;
