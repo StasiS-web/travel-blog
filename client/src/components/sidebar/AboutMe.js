@@ -20,8 +20,7 @@ import { useAuthContext } from "../../contexts/AuthContext";
         <h3>Jean Smith</h3>
         <strong className="role">CEO, Founder</strong>
         <p>
-          Quos quia provident conse culpa facere ratione maxime commodi
-          voluptates id repellat velit eaque aspernatur expedita.
+         Founder of Awesome Traveler and an accomplished public speaker. I'm on a mission to help you to plan your next vacation.
         </p>
         <Link to="#">
           <li className="social-icons">
@@ -47,7 +46,7 @@ import { useAuthContext } from "../../contexts/AuthContext";
         </Link>
         {user.email ? (
         <div className="admin-btn">
-         <NavLink to="/destination/create-article" className="btn btn-success"><i className="ri-add-circle-fill"></i>Create</NavLink> 
+         <NavLink to="/destinations/create-article" className="btn btn-success"><i className="ri-add-circle-fill"></i>Create</NavLink> 
         </div> ) : null}
       </div>
     </div>

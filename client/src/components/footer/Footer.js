@@ -1,6 +1,5 @@
 import "./footer.css";
 import { Link } from "react-router-dom"
-import { paths } from "../../constants/Constants";
 
 const Footer = () => {
   return (
@@ -10,8 +9,7 @@ const Footer = () => {
           <div className="col-4 widget">
             <h4><strong>Awesome Traveler</strong></h4>
             <p>
-              Facilis ipsum reprehenderit nemo molestias. Aut cum mollitia
-              reprehenderit. Eos cumque dicta adipisci architecto culpa amet.
+            A travel blog focusing on solo travel and getting to know the world through culture and food.
             </p>
             <div className="footer-social">
                
@@ -49,7 +47,7 @@ const Footer = () => {
               <a href="/about">About</a>
               </li>
               <li>
-              <a href="/destination">Destination</a>
+              <a href="/destinations">Destination</a>
               </li>
               <li>
               <a href="/contacts">Contact</a>

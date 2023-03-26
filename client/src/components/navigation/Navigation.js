@@ -22,7 +22,7 @@ const Navigation = () => {
                       <NavLink to="/about">About</NavLink>
                     </li>
                     <li>
-                      <NavLink to="/destination">Destination</NavLink>
+                      <NavLink to="/destinations">Destination</NavLink>
                     </li>
                     <li >
                       <NavLink to="/contacts">Contact</NavLink>

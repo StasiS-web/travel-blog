@@ -12,11 +12,11 @@ const paths = {
     editProfile: "/profile-edit",
     error404Path: "/404",
 
-    destinationsPath: "/destination",
-    detailsPath: "/destination/:postId",
+    destinationsPath: "/destinations",
+    detailsPath: "/destinations/:postId",
 
-    createArticle: "/destination/create-article",
-    updateArticleById: "/destination/edit-article/:postId",
+    createArticle: "/destinations/create-article",
+    updateArticleById: "/destinations/edit-article/:postId",
 }
 
 const notifications ={

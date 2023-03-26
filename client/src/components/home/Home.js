@@ -13,7 +13,7 @@ const  Home = () => {
             <div className="card-overlay text-center heading">
               <p>South Africa</p>
               <h2>The Best Places to Visit in South Africa</h2>
-              <Link to={`/details/${articleId}`} className="btn btn-primary">
+              <Link to={`/destinations/${articleId}`} className="btn btn-primary">
                 READ MORE
               </Link>
             </div>
@@ -25,7 +25,7 @@ const  Home = () => {
             <div className="card-overlay text-center heading">
               <p>Europe</p>
               <h2>Trip to Paris Visiting the Tourist Attractions</h2>
-              <Link to={`/details/${articleId}`} className="btn btn-primary">
+              <Link to={`/destinations/${articleId}`} className="btn btn-primary">
                 READ MORE
               </Link>
             </div>
@@ -81,48 +81,48 @@ const  Home = () => {
           <div className="row">
             <div className="col-3">
               <div className="blog animate-box">
-                <Link to={`/details/${articleId}`}>
+                <Link to={`/destinations/${articleId}`}>
                   <img className="img-responsive" src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1677797444/travel-blog/popular/hiking-canada_ubwtfl.jpg" alt="" />
                 </Link>
                 <div className="blog-text">
                   <h3>
-                    <Link to={`/details/${articleId}`}>Hiking in Canada</Link>
+                    <Link to={`/destinations/${articleId}`}>Hiking in Canada</Link>
                   </h3>
                 </div>
               </div>
             </div>
             <div className="col-3">
               <div className="blog animate-box">
-                <Link to={`/details/${articleId}`}>
+                <Link to={`/destinations/${articleId}`}>
                   <img className="img-responsive" src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1677793405/travel-blog/popular/caribbean_efthqn.jpg" alt="" />
                 </Link>
                 <div className="blog-text">
                   <h3>
-                    <Link to={`/details/${articleId}`}>20 Most Beautiful Caribbean Islands</Link>
+                    <Link to={`/destinations/${articleId}`}>20 Most Beautiful Caribbean Islands</Link>
                   </h3>
                 </div>
               </div>
             </div>
             <div className="col-3">
               <div className="blog animate-box">
-                <Link to={`/details/${articleId}`}>
+                <Link to={`/destinations/${articleId}`}>
                   <img className="img-responsive" src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1677864594/travel-blog/destination/shri-lanka_c3b69x.jpg" alt="" />
                 </Link>
                 <div className="blog-text">
                   <h3>
-                    <Link to={`/details/${articleId}`}>Shri Lanka</Link>
+                    <Link to={`/destinations/${articleId}`}>Shri Lanka</Link>
                   </h3>
                 </div>
               </div>
             </div>
             <div className="col-3">
               <div className="blog animate-box">
-                <Link to={`/details/${articleId}`}>
+                <Link to={`/destinations/${articleId}`}>
                   <img className="img-responsive" src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1677864970/travel-blog/destination/sagrada-fam%C3%ADlia_lgwlml.jpg" alt="" />
                 </Link>
                 <div className="blog-text">
                   <h3>
-                  <Link to={`/details/${articleId}`}>Sagrada Família by the Architect Antoni Gaudí</Link>
+                  <Link to={`/destinations/${articleId}`}>Sagrada Família by the Architect Antoni Gaudí</Link>
                   </h3>
                 </div>
               </div>

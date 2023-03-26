@@ -1,23 +1,23 @@
 import { requestFactory } from "./requester";
 
-const baseUrl = "http://localhost:3030/jsonstore/destinations";
+const baseUrl = "http://localhost:3030/data";
 
 export const destinationServiceFactory = (accessToken) =>{
     const request = requestFactory(accessToken);
 
-    const getAll = () => request.get(baseUrl);
+    const getAll = () => request.get(`${baseUrl}/destinations`);
 
-    const getOneArticle = (destinationId) => request.get(`${baseUrl}/${destinationId}`);
+    const getOneArticle = (postId) => request.get(`${baseUrl}/destinations/${postId}`);
 
-    const getArticleByCategory = (category) => request.get(`${baseUrl}/category/${category}`);
+    const getArticleByCategory = (category) => request.get(`${baseUrl}/destinations/category/${category}`);
 
-    const getLatestArticle = (createOn) => request.get(`${baseUrl}/records?sortBy=${createOn}%20desc%2C_createdOn`);
+    const getLatestArticle = (createOn) => request.get(`${baseUrl}/destinations?sortBy=${createOn}%20desc%2C_createdOn`);
 
-    const create = (destinationData) => request.post(`${baseUrl}`, destinationData);
+    const create = (destinationData) => request.post(`${baseUrl}/destinations`, destinationData);
 
-    const update = (destinationId, destinationData) => request.put(`${baseUrl}/${destinationId}`, destinationData);
+    const edit = (postId, destinationData) => request.put(`${baseUrl}/destinations/${postId}`, destinationData);
 
-    const removeArticle = (destinationId) => request.del(`${baseUrl}/${destinationId}`);
+    const remove = (postId) => request.del(`${baseUrl}/destinations/${postId}`);
 
     return{
         getAll,
@@ -25,8 +25,8 @@ export const destinationServiceFactory = (accessToken) =>{
         getArticleByCategory,
         getLatestArticle,
         create,
-        update,
-        delete: removeArticle,
+        edit,
+        delete: remove,
     }
 
 }
