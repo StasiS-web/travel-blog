@@ -6,7 +6,6 @@ import { useNotificationsContext, types } from "../../contexts/NotificationConte
 import { useAuthContext } from "../../contexts/AuthContext";
 import * as authServiceFactory from "../../services/authService";
 
-
 const Register = () => {
   const { userLogin } = useAuthContext();
   const { showNotifications } = useNotificationsContext();

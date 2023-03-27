@@ -1,13 +1,20 @@
 import Cookies from "js-cookie";
 
-const getToken = () => Cookies.get("access-token") || null;
+const getToken = () => {
+  const token = Cookies.get("access-token");
+
+  if(token && token !== "") {
+    return token;
+  }
+
+  return null;
+}
 
 const request = async (method, url, data) => {
   try {
-    const accessToken = getToken();
-    const headers = {
-      ...(accessToken && {'X-Authorization': accessToken}),
-    };
+    const headers = {};
+    const accessToken = getToken()  
+
     let options = { method, headers };
 
     if (data) {
@@ -15,12 +22,14 @@ const request = async (method, url, data) => {
       options.body = JSON.stringify(data);
     }
 
-    const response = await Promise.race([
-      fetch(url, options),
-      new Promise((_, reject) =>
-        setTimeout(() => reject(new Error("Request timed out")), 5000) // 5 seconds timeout
-      ),
-    ]);
+    if (accessToken) {
+      options.headers = {
+        ...options.headers,
+        'X-Authorization': accessToken,
+      }
+    }
+
+    const response = await fetch(url, options);
 
     if (response.status === 204) {
       return {};

@@ -2,8 +2,8 @@ import { requestFactory } from "./requester";
 
 const baseUrl = "http://localhost:3030/data/destinations";
 
-export const destinationServiceFactory = (accessToken) =>{
-    const request = requestFactory(accessToken);
+export const destinationServiceFactory = (token) =>{
+    const request = requestFactory(token);
 
     const getAll = () => request.get(baseUrl);
 
