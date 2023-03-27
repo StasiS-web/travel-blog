@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { ArticleProvider } from "./contexts/ArticleContext";
 import { AuthProvider } from "./contexts/AuthContext";
+import { ArticleProvider } from "./contexts/ArticleContext";
 import { NotificationProvider } from "./contexts/NotificationContext";
 import { ErrorBoundary } from "react-error-boundary";
 import About from "./components/about/About";
