@@ -1,37 +1,45 @@
-import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { destinationServiceFactory } from "../../services/destinationService";
-import { useForm } from "../../hooks/useForm";
+import useArticleState from "../../hooks/useArticleState";
+import { useAuthContext } from "../../contexts/AuthContext";
 import { useNotificationsContext, types } from "../../contexts/NotificationContext";
 import { useService } from "../../hooks/useService";
-import formatDate from "../../utils/dateUtils";
 import "../common/forms.css";
 
-const Edit = ({ onArticleUpdateSubmit }) => {
+const Edit = () => {
   const navigate = useNavigate();
+  const { user } = useAuthContext();
   const { articleId } = useParams();
+  const [ article, setArticles ] = useArticleState(articleId)
   const { showNotifications } = useNotificationsContext();
-  const destinationService = useService(destinationServiceFactory)
-  const { values, onChangeHandler, onSubmit, changeValues } = useForm({
-      _id: '',
-      title: '',
-      imageUrl: '',
-      category: '',
-      createdOn: '',
-      content: '',
-    },
-    onArticleUpdateSubmit);
+  const destinationService = useService(destinationServiceFactory);
 
-  useEffect(() => {
-    destinationService.edit(articleId)
-      .then(result => {
-        changeValues(result);
+  const onChangeCategory = (event) => {
+    setArticles({...article, category: event.target.value});
+  }
+
+ const onEditSubmit = (event) => {
+  event.preventDefault();
+
+  let formData = new FormData(event.currentTarget);
+  let title = formData.get("title");
+  let imageUrl = formData.get("imageUrl");
+  let category = formData.get("category");
+  let content = formData.get("content");
+
+  const data = { title, imageUrl, category, content};
+
+  destinationService.edit(articleId, data, user.accessToken)
+      .then(result => result.json())
+      .then(data => {
+        setArticles(data);
+        navigate("/destinations");
       })
       .catch((error) => {
         showNotifications({message: error.message, type: types.error})
         console.log(error);
       });
-  }, [articleId]);
+ }
 
   const handleClose = (event) => {
     event.preventDefault();
@@ -49,7 +57,7 @@ const Edit = ({ onArticleUpdateSubmit }) => {
           </div>
         </div>
         <div className="col-9 row">
-          <form id="edit" method="post" onSubmit={onSubmit}>
+          <form id="edit" method="post" onSubmit={onEditSubmit}>
             <div className="form-group">
               <div className="col-12 field">
                 <label htmlFor="title">Title*</label>
@@ -59,8 +67,7 @@ const Edit = ({ onArticleUpdateSubmit }) => {
                   name="title"
                   placeholder="Title ..."
                   className="form-control"
-                  value={values.title}
-                  onChange={onChangeHandler}
+                  defaultValue={article.title}
                 />
               </div>
               <div className="col-12 field">
@@ -71,35 +78,21 @@ const Edit = ({ onArticleUpdateSubmit }) => {
                   name="imageUrl"
                   placeholder="ImageUrl ..."
                   className="form-control"
-                  value={values.imageUrl}
-                  onChange={onChangeHandler}
+                  defaultValue={article.imageUrl}
                 />
               </div>
             </div>
             <div className="form-group">
               <div className="col-6 field">
-                <label htmlFor="date">Category*</label>
-                <input
-                  type="text"
-                  id="category"
-                  name="category"
-                  placeholder="Category ..."
-                  className="form-control"
-                  value={values.category}
-                  onChange={onChangeHandler}
-                />
-              </div>
-              <div className="col-6 field">
-                <label htmlFor="date">Created on*</label>
-                <input
-                  type="date"
-                  id="date"
-                  name="createdOn"
-                  placeholder="Created on ..."
-                  className="form-control"
-                  value={formatDate(values.createdOn)}
-                  onChange={e => formatDate(e.target.value)}
-                />
+                <label htmlFor="category">Select Category*</label>
+                <select name="category" id="category" placeholder="Select the category options..." value={article.category} onChange={onChangeCategory}>
+                  <option value="asia">Asia</option>
+                  <option value="south africa">South Africa</option> 
+                  <option value="north america">North America</option>
+                  <option value="south america">South America</option> 
+                  <option value="europe">Europe</option>
+                  <option value="australia">Australia</option> 
+                </select>
               </div>
             </div>
             <div className="form-group">
@@ -113,8 +106,7 @@ const Edit = ({ onArticleUpdateSubmit }) => {
                   rows="10"
                   placeholder="Content ..."
                   className="form-control"
-                  value={values.content}
-                  onChange={onChangeHandler}></textarea>
+                  defaultValue={article.content}></textarea>
               </div>
             </div>
             <div className="form-group">

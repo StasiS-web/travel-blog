@@ -1,13 +1,12 @@
-import "./create.css";
-import formatDate from "../../utils/dateUtils";
-import { useNavigate } from "react-router-dom";
+import { types as notificationTypes, useNotificationsContext } from "../../contexts/NotificationContext";
 import { useAuthContext } from "../../contexts/AuthContext";
-import { useNotificationsContext, types } from "../../contexts/NotificationContext";
-import { notifications } from "../../constants/Constants";
+import { useNavigate } from "react-router-dom";
 import { useService } from "../../hooks/useService";
 import { destinationServiceFactory } from "../../services/destinationService";
 import { validateArticle } from "../../utils/validationHandler";
-
+import formatDate from "../../utils/dateUtils";
+import { notifications } from "../../constants/Constants";
+import "./create.css";
 
 const Create = () => {
   const { user } = useAuthContext();
@@ -21,40 +20,39 @@ const Create = () => {
     let formData = new FormData(event.currentTarget);
     let title = formData.get("title");
     let imageUrl = formData.get("imageUrl");
-    let createOn = formData.get("createOn");
+    let createdOn = formatDate(formData.get("_createdOn"));
     let category = formData.get("category");
     let content = formData.get("content");
 
-    if(title === "" || category === "" || content === "" || 
+    if(title === "" || category === "" || createdOn === "" || 
        imageUrl === "" || content === "") {
-          showNotifications({message: notifications.fieldsErrorMsg, type: types.error});
+          showNotifications({message: notifications.fieldsErrorMsg, type: notificationTypes.error});
           return;
     }
 
-    let publishDate = formatDate(createOn);
-
-    const articleData = {
+    let articleData = {
       title,
       imageUrl,
       category,
-      createdOn: publishDate,
+      createdOn,
       content,
-    }
+    };
 
     destinationService.create(articleData, user.accessToken)
-      .then(result => {
-        showNotifications({message: notifications.articleCreateMsg, type: types.success});
-        navigate("/destination")
+      .then((result) => {
+        showNotifications({message: notifications.articleCreateMsg, type: notificationTypes.success});
+        console.log(result);
+        navigate("/destinations");
       })
       .catch((error) => {
-        showNotifications({message: error.message, type: types.error});
+        showNotifications({message: error.message, type: notificationTypes.error});
         console.log(error);
       });
   }
 
   const handleClose = (event) => {
     event.preventDefault();
-    navigate("/destination");
+    navigate("/destinations");
   };
 
   const validateHandler = (event) => {
@@ -97,25 +95,16 @@ const Create = () => {
               </div>
             </div>
             <div className="form-group">
-              <div className="col-6 field">
-                <label htmlFor="date">Category*</label>
-                <input
-                  type="text"
-                  id="category"
-                  name="category"
-                  placeholder="Category ..."
-                  className="form-control"
-                  onBlur={validateHandler}/>
-              </div>
-              <div className="col-6 field">
-                <label htmlFor="date">Created on*</label>
-                <input
-                  type="date"
-                  id="date"
-                  name="date"
-                  placeholder="Created on ..."
-                  className="form-control"
-                  onBlur={validateHandler} />
+              <div className="col-12 field">
+                <label htmlFor="category">Select Category*</label>
+                <select name="category" id="category" placeholder="Select the category options...">
+                  <option value="asia">Asia</option>
+                  <option value="south africa">South Africa</option> 
+                  <option value="north america">North America</option>
+                  <option value="south america">South America</option> 
+                  <option value="europe">Europe</option>
+                  <option value="australia">Australia</option> 
+                </select>
               </div>
             </div>
             <div className="form-group">
