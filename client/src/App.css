@@ -74,6 +74,21 @@ input[type="submit"] {
     cursor: pointer;
 }
 
+button,
+input,
+optgroup,
+select,
+textarea {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+}
+
+button,
+select {
+  text-transform: none;
+}
+
 .uppercase {
     font-size: 14px;
     color: #000;
