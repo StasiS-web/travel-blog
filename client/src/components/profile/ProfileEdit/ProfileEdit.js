@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../../contexts/AuthContext";
 
-export const ProfileEdit = () => {
+const ProfileEdit = () => {
   const { user, updateProfile } = useAuthContext();
   const navigate = useNavigate();
 
@@ -104,3 +104,5 @@ export const ProfileEdit = () => {
     </div>
   );
 };
+
+export default ProfileEdit;

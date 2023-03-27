@@ -30,7 +30,7 @@ const Navigation = () => {
                 </div>
                   {user.email ?  
                     <div id="user" className="col-sm-5 user-links text-justify">
-                      <span className="welcome-msg">Hello, <Link to="/profile">{user.name}</Link></span>
+                      <span className="welcome-msg">Hello, <Link to="/profile">{user.email}</Link></span>
                       <NavLink to="/logout" className="btn btn-primary logout-btn">Logout</NavLink>
                     </div>
                     : <div id="guest" className="col-sm-5 user-links text-justify">

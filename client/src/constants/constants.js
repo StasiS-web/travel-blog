@@ -43,6 +43,7 @@ const notifications ={
     articleCreateMsg: "Article created.",
     articleUpdateMsg: "Article updated.",
     articleDeleteMsg: "Article deleted.",
+    articleInfoMsg: "Sorry, we couldn't find the article you are looking for.",
 
     invalidInput: "Invalid input!",
     notReceivedData: "Authentication data not received."

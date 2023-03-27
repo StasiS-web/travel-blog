@@ -1,29 +1,26 @@
 import { requestFactory } from "./requester";
 
-const baseUrl = "http://localhost:3030/data";
+const baseUrl = "http://localhost:3030/data/destinations";
 
 export const destinationServiceFactory = (accessToken) =>{
     const request = requestFactory(accessToken);
 
-    const getAll = () => request.get(`${baseUrl}/destinations`);
+    const getAll = () => request.get(baseUrl);
 
-    const getOneArticle = (postId) => request.get(`${baseUrl}/destinations/${postId}`);
+    const getOneArticle = (postId) => request.get(`${baseUrl}/${postId}`);
 
-    const getArticleByCategory = (category) => request.get(`${baseUrl}/destinations/category/${category}`);
+    const getArticleByCategory = (category) => request.get(`${baseUrl}/category/${category}`);
 
-    const getLatestArticle = (createOn) => request.get(`${baseUrl}/destinations?sortBy=${createOn}%20desc%2C_createdOn`);
+    const create = (destinationData) => request.post(baseUrl, destinationData);
 
-    const create = (destinationData) => request.post(`${baseUrl}/destinations`, destinationData);
+    const edit = (postId, destinationData) => request.put(`${baseUrl}/${postId}`, destinationData);
 
-    const edit = (postId, destinationData) => request.put(`${baseUrl}/destinations/${postId}`, destinationData);
-
-    const remove = (postId) => request.del(`${baseUrl}/destinations/${postId}`);
+    const remove = (postId) => request.del(`${baseUrl}/${postId}`);
 
     return{
         getAll,
         getOneArticle,
         getArticleByCategory,
-        getLatestArticle,
         create,
         edit,
         delete: remove,
