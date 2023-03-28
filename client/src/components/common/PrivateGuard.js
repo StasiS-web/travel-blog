@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useAuthContext } from "../../contexts/AuthContext";
 
-const PrivateRoute = ({children}) => {
+const PrivateGuard = ({children}) => {
     const { isAuth } = useAuthContext();
 
     if (!isAuth) {
@@ -11,4 +11,4 @@ const PrivateRoute = ({children}) => {
     return children ? children : <Outlet />
 };
 
-export default PrivateRoute;
+export default PrivateGuard;
