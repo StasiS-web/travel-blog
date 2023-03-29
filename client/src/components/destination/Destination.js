@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import { destinationServiceFactory } from "../../services/destinationService";
 import { useService } from "../../hooks/useService";
 import DestinationItem from "../destination/destinationItem/DestinationItem";
@@ -7,7 +7,7 @@ import "./destination.css";
 
 const Destination = () => {
   const [articles, setArticles] = useState([]);
-  const [loading, setLoading] = useState(Boolean);
+  const [loading, setLoading] = useState(false);
   const destinationService = useService(destinationServiceFactory);
 
   useEffect(() => {
@@ -19,7 +19,7 @@ const Destination = () => {
         setArticles(result);
       })
       .catch((error) => console.log(error));
-  }, []);
+  }, [destinationService]);
 
   let loader = (
     <div className="loader">
