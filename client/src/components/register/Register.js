@@ -103,7 +103,7 @@ const Register = () => {
                   <label htmlFor="con-password">Confirm Password</label>
                   <input
                     type="password"
-                    id="confirm-password"
+                    id="confirmPassword"
                     name="confirmPassword"
                     placeholder="Confirm Password ..."
                     className="form-control"

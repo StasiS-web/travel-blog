@@ -8,14 +8,13 @@ const Logout = () => {
   const { user, userLogout } = useAuthContext();
 
   useEffect(() => {
-      authServiceFactory.logout()
-        .then(() => {
-          userLogout();
-          navigate("/");
-        });
-    }, [userLogout, navigate, user.accessToken, user.email]);
-
-    return <Navigate to="/" />
+    authServiceFactory.logout()
+      .then(() => {
+        userLogout();
+        navigate("/");
+      })
+    }, [user.accessToken, user.email, userLogout, navigate]);
+  return <Navigate to="/" />;
 }
 
 export default Logout;
