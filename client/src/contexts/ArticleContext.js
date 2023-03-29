@@ -1,5 +1,5 @@
 import { createContext, useReducer, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { useService } from "../hooks/useService";
 import { destinationServiceFactory } from "../services/destinationService";
 
@@ -12,7 +12,6 @@ const articleReducer = (state, action) => {
         case "ADD_ARTICLE":
             return [...state, action.payload];
         case "FETCH_ARTICLE_DETAILS":
-            return state.map(x => x._id === action.articleId ? action.payload : x);
         case "EDIT_ARTICLE":
             return state.map(x => x._id === action.articleId ? action.payload : x);
         case "ADD_COMMENT":
@@ -25,7 +24,6 @@ const articleReducer = (state, action) => {
 };
 
 export const ArticleProvider = ({children, }) => {
-    const navigate = useNavigate();
     const [articles, dispatch] = useReducer(articleReducer, []);
     const destinationService = useService(destinationServiceFactory);
 
@@ -47,16 +45,8 @@ export const ArticleProvider = ({children, }) => {
 
     const fetchArticleDetails = (articleId, articleDetails) => {
          dispatch({
-            type: "EDIT_ARTICLE",
+            type: "FETCH_ARTICLE_DETAILS",
             payload: articleDetails ,
-            articleId
-        });
-    };
-
-    const addComment = (articleId, comment) => {
-        dispatch({
-            type: "ADD_COMMENT",
-            payload: comment,
             articleId,
         });
     };
@@ -67,7 +57,7 @@ export const ArticleProvider = ({children, }) => {
             payload: articleData,
         });
 
-        navigate("/destinations");
+        <Navigate to="/destinations" />
     };
 
     const articleEdit = (articleId, articleData) => {
@@ -81,9 +71,18 @@ export const ArticleProvider = ({children, }) => {
     const articleRemove = (articleId) => {
         dispatch({
             type: "REMOVE_ARTICLE",
-            articleId
+            articleId,
         });
     }
+    
+    const addComment = (articleId, comment) => {
+        dispatch({
+            type: "ADD_COMMENT",
+            payload: comment,
+            articleId,
+        });
+    };
+
 
     return (
         <ArticleContext.Provider value={{

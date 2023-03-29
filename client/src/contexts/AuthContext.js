@@ -1,5 +1,6 @@
 import { createContext, useContext } from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
+import * as authServiceFactory from "../services/authService";
 
 const initialState = {
   _id: '',
@@ -20,11 +21,22 @@ export const AuthProvider = ({ children }) => {
     setAuth(authData);
   };
 
+  const registerUser = (values) => {
+    const { confirmPassword, ...registerData} = values;
+    if(confirmPassword !== registerData.password) {
+      return;
+    }
+
+      const result = authServiceFactory.register(registerData);
+      setAuth(result);
+  }
+
   const updateProfile = (profileData) => {
     setAuth({...auth, ...profileData});
   };
 
   const userLogout = () => {
+    authServiceFactory.logout();
     setAuth(initialState);
   };
 
@@ -34,7 +46,8 @@ export const AuthProvider = ({ children }) => {
         userLogin,
         userLogout,
         updateProfile,
-        isAuth: auth.name,
+        registerUser,
+        isAuth: auth.accessToken,
     }}>
         {children}
     </AuthContext.Provider>
