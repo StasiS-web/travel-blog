@@ -46,6 +46,7 @@ import "./aboutme.css";
         </Link>
         {user.email ? (
         <div className="admin-btn">
+         <NavLink to="/profile" className="btn btn-primary">Profile</NavLink>
          <NavLink to="/destinations/create-article" className="btn btn-success"><i className="ri-add-circle-fill"></i>Create</NavLink> 
         </div> ) : null}
       </div>
