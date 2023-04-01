@@ -1,4 +1,7 @@
-import { types as notificationTypes, useNotificationsContext } from "../../contexts/NotificationContext";
+import {
+  types,
+  useNotificationsContext,
+} from "../../contexts/NotificationContext";
 import { useAuthContext } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useService } from "../../hooks/useService";
@@ -11,7 +14,7 @@ import "./create.css";
 const Create = () => {
   const { user } = useAuthContext();
   const navigate = useNavigate();
-  const { showNotifications} = useNotificationsContext();
+  const { showNotifications } = useNotificationsContext();
   const destinationService = useService(destinationServiceFactory);
 
   const onCreateSubmit = (event) => {
@@ -24,10 +27,18 @@ const Create = () => {
     let category = formData.get("category");
     let content = formData.get("content");
 
-    if(title === "" || category === "" || createdOn === "" || 
-       imageUrl === "" || content === "") {
-          showNotifications({message: notifications.fieldsErrorMsg, type: notificationTypes.error});
-          return;
+    if (
+      title === "" ||
+      category === "" ||
+      createdOn === "" ||
+      imageUrl === "" ||
+      content === ""
+    ) {
+      showNotifications({
+        message: notifications.fieldsErrorMsg,
+        type: types.error,
+      });
+      return;
     }
 
     let articleData = {
@@ -38,17 +49,21 @@ const Create = () => {
       content,
     };
 
-    destinationService.create(articleData, user.accessToken)
+    destinationService
+      .create(articleData, user.accessToken)
       .then((result) => {
-        showNotifications({message: notifications.articleCreateMsg, type: notificationTypes.success});
+        showNotifications({
+          message: notifications.articleCreateMsg,
+          type: types.success,
+        });
         console.log(result);
         navigate("/destinations");
       })
       .catch((error) => {
-        showNotifications({message: error.message, type: notificationTypes.error});
+        showNotifications({ message: error.message, type: types.error });
         console.log(error);
       });
-  }
+  };
 
   const handleClose = (event) => {
     event.preventDefault();
@@ -57,10 +72,10 @@ const Create = () => {
 
   const validateHandler = (event) => {
     let [message, type] = validateArticle(event.target);
-    showNotifications({type, message});
+    showNotifications({ type, message });
   };
 
-  return ( 
+  return (
     <div id="create-page">
       <div className="container">
         <div className="row">
@@ -81,7 +96,8 @@ const Create = () => {
                   name="title"
                   placeholder="Title ..."
                   className="form-control"
-                  onBlur={validateHandler}/>
+                  onBlur={validateHandler}
+                />
               </div>
               <div className="col-12 field">
                 <label htmlFor="imageUrl">ImageUrl*</label>
@@ -91,19 +107,24 @@ const Create = () => {
                   name="imageUrl"
                   placeholder="ImageUrl ..."
                   className="form-control"
-                  onBlur={validateHandler}/>
+                  onBlur={validateHandler}
+                />
               </div>
             </div>
             <div className="form-group">
               <div className="col-12 field">
                 <label htmlFor="category">Select Category*</label>
-                <select name="category" id="category" placeholder="Select the category options...">
+                <select
+                  name="category"
+                  id="category"
+                  placeholder="Select the category options..."
+                >
                   <option value="asia">Asia</option>
-                  <option value="south africa">South Africa</option> 
+                  <option value="south africa">South Africa</option>
                   <option value="north america">North America</option>
-                  <option value="south america">South America</option> 
+                  <option value="south america">South America</option>
                   <option value="europe">Europe</option>
-                  <option value="australia">Australia</option> 
+                  <option value="australia">Australia</option>
                 </select>
               </div>
             </div>
@@ -113,12 +134,13 @@ const Create = () => {
                 <textarea
                   id="content"
                   name="content"
-                  minLength="250"
-                  maxLength="1200"
-                  rows="15"
+                  minLength="150"
+                  maxLength="5000"
+                  rows="35"
                   placeholder="Content ..."
                   className="form-control"
-                  onBlur={validateHandler}></textarea>
+                  onBlur={validateHandler}
+                ></textarea>
               </div>
             </div>
             <div className="form-group">
@@ -135,6 +157,6 @@ const Create = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Create;

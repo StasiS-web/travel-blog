@@ -10,12 +10,12 @@ const Edit = () => {
   const navigate = useNavigate();
   const { user } = useAuthContext();
   const { articleId } = useParams();
-  const [ article, setArticles ] = useArticleState(articleId)
+  const [ article, setArticle ] = useArticleState(articleId)
   const { showNotifications } = useNotificationsContext();
   const destinationService = useService(destinationServiceFactory);
 
   const onChangeCategory = (event) => {
-    setArticles({...article, category: event.target.value});
+    setArticle({...article, category: event.target.value});
   }
 
  const onEditSubmit = (event) => {
@@ -32,7 +32,7 @@ const Edit = () => {
   destinationService.edit(articleId, data, user.accessToken)
       .then(result => result.json())
       .then(data => {
-        setArticles(data);
+        setArticle(data);
         navigate("/destinations");
       })
       .catch((error) => {
@@ -83,7 +83,7 @@ const Edit = () => {
               </div>
             </div>
             <div className="form-group">
-              <div className="col-6 field">
+              <div className="col-12 field">
                 <label htmlFor="category">Select Category*</label>
                 <select name="category" id="category" placeholder="Select the category options..." value={article.category} onChange={onChangeCategory}>
                   <option value="asia">Asia</option>
@@ -101,15 +101,16 @@ const Edit = () => {
                 <textarea
                   id="content"
                   name="content"
-                  minLength="50"
-                  maxLength="600"
-                  rows="10"
+                  minLength="150"
+                  maxLength="5000"
+                  rows="35"
                   placeholder="Content ..."
                   className="form-control"
                   defaultValue={article.content}></textarea>
               </div>
             </div>
             <div className="form-group">
+              <div className="col-12 field">
               <p className="mandatory">* are mandatory</p>
               <button type="submit" className="btn btn-success">
                 Update
@@ -117,6 +118,7 @@ const Edit = () => {
               <button className="btn btn-outline" onClick={handleClose}>
                 Cancel
               </button>
+              </div>
             </div>
           </form>
         </div>
