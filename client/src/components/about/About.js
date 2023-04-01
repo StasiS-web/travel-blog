@@ -20,8 +20,7 @@ const About = () => {
                 <h3>Jean Smith</h3>
                 <strong className="role">CEO, Founder</strong>
                 <p>
-                  Quos quia provident conse culpa facere ratione maxime commodi
-                  voluptates id repellat velit eaque aspernatur expedita.
+                Founder of Awesome Traveler and an accomplished public speaker. I'm on a mission to help you to plan your next vacation.
                 </p>
                 <Link to="#">
                 <li className="social-icons">
