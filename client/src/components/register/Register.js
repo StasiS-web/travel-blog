@@ -100,7 +100,7 @@ const Register = () => {
                   />
                   </div>
                 <div className="col-12 field">
-                  <label htmlFor="con-password">Confirm Password</label>
+                  <label htmlFor="confirmPassword">Confirm Password</label>
                   <input
                     type="password"
                     id="confirmPassword"
