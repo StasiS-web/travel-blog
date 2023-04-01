@@ -66,6 +66,15 @@ Login credentials for this application
 email: jean@admin.awesome.com
 password: 123456
 
+## Screenshots
+* public pages accessible from any user
+[Destinations](https://res.cloudinary.com/dnvg6uuxl/image/upload/v1680370197/travel-blog/screenshots/destinations_jwd9sd.png)
+* pages with logged in users
+[Destinations](https://res.cloudinary.com/dnvg6uuxl/image/upload/v1680370193/travel-blog/screenshots/destination_loggedInUser_mfvq2o.png)
+[Profile](https://res.cloudinary.com/dnvg6uuxl/image/upload/v1680369259/travel-blog/screenshots/profile_chmdkh.png)
+[Create](https://res.cloudinary.com/dnvg6uuxl/image/upload/v1680370189/travel-blog/screenshots/create_frjkif.png)
+[Edit](https://res.cloudinary.com/dnvg6uuxl/image/upload/v1680370187/travel-blog/screenshots/edit_pfe9k8.png)
+
 
 ## Disclaimer
 The content and image used in this project does not have a commercial license and it is not used for commercial purpose. The image on the error 404 page were purchased with License for personal use only. All the content in this project is used only for educational purpose.
