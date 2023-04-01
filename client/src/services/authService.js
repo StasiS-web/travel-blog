@@ -1,5 +1,5 @@
 import {requestFactory} from "./requester";
-import { notifications } from '../constants/Constants';
+import { notifications } from "../constants/Constants";
 
 const baseUrl = "http://localhost:3030/users";
 
