@@ -13,10 +13,10 @@ const paths = {
     error404Path: "/404",
 
     destinationsPath: "/destinations",
-    detailsPath: "/destinations/:postId",
+    detailsPath: "/destinations/:articleId",
 
     createArticle: "/destinations/create-article",
-    updateArticleById: "/destinations/edit-article/:postId",
+    updateArticleById: "/destinations/edit-article/:articleId",
 }
 
 const notifications ={
@@ -31,6 +31,8 @@ const notifications ={
     passwordWarningMsg: "Password and Confirm password should match.",
     emailWarningMsg: "Please insert a valid email.",
     nameWarningMsg: "Please insert a valid name.",
+    tokenErrorMsg: "Invalid token! Please make sure you got a valid token.",
+    userNotAuthorizedMsg: "Unauthorized user.",
 
     titleWarningMsg: "The article title must be at least 15 characters long.",
     contentWarningMsg: "The article content must be at least 150 characters long.",

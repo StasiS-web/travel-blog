@@ -1,32 +1,45 @@
-import "./articleDetails.css";
-import { useParams, Link, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import formatDate from "../../utils/dateUtils";
+import { useEffect, useContext } from "react";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { useAuthContext } from "../../contexts/AuthContext";
-import { destinationServiceFactory } from "../../services/destinationService";
+import { ArticleContext } from "../../contexts/ArticleContext";
 import { useService } from "../../hooks/useService";
+import { destinationServiceFactory } from "../../services/destinationService";
+import "./articleDetails.css";
 
-export const ArticleDetails = () => {
-  const { articleId } = useParams();
-  const [currentArticle, setCurrentArticle] = useState({});
+const ArticleDetails = () => {
   const { user } = useAuthContext();
+  const { postId } = useParams();
+  const { fetchArticleDetails, articleRemove, selectArticle } = useContext(ArticleContext);
   const destinationService = useService(destinationServiceFactory);
   const navigate = useNavigate();
 
-  const isOwner = currentArticle._ownerId === user._id;
+  const currentArticle = selectArticle(postId);
+  const isOwner = currentArticle?._ownerId === user._id;
 
   useEffect(() => {
-    destinationService.getOneArticle(articleId)
-      .then((result) => {
-        setCurrentArticle(result);
-    })
-  }, [articleId]);
+    const getArticleDetails = async () => {
+      try {
+        const articleDetails = await destinationService.getOneArticle(postId);
+        fetchArticleDetails(postId, { ...articleDetails });
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-  const onDelete = async () => { 
-    await destinationService.delete(articleId);
-    navigate("/destination")
-  }
+    getArticleDetails();
+  }, [postId, destinationService, fetchArticleDetails]);
 
+  const onDelete = async () => {
+    const deleteAction = window.confirm(
+      `Are you sure you want to delete ${currentArticle.title}?`
+    );
+    if (deleteAction) {
+      await destinationService.delete(postId).then(() => {
+        articleRemove(postId);
+        navigate("/destination");
+      });
+    }
+  };
 
   return (
     <div id="article-details">
@@ -46,9 +59,6 @@ export const ArticleDetails = () => {
                   <div className="blog animate-box">
                     <div className="title text-center">
                       <h3>{currentArticle.title}</h3>
-                      <span className="posted-on">
-                        {formatDate(currentArticle.createdOn)}
-                      </span>
                       <span className="category">
                         {currentArticle.category}
                       </span>
@@ -63,7 +73,10 @@ export const ArticleDetails = () => {
                     </div>
                     {isOwner && (
                       <div className="admin-btn">
-                        <Link to={`/destination/edit-article/${articleId}`} className="btn btn-outline edit-btn">
+                        <Link
+                          to={`/destination/edit-article/${postId}`}
+                          className="btn btn-outline edit-btn"
+                        >
                           <i className="ri-edit-box-fill"></i>
                         </Link>
                         <button className="btn btn-danger" onClick={onDelete}>
@@ -81,3 +94,5 @@ export const ArticleDetails = () => {
     </div>
   );
 };
+
+export default ArticleDetails;
