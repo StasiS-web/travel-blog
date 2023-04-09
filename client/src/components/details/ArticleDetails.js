@@ -19,7 +19,7 @@ const ArticleDetails = () => {
   useEffect(() => {
     const getArticleDetails = async () => {
       try {
-        const articleDetails = await destinationService.getOneArticle(postId);
+        const articleDetails = await destinationService.getOneDestination(postId);
         fetchArticleDetails(postId, { ...articleDetails });
       } catch (error) {
         console.log(error);

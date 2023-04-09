@@ -7,7 +7,7 @@ export const destinationServiceFactory = (token) =>{
 
     const getAll = () => request.get(baseUrl);
 
-    const getOneArticle = (articleId) => request.get(`${baseUrl}/${articleId}`);
+    const getOneDestination = (articleId) => request.get(`${baseUrl}/${articleId}`);
 
     const getArticleByCategory = (category) => request.get(`${baseUrl}/category/${category}`);
 
@@ -15,11 +15,11 @@ export const destinationServiceFactory = (token) =>{
 
     const edit = (articleId, destinationData) => request.put(`${baseUrl}/${articleId}`, destinationData);
 
-    const remove = (articleId) => request.del(`${baseUrl}/${articleId}`);
+    const remove = (articleId) => request.delete(`${baseUrl}/${articleId}`);
 
     return{
         getAll,
-        getOneArticle,
+        getOneDestination,
         getArticleByCategory,
         create,
         edit,

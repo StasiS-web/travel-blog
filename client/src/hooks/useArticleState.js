@@ -7,7 +7,7 @@ const useArticleState = (id) => {
     const destinationService = useService(destinationServiceFactory);
 
     useEffect(() => {
-        destinationService.getOneArticle(id)
+        destinationService.getOneDestination(id)
             .then(article => {
                 setArticle(article)
             })

@@ -1,7 +1,7 @@
 import { createContext, useReducer, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import { useService } from "../hooks/useService";
-import { destinationServiceFactory } from "../services/destinationService";
+import {destinationServiceFactory} from "../services/destinationService";
 
 export const ArticleContext = createContext();
 
@@ -57,7 +57,7 @@ export const ArticleProvider = ({children, }) => {
             payload: articleData,
         });
 
-        <Navigate to="/destinations" />
+        return <Navigate to="/destinations" />;
     };
 
     const articleEdit = (articleId, articleData) => {
