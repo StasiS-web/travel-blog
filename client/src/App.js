@@ -31,7 +31,6 @@ function App() {
       <ErrorBoundary FallbackComponent={ErrorFallback}>
       <ArticleProvider>
       <AuthProvider>
-        
         <NotificationProvider>
           <Router>
           <Toggle />
@@ -53,9 +52,8 @@ function App() {
               <Route path="/profile-edit" element={<ProfileEdit />} />
               <Route path="/logout" element={<Logout />} />
               <Route path="/destinations/create-article" element={<Create />} />
-              
+              <Route path="/destinations/edit-article/:articleId" element={<Edit />} />
             </Route>
-            <Route path="/destinations/edit-article/:articleId" element={<Edit />} />
           </Routes>
            <Footer />
            <GoTop />
