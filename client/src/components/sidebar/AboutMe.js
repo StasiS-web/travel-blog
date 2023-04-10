@@ -2,7 +2,7 @@ import { Link, NavLink } from "react-router-dom";
 import { useAuthContext } from "../../contexts/AuthContext";
 import "./aboutme.css";
 
- const AboutMe = () => {
+const AboutMe = () => {
   const { user } = useAuthContext();
 
   return (
@@ -20,7 +20,8 @@ import "./aboutme.css";
         <h3>Jean Smith</h3>
         <strong className="role">CEO, Founder</strong>
         <p>
-         Founder of Awesome Traveler and an accomplished public speaker. I'm on a mission to help you to plan your next vacation.
+          Founder of Awesome Traveler and an accomplished public speaker. I'm on
+          a mission to help you to plan your next vacation.
         </p>
         <Link to="#">
           <li className="social-icons">
@@ -52,6 +53,6 @@ import "./aboutme.css";
       </div>
     </div>
   );
-}
+};
 
 export default AboutMe;

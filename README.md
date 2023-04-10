@@ -17,23 +17,26 @@ User are able to navigate through various links like:
 
 ## Functionality
 The application contains two parts:
-Public part
-    * Guests can:
-        - visit Home page
-        - register: "/register"
-        - login: "/login"
-        - view all articles: "/destinations"
-        - view a single article's details: "/destinations:postId"
-        - view 404 page
-
-Private part
-    * Logger users can:
-        - create new articles: "/destinations/create-article"
-    * The author of the post can:
-        - edit existing articles: "/destinations/edit-article/:postId",
-        - delete existing article by id
-    * The owner of the account
-        - edit the details in the profile page: "/profile-edit"
+### Public part
+* Guests can:
+    - visit Home page
+    - register: "/register"
+    - login: "/login"
+    - view all articles: "/destinations"
+    - view a single article's details: "/destinations:articleId"
+    - view 404 page
+### Private part (logged in users only)
+* Logger users can  (if they are not the owner of that article):
+    - view to comments for specific article
+    - create a new comment for each article
+    - like specific article
+* The author of the article can (if they are the owner of that article):
+    - create new articles: "/destinations/create-article"
+    - edit existing articles: "/destinations/edit-article/:articleId",
+    - delete existing article by id
+* Any logged in user:
+    - create new articles: "/destinations/create-article"
+    - edit the details in the profile page: "/profile-edit"
 
 ## :hammer: Used technologies
 * HTML
