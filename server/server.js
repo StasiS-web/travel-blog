@@ -1431,6 +1431,15 @@
                 content: "In this post it will be discuss an awesome trip to Paris. This town is huge that you need a well-planned itinerary. In this way you can prioritize your visits and you will see everything that you want. \n There are several tourist attraction you must visit during your stay in Paris. \n The Eiffel Tower \n The Eiffel Tower is acknowledged as the universal symbol of both Paris and France. It was originally designed by Émile Nouguier and Maurice Koechlin. In March 1885, Gustave Eiffel, known primarily as a successful iron engineer, submitted a plan for a tower to the French Ministre du Commerce et de l'Industrie. He entered a competition for students studying at the university. The winning proposal would stand as the centerpiece of the 1889 Exposition. Eiffel's was one of over 100 submissions. Eiffel's proposal was finally chosen in June 1886. Even before its construction, the Tower's uniqueness was noticed. \n Arc de Triomphe \n The Arc de Triomphe de l'Étoile is one of the most famous monuments in Paris. It stands in the centre of the Place Charles de Gaulle (originally named Place de l'Étoile) at the western end of the Champs-Élysées. It should not be confused with a smaller arch, the Arc de Triomphe du Carrousel, which stands west of the Louvre. The Arc de Triomphe (in English: 'Triumphal Arch') honours those who fought and died for France in the French Revolutionary and the Napoleonic Wars, with the names of all French victories and generals inscribed on its inner and outer surfaces. \n Musée d'Orsay (Orsay Museum) \n The Musée d'Orsay is an art museum on the left bank of the Seine originally constructed as a train station in the late 1890s. It was designed by Gae Aulenti, Victor Laloux, and Émile Bernard. The Musée opened in 1986, and exhibits artworks from 1848 to 1914 with emphasis on French Impressionism. \n Sections of the museum focus on Symbolism, Naturalism, Impressionism, Post-Impressionism, Pont Aven School, and Art Nouveau, to name a few. \n Musée du Louvre (Louvre Museum) \n The Louvre Palace, originally built as a medieval fortress in the year 1190 by King Philippe Auguste, was transformed by successive governments. Since the French Revolution, it has hosted the Musée du Louvre, one of the largest museums of the western world. It houses some of the most popular and culturally ethnic form of art. The Louvre opened to the public on August 10, 1793. On March 3, 1989, I.M. Pei inaugurated his Glass Pyramid, which also serves as an official entrance to the main exhibition hall, which in turn leads to the temporary exhibition halls. The Musée is divided into three wings: Sully, Richelieu, and Denon, which showcase 35,000 pieces of art, much of it dating back to the Middle Ages. \n Notre-Dame de Paris \n The Notre-Dame de Paris is the largest cathedral in Paris. Construction began in 1163 by Maurice de Sully, the then appointed bishop of Paris. The construction campaign was divided into 4 parts, and was done by well-known builders of that era: Jean de Chelles, Pierre de Montreuil, Pierre de Chelles, Jean Ravy, Jean le Bouteiller. It took over 100 years for the Notre-Dame to be built completely. It was built in honour of Virgin Mary, making it a bishop’s church, a canon church and a baptistery. It is one of the main symbols of Paris. It is located at Île de la Cité, a small island in the heart of the city. \n Basilique du Sacré-Cœur \n The Basilique du Sacré-Cœur is a Roman Catholic Basilica that was built in 1914 and consecrated in 1919. It is located at the highest altitude in Paris, at butte Montmartre, itself a historically important artist colony. The church contains one of the world's largest mosaic of Jesus Christ, with his arms wide spread. The basilica was built in the honour of the 58,000 lives lost in the Franco-Prussian war in the year 1870. Paul Abadie, the winner of the competition to find the right architectural design, was the architect for the basilica. The basilica offers some beautiful panoramic views of Paris. The walls of the church are naturally always white and clean, due to the travertine stone used in its construction. The stone reacts with water and creates a chemical called calcite, which acts as a natural bleacher. \n The Sainte Chapelle \n The Sainte-Chapelle is a royal medieval Gothic chapel, located near the Palais de la Cité, on the Île de la Cité in the heart of Paris, France. Begun some time after 1239 and consecrated on 26 April 1248, the Sainte-Chapelle is considered among the highest achievements of the Rayonnant period of Gothic architecture. Its erection was commissioned by King Louis IX of France to house his collection of Passion Relics, including Christ's Crown of Thorns - one of the most important relics in medieval Christendom. Along with the Conciergerie, the Sainte-Chapelle is one of the earliest surviving buildings of the Capetian royal palace on the Île de la Cité. Although damaged during the French revolution, and restored in the 19th century, it retains one of the most extensive in-situ collections of 13th-century stained glass anywhere in the world. "
             }
         },
+    	comments: {
+    		"64159f4c-c3f1-11ed-afa1-0242ac120002": {
+    			_ownerId: "847ec027-f659-4086-8032-5173e2f9c93a",
+    			content: "I like Aruba very much.",
+    			articleId: "64159f4c-c3f1-11ed-afa1-0242ac120002",
+    			_createdOn: 1614260681375,
+    			_id: "0a272c58-b7ea-4e09-a000-7ec988248f66"
+    		}
+    	},
     	recipes: {
     		"3987279d-0ad4-4afb-8ca9-5b256ae3b298": {
     			_ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
@@ -1482,15 +1491,6 @@
     				"Cook until done"
     			],
     			_createdOn: 1613551388703
-    		}
-    	},
-    	comments: {
-    		"0a272c58-b7ea-4e09-a000-7ec988248f66": {
-    			_ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
-    			content: "Great recipe!",
-    			recipeId: "8f414b4f-ab39-4d36-bedb-2ad69da9c830",
-    			_createdOn: 1614260681375,
-    			_id: "0a272c58-b7ea-4e09-a000-7ec988248f66"
     		}
     	},
     	records: {
