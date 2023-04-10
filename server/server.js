@@ -1432,7 +1432,7 @@
             }
         },
     	comments: {
-    		"64159f4c-c3f1-11ed-afa1-0242ac120002": {
+    		"0a272c58-b7ea-4e09-a000-7ec988248f66": {
     			_ownerId: "847ec027-f659-4086-8032-5173e2f9c93a",
     			content: "I like Aruba very much.",
     			articleId: "64159f4c-c3f1-11ed-afa1-0242ac120002",
