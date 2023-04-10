@@ -1,9 +1,11 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
+import useScrollTop  from "../../hooks/useScrollTop";
 import "../home/home.css";
 
 const  Home = () => {
   const { articleId } = useParams();
+  useScrollTop();
   return (
     <div id="home">
       <div id="hero" className="row ml-0 mr-0">

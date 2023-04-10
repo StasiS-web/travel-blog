@@ -46,6 +46,9 @@ const notifications ={
     articleDeleteMsg: "Article deleted.",
     articleInfoMsg: "Sorry, we couldn't find the article you are looking for.",
 
+    likeSucceededMsg: "Successfully liked this article.",
+    likeErrorMsg: "You have already liked this article",
+
     invalidInput: "Invalid input!",
     notReceivedData: "Authentication data not received."
 }

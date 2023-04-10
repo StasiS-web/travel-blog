@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
+import useScrollTop  from "../../hooks/useScrollTop";
 import "./about.css";
 
 const About = () => {
+  useScrollTop();
   return (
     <div id="about">
       <div id="content" className="no-pd-top">
