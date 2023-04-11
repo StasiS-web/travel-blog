@@ -1,39 +1,35 @@
-import {
-  types,
-  useNotificationsContext,
-} from "../../contexts/NotificationContext";
+import { types, useNotificationsContext } from "../../contexts/NotificationContext";
 import { useAuthContext } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useService } from "../../hooks/useService";
 import { destinationServiceFactory } from "../../services/destinationService";
 import { validateArticle } from "../../utils/validationHandler";
-import formatDate from "../../utils/dateUtils";
 import { notifications } from "../../constants/Constants";
 import "./create.css";
+import { useState } from "react";
 
-const Create = () => {
+const Create = ({userId}) => {
   const { user } = useAuthContext();
   const navigate = useNavigate();
   const { showNotifications } = useNotificationsContext();
   const destinationService = useService(destinationServiceFactory);
+  const [formData, setFormData] = useState({
+    title: "",
+    category: "",
+    imageUrl: "",
+    content: ""
+  });
 
   const onCreateSubmit = (event) => {
     event.preventDefault();
 
-    let formData = new FormData(event.currentTarget);
-    let title = formData.get("title");
-    let imageUrl = formData.get("imageUrl");
-    let createdOn = formatDate(formData.get("_createdOn"));
-    let category = formData.get("category");
-    let content = formData.get("content");
+    const { title, category, imageUrl, content } = formData;
 
     if (
       title === "" ||
       category === "" ||
-      createdOn === "" ||
       imageUrl === "" ||
-      content === ""
-    ) {
+      content === "") {
       showNotifications({
         message: notifications.fieldsErrorMsg,
         type: types.error,
@@ -41,12 +37,12 @@ const Create = () => {
       return;
     }
 
-    let articleData = {
+    const articleData = {
       title,
       imageUrl,
       category,
-      createdOn,
       content,
+      owner: userId
     };
 
     destinationService
@@ -70,9 +66,16 @@ const Create = () => {
     navigate("/destinations");
   };
 
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevState) => ({...prevState, [name]: value}));
+  };
+
   const validateHandler = (event) => {
     let [message, type] = validateArticle(event.target);
-    showNotifications({ type, message });
+    if(message) {
+      showNotifications({ type, message });
+    }
   };
 
   return (
@@ -96,6 +99,8 @@ const Create = () => {
                   name="title"
                   placeholder="Title ..."
                   className="form-control"
+                  value={formData.title}
+                  onChange={handleChange}
                   onBlur={validateHandler}
                 />
               </div>
@@ -107,6 +112,8 @@ const Create = () => {
                   name="imageUrl"
                   placeholder="ImageUrl ..."
                   className="form-control"
+                  value={formData.imageUrl}
+                  onChange={handleChange}
                   onBlur={validateHandler}
                 />
               </div>
@@ -118,6 +125,8 @@ const Create = () => {
                   name="category"
                   id="category"
                   placeholder="Select the category options..."
+                  value={formData.category}
+                  onChange={handleChange}
                 >
                   <option value="asia">Asia</option>
                   <option value="south africa">South Africa</option>
@@ -139,6 +148,8 @@ const Create = () => {
                   rows="35"
                   placeholder="Content ..."
                   className="form-control"
+                  value={formData.content}
+                  onChange={handleChange}
                   onBlur={validateHandler}
                 ></textarea>
               </div>
