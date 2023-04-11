@@ -144,7 +144,7 @@ const Create = ({userId}) => {
                   id="content"
                   name="content"
                   minLength="150"
-                  maxLength="5000"
+                  maxLength="6000"
                   rows="35"
                   placeholder="Content ..."
                   className="form-control"

@@ -1,3 +1,4 @@
+import { useContext, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { destinationServiceFactory } from "../../services/destinationService";
 import useArticleState from "../../hooks/useArticleState";
@@ -5,11 +6,13 @@ import { useAuthContext } from "../../contexts/AuthContext";
 import { useNotificationsContext, types } from "../../contexts/NotificationContext";
 import { useService } from "../../hooks/useService";
 import "../common/forms.css";
+import { ArticleContext } from "../../contexts/ArticleContext";
 
 const Edit = () => {
   const navigate = useNavigate();
   const { user } = useAuthContext();
   const { articleId } = useParams();
+  const { articleUpdate } = useContext(ArticleContext);
   const [ article, setArticle ] = useArticleState(articleId)
   const { showNotifications } = useNotificationsContext();
   const destinationService = useService(destinationServiceFactory);
@@ -17,6 +20,13 @@ const Edit = () => {
   const onChangeCategory = (event) => {
     setArticle({...article, category: event.target.value});
   }
+
+  useEffect(() => {
+    destinationService.getOneDestination(articleId)
+      .then(articleData => {
+        setArticle(articleData)
+      })
+  }, [articleId])
 
  const onEditSubmit = (event) => {
   event.preventDefault();
@@ -32,8 +42,8 @@ const Edit = () => {
   destinationService.edit(articleId, data, user.accessToken)
       .then(result => result.json())
       .then(data => {
-        setArticle(data);
-        navigate("/destinations");
+        articleUpdate(articleId, data);
+        navigate(`/destinations/${articleId}`);
       })
       .catch((error) => {
         showNotifications({message: error.message, type: types.error})
@@ -102,7 +112,7 @@ const Edit = () => {
                   id="content"
                   name="content"
                   minLength="150"
-                  maxLength="5000"
+                  maxLength="6000"
                   rows="35"
                   placeholder="Content ..."
                   className="form-control"
