@@ -5,6 +5,7 @@ import { NotificationProvider } from "./contexts/NotificationContext";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "./components/common/ErrorFallback";
 import PrivateGuard from "./components/common/PrivateGuard";
+import { paths } from "./constants/Constants";
 import About from "./components/about/About";
 import ArticleDetails from "./components/details/ArticleDetails";
 import Contacts from "./components/contacts/Contacts";
@@ -29,9 +30,9 @@ function App() {
   return (
     <>
       <ErrorBoundary FallbackComponent={ErrorFallback}>
-      <ArticleProvider>
       <AuthProvider>
         <NotificationProvider>
+        <ArticleProvider>
           <Router>
           <Toggle />
           <Navigation />
@@ -39,28 +40,28 @@ function App() {
             <Route path="*" element={<NotFound />} />
             <Route element={<Toggle />} />
             <Route element={<Navigation />} />
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/destinations" element={<Destination />} />
-            <Route path="/destinations/:articleId" element={<ArticleDetails />} />
-            <Route path="/contacts" element={<Contacts />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
+            <Route path={paths.homePath} element={<Home />} />
+            <Route path={paths.aboutPath} element={<About />} />
+            <Route path={paths.destinationsPath} element={<Destination />} />
+            <Route path={paths.detailsPath} element={<ArticleDetails />} />
+            <Route path={paths.contactPath} element={<Contacts />} />
+            <Route path={paths.loginPath} element={<Login />} />
+            <Route path={paths.registerPath} element={<Register />} />
 
             <Route element={<PrivateGuard />}>
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/profile-edit" element={<ProfileEdit />} />
-              <Route path="/logout" element={<Logout />} />
-              <Route path="/destinations/create-article" element={<Create />} />
-              <Route path="/destinations/edit-article/:articleId" element={<Edit />} />
+              <Route path={paths.profilePath} element={<Profile />} />
+              <Route path={paths.editProfile} element={<ProfileEdit />} />
+              <Route path={paths.logoutPath} element={<Logout />} />
+              <Route path={paths.createArticlePath} element={<Create />} />
+              <Route path={paths.updateArticlePath} element={<Edit />} />
             </Route>
           </Routes>
-           <Footer />
-           <GoTop />
+          <GoTop />
+          <Footer />
           </Router>
+          </ArticleProvider>
         </NotificationProvider>
       </AuthProvider>
-      </ArticleProvider>
       </ErrorBoundary>
     </>
   );
