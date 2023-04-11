@@ -3,10 +3,9 @@ const request = async (method, url, data) => {
     const user = localStorage.getItem('auth');
     let auth;
 
-    if(user === "undefined" || user === undefined){
+    if (user === "undefined" || user === undefined) {
       auth = {};
-    } 
-    else {
+    } else {
       auth = JSON.parse(user);
     }
 
@@ -19,11 +18,11 @@ const request = async (method, url, data) => {
       headers['X-Authorization'] = auth.accessToken;
     }
 
-    const options = { 
-      method, 
+    const options = {
+      method,
       headers,
       body: data ? JSON.stringify(data) : undefined,
-     };
+    };
 
     const response = await fetch(url, options);
 
@@ -43,22 +42,18 @@ const request = async (method, url, data) => {
 
     return result;
   } catch (error) {
-    if (error.message === "Conflict: The server encountered a conflict while processing the request.") {
-      // Handle the 409 error here
-      console.log("There was a conflict while processing the request.");
-    } else {
-      console.log(error);
-      throw error;
-    }
+    console.log(error);
+    throw error; // Removed duplicate throw statement
   }
 };
 
 export const requestFactory = () => {
-  return { 
+  return {
     get: request.bind(null, 'GET'),
     post: request.bind(null, 'POST'),
     patch: request.bind(null, 'PATCH'),
     put: request.bind(null, 'PUT'),
     delete: request.bind(null, 'DELETE'),
-  }
-}
+  };
+};
+
