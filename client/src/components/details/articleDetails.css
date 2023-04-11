@@ -1,3 +1,25 @@
 button{
     margin-left: 10px;
 }
+
+.text-heading h2 {
+    font-size: 30px;
+    line-height: 1.5;
+    color: #000;
+    font-family: "Sacramento", cursive;
+  }
+
+  .comment-text{
+    font-size: 12px;
+    background-color: #fbf2eb;
+    border: 1px solid #fbf2eb;
+    color: #1d2f3b;
+  }
+
+  .comment-text p{
+    margin-left: 5px;
+  }
+
+  .likes{
+    margin-top: 10px;
+  }
