@@ -1,8 +1,13 @@
-import { useParams, Link } from "react-router-dom";
+import { useContext } from "react";
+import { ArticleContext } from "../../contexts/ArticleContext";
+import LatestPostItem from "./LatestPostItem";
 import "./latestPosts.css";
 
 const LatestPosts = () => {
-  const { articleId } = useParams();
+  const {articles} = useContext(ArticleContext);
+  let articlesLength = articles.length;
+  let latestArticles = articles.slice(articlesLength-3, articlesLength);
+
   return (
     <div className="side animate-box">
       <div className="col-12 col-md-offset-0 text-center heading heading-sidebar">
@@ -10,32 +15,24 @@ const LatestPosts = () => {
           <span>Latest Posts</span>
         </h2>
       </div>
-      <div className="blog-entry">
-        <Link to={`/destinations/${articleId}`}>
-          <img src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1677863148/travel-blog/destination/aruba_askniz.jpg" className="img-responsive" alt="" />
-          <div className="desc">
-            <h3>7 Awesome Reasons to Visit Aruba</h3>
-          </div>
-        </Link>
-      </div>
-      <div className="blog-entry">
-        <Link to={`/destinations/${articleId}`}>
-          <img src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1677797444/travel-blog/popular/hiking-canada_ubwtfl.jpg" className="img-responsive" alt="" />
-          <div className="desc">
-            <h3>The Trans Canada Trail</h3>
-          </div>
-        </Link>
-      </div>
-      <div className="blog-entry">
-        <Link to={`/destinations/${articleId}`}>
-          <img src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1678115031/travel-blog/popular/oxford-uni_rnmvu0.jpg" className="img-responsive" alt="" />
-          <div className="desc">
-            <h3>The Oxford University College</h3>
-          </div>
-        </Link>
-      </div>
+      {latestArticles.length > 0 ? (
+        latestArticles.map(article => {
+          return (
+            <LatestPostItem
+              key={article._id}
+              articleId={article._id}
+              imageUrl={article.imageUrl}
+              title={article.title}
+            ></LatestPostItem>
+          );
+        })
+      ) : (
+        <div className="title text-center">
+          <h3>No articles yet.</h3>
+        </div>
+      )}
     </div>
   );
-}
+};
 
 export default LatestPosts;
