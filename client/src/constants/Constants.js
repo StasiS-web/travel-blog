@@ -1,11 +1,11 @@
 const paths = {
-    registerPath: "/register",
-    loginPath: "/login",
-    logoutPath: "/logout",
-
     homePath: "/",
     aboutPath: "/about",
     contactPath: "/contacts",
+
+    registerPath: "/register",
+    loginPath: "/login",
+    logoutPath: "/logout",
 
     profilePath: "/profile",
     editProfile: "/profile-edit",
@@ -14,8 +14,8 @@ const paths = {
     destinationsPath: "/destinations",
     detailsPath: "/destinations/:articleId",
 
-    createArticle: "/destinations/create-article",
-    updateArticleById: "/destinations/edit-article/:articleId",
+    createArticlePath: "/destinations/create-article",
+    updateArticlePath: "/destinations/edit-article/:articleId",
 }
 
 const notifications ={
@@ -47,7 +47,9 @@ const notifications ={
     articleInfoMsg: "Sorry, we couldn't find the article you are looking for.",
 
     likeSucceededMsg: "Successfully liked this article.",
-    likeErrorMsg: "You have already liked this article",
+    likeErrorMsg: "You have already liked this article.",
+
+    commentCreateErrorMsg: "You were not able to create a comment.",
 
     invalidInput: "Invalid input!",
     notReceivedData: "Authentication data not received."
