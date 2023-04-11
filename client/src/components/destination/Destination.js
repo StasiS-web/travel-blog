@@ -1,25 +1,30 @@
-import {  useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { destinationServiceFactory } from "../../services/destinationService";
 import { useService } from "../../hooks/useService";
+import useScrollTop  from "../../hooks/useScrollTop";
 import DestinationItem from "../destination/destinationItem/DestinationItem";
 import Sidebar from "../sidebar/Sidebar";
 import "./destination.css";
 
 const Destination = () => {
-  const [articles, setArticles] = useState([]);
+  const [ articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(false);
   const destinationService = useService(destinationServiceFactory);
-
+  useScrollTop();
+  
   useEffect(() => {
     setLoading(true);
     destinationService
       .getAll()
       .then((result) => {
+        setArticles(result); 
         setLoading(false);
-        setArticles(result);
       })
-      .catch((error) => console.log(error));
-  }, [destinationService]);
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [destinationServiceFactory]);
+  
 
   let loader = (
     <div className="loader">
@@ -59,13 +64,10 @@ const Destination = () => {
                 </div>
                 {articles.length > 0 ? (
                   articles.map(
-                    ({ _id, title, imageUrl, category, content }) => (
+                    article => (
                       <DestinationItem
-                        key={_id}
-                        title={title}
-                        imageUrl={imageUrl}
-                        category={category}
-                        content={content}
+                        key={article._id}
+                        article={article}
                       ></DestinationItem>
                     )
                   )

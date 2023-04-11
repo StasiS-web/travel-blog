@@ -1,7 +1,9 @@
 import Category from "../sidebar/Category";
+import useScrollTop  from "../../hooks/useScrollTop";
 import "../common/forms.css";
 
 const Contacts = () => {
+  useScrollTop();
   return (
     <div id="contact" className="no-pd-top">
       <div className="container">
