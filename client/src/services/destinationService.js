@@ -1,4 +1,4 @@
-import { requestFactory } from "./requester";
+import { requestFactory } from "./requester.js";
 
 const baseUrl = "http://localhost:3030/data/destinations";
 
@@ -9,21 +9,22 @@ export const destinationServiceFactory = (token) =>{
 
     const getOneDestination = (articleId) => request.get(`${baseUrl}/${articleId}`);
 
-    const getArticleByCategory = (category) => request.get(`${baseUrl}/category/${category}`);
+    const getDestinationsByCategory = (category) => request.get(`${baseUrl}/category/${category}`);
 
     const create = (destinationData) => request.post(baseUrl, destinationData);
 
     const edit = (articleId, destinationData) => request.put(`${baseUrl}/${articleId}`, destinationData);
 
-    const remove = (articleId) => request.delete(`${baseUrl}/${articleId}`);
+    const remove = (articleId) => request.del(`${baseUrl}/likes/${articleId}`);
 
     return{
         getAll,
         getOneDestination,
-        getArticleByCategory,
+        getDestinationsByCategory,
         create,
         edit,
-        delete: remove,
+        remove,
     }
 
 }
+
