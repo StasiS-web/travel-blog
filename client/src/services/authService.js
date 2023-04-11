@@ -1,24 +1,64 @@
-import {requestFactory} from "./requester";
 import { notifications } from "../constants/Constants";
 
 const baseUrl = "http://localhost:3030/users";
 
-const request = requestFactory();
+export const login = async (email, password) => {
+    let response = await fetch(`${baseUrl}/login`, {
+        method: 'POST',
+        headers: { 
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({email, password})
+    });
 
-export const login = (email, password) => request.post(`${baseUrl}/login`, {email, password});
+    let result = await response.json();
 
-export const register = (email, password) => request.post(`${baseUrl}/register`, {email, password});
+    if(response.ok){
+        return result;
+    }
+    else {
+        throw result.message;
+    }
+}
 
-export const logout = () => request.get(`${baseUrl}/logout`);
+export const register = async (email, password) => {
+    let response = await fetch(`${baseUrl}/register`, {
+        method: 'POST',
+        headers: { 
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({email, password})
+    });
 
-export const getProfile = () => request.get(`${baseUrl}/profile`);
+    let result = await response.json();
+
+    if(response.ok) {
+        return result;
+    } else {
+        throw result.message;
+    }
+}
+
+export const logout = (token) => {
+    return fetch(`${baseUrl}/logout`, {
+        method: 'POST',
+        headers: { 
+            'X-Authorization': token
+        }
+    });
+}
+
+export const getProfile = () => {
+    return fetch(`${baseUrl}/profile`)
+        .then(response => response.json());
+}
 
 export const clearUserData = () => localStorage.removeItem('user');
 
 export const getUserData = () => {
     let user = localStorage.getItem('user');
 
-    if(!user) {
+    if(user === null) {
         throw new Error(notifications.userDataNotFound);
     }
 
@@ -28,3 +68,5 @@ export const getUserData = () => {
 export const isAuth = () => {
     return Boolean(getUserData());
 };
+
+
