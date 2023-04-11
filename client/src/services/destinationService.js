@@ -15,7 +15,7 @@ export const destinationServiceFactory = (token) =>{
 
     const edit = (articleId, destinationData) => request.put(`${baseUrl}/${articleId}`, destinationData);
 
-    const remove = (articleId) => request.del(`${baseUrl}/likes/${articleId}`);
+    const remove = (articleId) => request.delete(`${baseUrl}/${articleId}`);
 
     return{
         getAll,
