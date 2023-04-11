@@ -1,33 +1,29 @@
-import Cookies from "js-cookie";
-
-const getToken = () => {
-  const token = Cookies.get("access-token");
-
-  if(token && token !== "") {
-    return token;
-  }
-
-  return null;
-}
-
 const request = async (method, url, data) => {
   try {
+    const user = localStorage.getItem('auth');
+    let auth;
+
+    if(user === "undefined" || user === undefined){
+      auth = {};
+    } 
+    else {
+      auth = JSON.parse(user);
+    }
+
     const headers = {};
-    const accessToken = getToken()  
-
-    let options = { method, headers };
-
-    if (data) {
-      options.headers['Content-Type'] = 'application/json';
-      options.body = JSON.stringify(data);
+    if (data !== undefined) {
+      headers['Content-Type'] = 'application/json';
     }
 
-    if (accessToken) {
-      options.headers = {
-        ...options.headers,
-        'X-Authorization': accessToken,
-      }
+    if (auth.accessToken) {
+      headers['X-Authorization'] = auth.accessToken;
     }
+
+    const options = { 
+      method, 
+      headers,
+      body: data ? JSON.stringify(data) : undefined,
+     };
 
     const response = await fetch(url, options);
 
@@ -57,7 +53,7 @@ const request = async (method, url, data) => {
   }
 };
 
-export const requestFactory= () => {
+export const requestFactory = () => {
   return { 
     get: request.bind(null, 'GET'),
     post: request.bind(null, 'POST'),
