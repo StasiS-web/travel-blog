@@ -1,21 +1,14 @@
 const baseUrl = "http://localhost:3030/data";
 
-export const likes = async (articleId, userId) => {
-    let userItem = localStorage.getItem("user");
-    let user = JSON.parse(userItem);
-    user = user.accessToken
-
-    let response = await fetch(`${baseUrl}/likes/`, {
+export const likes = (articleId, userId, token) => {
+    return fetch(`${baseUrl}/likes`, {
         method: 'POST',
         headers: { 
             'Content-Type': 'application/json',
-            'X-Authorization': user,
+            'X-Authorization': token,
         },
-        body: JSON.stringify({ userId, articleId }),
-    });
-
-    let result = await response.json();
-    return Object.values(result);
+        body: JSON.stringify({ userId, articleId})
+    }).then(result => result.json());
 }
 
 export const getLikes = (articleId,) => {

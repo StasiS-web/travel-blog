@@ -1,12 +1,18 @@
-import { requestFactory } from "./requester";
-
 const baseUrl = "http://localhost:3030/data/comments";
 
-const request = requestFactory();
-
-export const createComment = (articleId, comment) => request.post(baseUrl, { articleId, text: comment });
+export const createComment = (articleId, comment, token) => {
+    return fetch(baseUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+         "X-Authorization": token
+        },
+        body: JSON.stringify({comment, articleId})
+    }).then(response => response.json());
+}
 
 export const getComment = (articleId) => {
-    return fetch(`${baseUrl}?where=articleId%3D%22${encodeURIComponent(articleId)}%22`);
+    return fetch(`${baseUrl}?where=articleId%3D%22${encodeURIComponent(articleId)}%22`)
+        .then(result => result.json());
 }
 
