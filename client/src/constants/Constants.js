@@ -25,7 +25,11 @@ const notifications ={
     userDataNotFound: "User data not found",
 
     emailErrorMsg: "Email must be at least 6 characters long.",
-    fieldsErrorMsg: "Filed should not be empty.",
+    fieldsErrorMsg: "All Fields are required. They should not be empty.",
+
+    emailFieldErrorMsg: "Email should not be empty.",
+    passwordFieldErrorMsg: "Password should not be empty.",
+    confirmPasswordFieldErrorMsg: "Confirm Password should not be empty.",
 
     passwordWarningMsg: "Password and Confirm password should match.",
     emailWarningMsg: "Please insert a valid email.",

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { notifications } from "../../constants/Constants";
 import { useAuthContext } from "../../contexts/AuthContext";
@@ -9,6 +9,9 @@ import * as authServiceFactory from "../../services/authService";
 const Login = () => {
   const { showNotifications } = useNotificationsContext();
   const { userLogin } = useAuthContext();
+  const [ email, setEmail ] = useState('');
+  const [ password, setPassword ] = useState('');
+  const [ error, setError ] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,6 +32,10 @@ const Login = () => {
       return;
     }
 
+    if( email.length === 0 || password.length === 0) {
+      setError(true);
+    }
+
     await authServiceFactory.login(email, password)
       .then((authData) => {
         userLogin(authData);
@@ -42,6 +49,7 @@ const Login = () => {
 
   const validationHandler = (event) => {
     let [message, type] = validateUser(event.target);
+    setError(true);
     showNotifications({ type, message });
   };
 
@@ -67,8 +75,9 @@ const Login = () => {
                     name="email"
                     placeholder="Email ..."
                     className="form-control"
-                    onBlur={validationHandler}
-                  />
+                    onChange={event => setEmail(event.target.value)}
+                    onBlur={validationHandler}/>
+                    {error && email.length <= 0 ? <p className="text-danger text-center">{notifications.emailFieldErrorMsg}</p> : ""}
                 </div>
               </div>
 
@@ -81,8 +90,9 @@ const Login = () => {
                     name="password"
                     placeholder="Password ..."
                     className="form-control"
-                    onBlur={validationHandler}
-                  />
+                    onChange={event => setPassword(event.target.value)}
+                    onBlur={validationHandler}/>
+                    {error && password.length <= 0 ? <p className="text-danger text-center">{notifications.passwordFieldErrorMsg}</p> : ""}
                 </div>
               </div>
 

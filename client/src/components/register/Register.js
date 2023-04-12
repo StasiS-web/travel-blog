@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { validateUser } from "../../utils/validationHandler";
 import { notifications } from "../../constants/Constants";
@@ -9,7 +9,12 @@ import * as authServiceFactory from "../../services/authService";
 const Register = () => {
   const { userLogin } = useAuthContext();
   const { showNotifications } = useNotificationsContext();
+  const [ email, setEmail ] = useState('');
+  const [ password, setPassword ] = useState('');
+  const [ confirmPassword, setConfirmPassword ] = useState('');
+  const [ error, setError ] = useState(false);
   const navigate = useNavigate();
+
   useEffect(() => {
     document.getElementById("register-page").classList.add("active");
   }, []);
@@ -23,13 +28,16 @@ const Register = () => {
     if (
       email === "" ||
       password === "" ||
-      confirmPassword === ""
-    ) {
+      confirmPassword === "") { 
        showNotifications({
         message: notifications.fieldsErrorMsg,
         type: types.error,
       });
       return;
+    }
+
+    if( email.length === 0 || password.length === 0 || confirmPassword.length === 0) {
+      setError(true);
     }
 
     if (email.length < 6) {
@@ -52,11 +60,15 @@ const Register = () => {
       .then((authData) => {
         userLogin(authData);
         navigate("/");
+      })
+      .catch(error => {
+        console.log("Error: ", error);
       });
   }
 
   const validationHandler = (event) => {
     let [message, type] = validateUser(event.target);
+    setError(true);
     showNotifications({type, message});
   }
   
@@ -82,8 +94,9 @@ const Register = () => {
                     name="email"
                     placeholder="Email ..."
                     className="form-control"
-                    onBlur={validationHandler}
-                  />
+                    onChange={event => setEmail(event.target.value)}
+                    onBlur={validationHandler}/>
+                  {error && email.length <= 0 ? <p className="text-danger text-center">{notifications.emailFieldErrorMsg}</p> : ""}
                 </div>
               </div>
 
@@ -96,8 +109,9 @@ const Register = () => {
                     name="password"
                     placeholder="Password ..."
                     className="form-control"
-                    onBlur={validationHandler}
-                  />
+                    onChange={event => setPassword(event.target.value)}
+                    onBlur={validationHandler}/>
+                    {error && password.length <= 0 ? <p className="text-danger text-center">{notifications.passwordFieldErrorMsg}</p> : ""}
                   </div>
                 <div className="col-12 field">
                   <label htmlFor="confirmPassword">Confirm Password</label>
@@ -107,8 +121,9 @@ const Register = () => {
                     name="confirmPassword"
                     placeholder="Confirm Password ..."
                     className="form-control"
-                    onBlur={validationHandler}
-                  />
+                    onChange={event => setConfirmPassword(event.target.value)}
+                    onBlur={validationHandler}/>
+                    {error && confirmPassword.length <= 0 ? <p className="text-danger text-center">{notifications.confirmPasswordFieldErrorMsg}</p> : ""}
                 </div>
               </div>
               <div className="form-group row">
