@@ -1,7 +1,6 @@
 import { createContext, useReducer, useEffect } from "react";
 import { Navigate } from "react-router-dom";
-import { useService } from "../hooks/useService";
-import {destinationServiceFactory} from "../services/destinationService";
+import * as destinationService from "../services/destinationService";
 
 export const ArticleContext = createContext();
 
@@ -23,9 +22,8 @@ const articleReducer = (state, action) => {
     }
 };
 
-export const ArticleProvider = ({children, }) => {
+export const ArticleProvider = ({children }) => {
     const [articles, dispatch] = useReducer(articleReducer, []);
-    const destinationService = useService(destinationServiceFactory);
 
     useEffect(() => {
         destinationService.getAll()
@@ -78,8 +76,8 @@ export const ArticleProvider = ({children, }) => {
     const addComment = (articleId, comment) => {
         dispatch({
             type: "ADD_COMMENT",
-            payload: comment,
-            articleId,
+            payload: comment, 
+            articleId
         });
     };
 

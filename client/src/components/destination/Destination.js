@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { destinationServiceFactory } from "../../services/destinationService";
-import { useService } from "../../hooks/useService";
+import * as destinationService from "../../services/destinationService";
 import useScrollTop  from "../../hooks/useScrollTop";
 import DestinationItem from "../destination/destinationItem/DestinationItem";
 import Sidebar from "../sidebar/Sidebar";
@@ -9,7 +8,6 @@ import "./destination.css";
 const Destination = () => {
   const [ articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(false);
-  const destinationService = useService(destinationServiceFactory);
   useScrollTop();
   
   useEffect(() => {
@@ -17,13 +15,13 @@ const Destination = () => {
     destinationService
       .getAll()
       .then((result) => {
-        setArticles(result); 
+        setArticles(result);
         setLoading(false);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, [destinationServiceFactory]);
+  }, [destinationService]);
   
 
   let loader = (
