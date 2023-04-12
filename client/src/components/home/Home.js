@@ -1,17 +1,20 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
-import useScrollTop  from "../../hooks/useScrollTop";
+import useScrollTop from "../../hooks/useScrollTop";
 import "../home/home.css";
 
-const  Home = () => {
+const Home = () => {
   const { articleId } = useParams();
+
   useScrollTop();
   return (
     <div id="home">
       <div id="hero" className="row ml-0 mr-0">
         <div className="col-6 pr-0">
           <div className="card">
-            <img className="card-img" src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1677863934/travel-blog/destination/south-africa_sjjdnh.jpg" alt="" />
+            <img className="card-img"
+              src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1677863934/travel-blog/destination/south-africa_sjjdnh.jpg"
+              alt=""/>
             <div className="card-overlay text-center heading">
               <p>South Africa</p>
               <h2>The Best Places to Visit in South Africa</h2>
@@ -23,7 +26,9 @@ const  Home = () => {
         </div>
         <div className="col-6 pl-0">
           <div className="card">
-            <img className="card-img" src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1677793219/travel-blog/popular/paris_xed1u2.jpg" alt="" />
+            <img className="card-img"
+              src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1677793219/travel-blog/popular/paris_xed1u2.jpg"
+              alt="" />
             <div className="card-overlay text-center heading">
               <p>Europe</p>
               <h2>Trip to Paris Visiting the Tourist Attractions</h2>
@@ -36,7 +41,11 @@ const  Home = () => {
 
         <div className="col-3 pr-0 first">
           <div className="card">
-            <img className="card-img" src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1677792081/travel-blog/africa_nbnol3.jpg" alt="" />
+            <img
+              className="card-img"
+              src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1677792081/travel-blog/africa_nbnol3.jpg"
+              alt=""
+            />
             <div className="card-overlay heading">
               <h5>South Africa</h5>
             </div>
@@ -45,7 +54,11 @@ const  Home = () => {
 
         <div className="col-3 pl-0 pr-0">
           <div className="card">
-            <img className="card-img" src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1677792081/travel-blog/europe_nrfovi.jpg" alt="" />
+            <img
+              className="card-img"
+              src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1677792081/travel-blog/europe_nrfovi.jpg"
+              alt=""
+            />
             <div className="card-overlay heading">
               <h5>Europe</h5>
             </div>
@@ -54,18 +67,26 @@ const  Home = () => {
 
         <div className="col-3 pl-0 pr-0">
           <div className="card">
-            <img className="card-img" src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1677792081/travel-blog/north-america_cu9owp.jpg" alt="" />
+            <img
+              className="card-img"
+              src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1677792081/travel-blog/north-america_cu9owp.jpg"
+              alt=""
+            />
             <div className="card-overlay heading">
-            <h5>America</h5>
+              <h5>America</h5>
             </div>
           </div>
         </div>
 
         <div className="col-3 pl-0 last">
           <div className="card">
-            <img className="card-img" src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1677792081/travel-blog/australia_azxeqa.jpg" alt="" />
+            <img
+              className="card-img"
+              src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1677792081/travel-blog/australia_azxeqa.jpg"
+              alt=""
+            />
             <div className="card-overlay heading">
-            <h5>Australia</h5>
+              <h5>Australia</h5>
             </div>
           </div>
         </div>
@@ -81,7 +102,7 @@ const  Home = () => {
             </div>
           </div>
           <div className="row">
-            <div className="col-3">
+          <div className="col-3">
               <div className="blog animate-box">
                 <Link to={`/destinations/${articleId}`}>
                   <img className="img-responsive" src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1677797444/travel-blog/popular/hiking-canada_ubwtfl.jpg" alt="" />
@@ -144,26 +165,35 @@ const  Home = () => {
           </div>
         </div>
         <div className="row">
-          <div className="col-3 nopadding animate-box"
-            data-animate-effect="fadeIn">
+          <div
+            className="col-3 nopadding animate-box"
+            data-animate-effect="fadeIn"
+          >
             <div className="insta">
-              <img src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1677792080/travel-blog/insta-post1_b8qhok.jpg" alt="" />
+              <img
+                src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1677792080/travel-blog/insta-post1_b8qhok.jpg"
+                alt=""
+              />
             </div>
           </div>
           <div className="col-3 nopadding animate-box" data-animate-effect="fadeIn">
             <div className="insta">
-              <img src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1677792080/travel-blog/insta-post2_ytvmnd.jpg" alt="" />
-            </div>
-          </div>
-          <div className="col-3 nopadding animate-box"
-            data-animate-effect="fadeIn">
-            <div className="insta">
-              <img src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1677792080/travel-blog/insta-post3_arafve.jpg" alt="" />
+              <img
+                src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1677792080/travel-blog/insta-post2_ytvmnd.jpg"
+                alt=""
+              />
             </div>
           </div>
           <div className="col-3 nopadding animate-box" data-animate-effect="fadeIn">
             <div className="insta">
-              <img src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1677792080/travel-blog/insta-post4_pcmmer.jpg" alt="" />
+              <img src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1677792080/travel-blog/insta-post3_arafve.jpg"
+                alt="" />
+            </div>
+          </div>
+          <div className="col-3 nopadding animate-box" data-animate-effect="fadeIn">
+            <div className="insta">
+              <img src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1677792080/travel-blog/insta-post4_pcmmer.jpg"
+                alt=""/>
               <div />
             </div>
           </div>
@@ -171,6 +201,6 @@ const  Home = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Home;
