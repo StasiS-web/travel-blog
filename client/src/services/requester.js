@@ -43,7 +43,6 @@ const request = async (method, url, data) => {
     return result;
   } catch (error) {
     console.log(error);
-    throw error; // Removed duplicate throw statement
   }
 };
 
