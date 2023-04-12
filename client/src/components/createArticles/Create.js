@@ -11,6 +11,7 @@ const Create = ({userId}) => {
   const { user } = useAuthContext();
   const navigate = useNavigate();
   const { showNotifications } = useNotificationsContext();
+  const [ error, setError ] = useState(false);
   const [formData, setFormData] = useState({
     title: "",
     category: "",
@@ -23,11 +24,11 @@ const Create = ({userId}) => {
 
     const { title, category, imageUrl, content } = formData;
 
-    if (
-      title === "" ||
-      category === "" ||
-      imageUrl === "" ||
-      content === "") {
+    if (title === "" ||
+        category === "" ||
+        imageUrl === "" ||
+        content === "") {
+      setError(true);
       showNotifications({
         message: notifications.fieldsErrorMsg,
         type: types.error,
@@ -99,8 +100,8 @@ const Create = ({userId}) => {
                   className="form-control"
                   value={formData.title}
                   onChange={handleChange}
-                  onBlur={validateHandler}
-                />
+                  onBlur={validateHandler}/>
+                  {error && formData.title.length <= 0 ? <p className="text-danger text-center">{notifications.fieldsErrorMsg}</p> : ""}
               </div>
               <div className="col-12 field">
                 <label htmlFor="imageUrl">ImageUrl*</label>
@@ -112,20 +113,18 @@ const Create = ({userId}) => {
                   className="form-control"
                   value={formData.imageUrl}
                   onChange={handleChange}
-                  onBlur={validateHandler}
-                />
+                  onBlur={validateHandler}/>
+                  {error && formData.imageUrl.length <= 0 ? <p className="text-danger text-center">{notifications.fieldsErrorMsg}</p> : ""}
               </div>
             </div>
             <div className="form-group">
               <div className="col-12 field">
                 <label htmlFor="category">Select Category*</label>
-                <select
-                  name="category"
+                <select name="category"
                   id="category"
                   placeholder="Select the category options..."
                   value={formData.category}
-                  onChange={handleChange}
-                >
+                  onChange={handleChange}>
                   <option value="asia">Asia</option>
                   <option value="south africa">South Africa</option>
                   <option value="north america">North America</option>
@@ -133,6 +132,7 @@ const Create = ({userId}) => {
                   <option value="europe">Europe</option>
                   <option value="australia">Australia</option>
                 </select>
+                {error && formData.category.length <= 0 ? <p className="text-danger text-center">{notifications.fieldsErrorMsg}</p> : ""}
               </div>
             </div>
             <div className="form-group">
@@ -148,8 +148,8 @@ const Create = ({userId}) => {
                   className="form-control"
                   value={formData.content}
                   onChange={handleChange}
-                  onBlur={validateHandler}
-                ></textarea>
+                  onBlur={validateHandler}></textarea>
+                  {error && formData.content.length <= 0 ? <p className="text-danger text-center">{notifications.fieldsErrorMsg}</p> : ""}
               </div>
             </div>
             <div className="form-group">
