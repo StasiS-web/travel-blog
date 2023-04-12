@@ -30,11 +30,11 @@ The application contains two parts:
     - view to comments for specific article
     - create a new comment for each article
     - like specific article
-* The author of the article can:
+* The owner of the article can:
     - create new articles: "/destinations/create-article"
     - edit existing articles: "/destinations/edit-article/:articleId",
     - delete existing article by id
-* Any logged in user:
+* Any logged in user can:
     - create new articles: "/destinations/create-article"
     - edit the details in the profile page: "/profile-edit"
 
@@ -75,12 +75,19 @@ password: 123456
 
 * pages with logged in users
 <img src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1680370193/travel-blog/screenshots/destination_loggedInUser_mfvq2o.png" alt="Destinations" />
+<img src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1681282036/travel-blog/screenshots/loggedin-user_b538ok.png" alt="Details" />
 <img src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1680369259/travel-blog/screenshots/profile_chmdkh.png" alt="Profile" />
 <img src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1680370189/travel-blog/screenshots/create_frjkif.png" alt="Create" />
 <img src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1680370187/travel-blog/screenshots/edit_pfe9k8.png" alt="Edit" />
 
+* pages for logged in users (the owner of the article)
+<img src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1681282038/travel-blog/screenshots/loggedin-user-owner_owwaxs.png" alt="Details" />
+
 ## Disclaimer
 The content and image used in this project does not have a commercial license and it is not used for commercial purpose. The image on the error 404 page were purchased with License for personal use only. All the content in this project is used only for educational purpose.
+
+## ✍️ Give me a feedback
+If you like this project give me a 🌟
 
 ## Resources
 * Use local image files
@@ -92,4 +99,3 @@ The content and image used in this project does not have a commercial license an
 
 ## License
 This project is licensed with the MIT license. This [image](https://res.cloudinary.com/dnvg6uuxl/image/upload/v1678298265/travel-blog/error_404_wnxcl7_gzg5il.jpg) has a license for personal use only.
-
