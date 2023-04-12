@@ -150,10 +150,12 @@ const ArticleDetails = () => {
                             <div className="likes">
                               <div className="text-info">
                                 <p>
-                                  <strong>Likes:</strong> {currentArticle.likes ? 
-                                    <span id="likes">{currentArticle.likes.length}</span>
-                                   : <span id="likes">0</span>
-                                  }
+                                  <strong>Likes:</strong> 
+                                  {likes ? (
+                                    <span id="likes">{currentArticle.likes ? currentArticle.likes.length + 1 : 1}</span>
+                                    ) : (
+                                   <span id="likes">{currentArticle.likes ? currentArticle.likes.length : 0}</span>
+                                  )}
                                 </p>
                                 <button className="btn btn-success" onClick={onLikeDislike}>
                                   {likes ? (
