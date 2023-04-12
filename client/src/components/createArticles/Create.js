@@ -1,8 +1,7 @@
 import { types, useNotificationsContext } from "../../contexts/NotificationContext";
 import { useAuthContext } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { useService } from "../../hooks/useService";
-import { destinationServiceFactory } from "../../services/destinationService";
+import * as destinationService from "../../services/destinationService";
 import { validateArticle } from "../../utils/validationHandler";
 import { notifications } from "../../constants/Constants";
 import "./create.css";
@@ -12,7 +11,6 @@ const Create = ({userId}) => {
   const { user } = useAuthContext();
   const navigate = useNavigate();
   const { showNotifications } = useNotificationsContext();
-  const destinationService = useService(destinationServiceFactory);
   const [formData, setFormData] = useState({
     title: "",
     category: "",

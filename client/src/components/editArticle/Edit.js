@@ -1,21 +1,20 @@
 import { useContext, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { destinationServiceFactory } from "../../services/destinationService";
+import * as destinationService from "../../services/destinationService";
 import useArticleState from "../../hooks/useArticleState";
 import { useAuthContext } from "../../contexts/AuthContext";
-import { useNotificationsContext, types } from "../../contexts/NotificationContext";
-import { useService } from "../../hooks/useService";
-import "../common/forms.css";
 import { ArticleContext } from "../../contexts/ArticleContext";
+import { useNotificationsContext, types } from "../../contexts/NotificationContext";
+import "../common/forms.css";
+
 
 const Edit = () => {
   const navigate = useNavigate();
   const { user } = useAuthContext();
   const { articleId } = useParams();
-  const { articleUpdate } = useContext(ArticleContext);
+  const { articleEdit } = useContext(ArticleContext);
   const [ article, setArticle ] = useArticleState(articleId)
   const { showNotifications } = useNotificationsContext();
-  const destinationService = useService(destinationServiceFactory);
 
   const onChangeCategory = (event) => {
     setArticle({...article, category: event.target.value});
@@ -24,9 +23,9 @@ const Edit = () => {
   useEffect(() => {
     destinationService.getOneDestination(articleId)
       .then(articleData => {
-        setArticle(articleData)
-      })
-  }, [articleId])
+        setArticle(articleData);
+      });
+  }, [articleId, user.accessToken]);
 
  const onEditSubmit = (event) => {
   event.preventDefault();
@@ -40,9 +39,13 @@ const Edit = () => {
   const data = { title, imageUrl, category, content};
 
   destinationService.edit(articleId, data, user.accessToken)
-      .then(result => result.json())
+      .then(result => {
+        if (result.ok) {
+          return result.json();
+        }
+      })
       .then(data => {
-        articleUpdate(articleId, data);
+        articleEdit(articleId, data);
         navigate(`/destinations/${articleId}`);
       })
       .catch((error) => {
