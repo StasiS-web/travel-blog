@@ -30,7 +30,7 @@ The application contains two parts:
     - view to comments for specific article
     - create a new comment for each article
     - like specific article
-* The author of the article can (if they are the owner of that article):
+* The author of the article can:
     - create new articles: "/destinations/create-article"
     - edit existing articles: "/destinations/edit-article/:articleId",
     - delete existing article by id
