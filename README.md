@@ -79,10 +79,10 @@ password: 123456
 <img src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1680370193/travel-blog/screenshots/destination_loggedInUser_mfvq2o.png" alt="Destinations" />
 <img src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1681282036/travel-blog/screenshots/loggedin-user_b538ok.png" alt="Details" />
 <img src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1680369259/travel-blog/screenshots/profile_chmdkh.png" alt="Profile" />
-<img src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1680370189/travel-blog/screenshots/create_frjkif.png" alt="Create" />
-<img src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1680370187/travel-blog/screenshots/edit_pfe9k8.png" alt="Edit" />
 
 * pages for logged in users (the owner of the article)
+<img src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1680370189/travel-blog/screenshots/create_frjkif.png" alt="Create" />
+<img src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1680370187/travel-blog/screenshots/edit_pfe9k8.png" alt="Edit" />
 <img src="https://res.cloudinary.com/dnvg6uuxl/image/upload/v1681282038/travel-blog/screenshots/loggedin-user-owner_owwaxs.png" alt="Details" />
 
 ## Disclaimer
