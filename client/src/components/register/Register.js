@@ -4,7 +4,7 @@ import { validateUser } from "../../utils/validationHandler";
 import { notifications } from "../../constants/Constants";
 import { useNotificationsContext, types } from "../../contexts/NotificationContext";
 import { useAuthContext } from "../../contexts/AuthContext";
-import * as authServiceFactory from "../../services/authService";
+import * as authService from "../../services/authService";
 
 const Register = () => {
   const { userLogin } = useAuthContext();
@@ -56,7 +56,7 @@ const Register = () => {
       return;
     }
   
-    authServiceFactory.register(email, password)
+    authService.register(email, password)
       .then((authData) => {
         userLogin(authData);
         navigate("/");

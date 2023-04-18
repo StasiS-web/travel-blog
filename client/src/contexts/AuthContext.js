@@ -1,6 +1,6 @@
 import { createContext, useContext } from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
-import * as authServiceFactory from "../services/authService";
+import * as authService from "../services/authService";
 
 const initialState = {
   _id: '',
@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }) => {
       return;
     }
 
-      const result = authServiceFactory.register(registerData);
+      const result = authService.register(registerData);
       setAuth(result);
   }
 
@@ -36,7 +36,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const userLogout = () => {
-    authServiceFactory.logout();
+    authService.logout();
     setAuth(initialState);
   };
 

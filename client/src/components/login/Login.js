@@ -4,7 +4,7 @@ import { notifications } from "../../constants/Constants";
 import { useAuthContext } from "../../contexts/AuthContext";
 import { useNotificationsContext, types } from "../../contexts/NotificationContext";
 import { validateUser } from "../../utils/validationHandler";
-import * as authServiceFactory from "../../services/authService";
+import * as authService from "../../services/authService";
 
 const Login = () => {
   const { showNotifications } = useNotificationsContext();
@@ -36,7 +36,7 @@ const Login = () => {
       setError(true);
     }
 
-    await authServiceFactory.login(email, password)
+    await authService.login(email, password)
       .then((authData) => {
         userLogin(authData);
         navigate("/");
